@@ -1,0 +1,160 @@
+<body>
+  <div class="container-1">
+    <h1>Smart Money</h1>
+  </div>
+
+  <div class="container">
+    <div class="container-2">
+      <button type="button" (click)="setBusinessCustomer()" class="btn btn-primary" id="businessCustomer">
+        Business Kunde
+      </button>
+      <button type="button" (click)="setPrivateCustomer()" class="btn btn-primary" id="privateCustomer">
+        Private Kunde
+      </button>
+      <button [routerLink]="'/'" class="btn btn-primary" id="toDashboard">
+        Zum Dashboard
+      </button>
+    </div>
+
+    <div>
+      <form #form="ngForm" (ngSubmit)="onSubmit(form.value)" style="display:flex;flex-direction: column; gap: 5px;">
+        <div class="form-group">
+          <label>Vorname:</label>
+          <input type="text" class="form-control" name="firstName" ngModel id="firstName" #firstNameRef="ngModel"
+            required />
+          <div *ngIf="firstNameRef.errors && (firstNameRef.dirty || firstNameRef.touched)" class="alert alert-danger">
+            <div [hidden]="!firstNameRef.errors.required">
+              Bitte Geben Sie Ihren Vornamen Ein!
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Nachname:</label>
+          <input type="text" class="form-control" name="lastName" ngModel id="lastName" #lastNameRef="ngModel"
+            required />
+          <div *ngIf="lastNameRef.errors && (lastNameRef.dirty || lastNameRef.touched)" class="alert alert-danger">
+            <div [hidden]="!lastNameRef.errors.required">
+              Bitte Geben Sie Ihren Nachnamen Ein!
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Password:</label>
+          <input type="password" class="form-control" name="password" ngModel id="password" #passwordRef="ngModel"
+            required />
+          <div *ngIf="passwordRef.errors && (passwordRef.dirty || passwordRef.touched)" class="alert alert-danger">
+            <div [hidden]="!passwordRef.errors.required">
+              Bitte Geben Sie ein Passwort ein!
+            </div>
+          </div>
+        </div>
+        <div ngModelGroup="currentAddress" style="margin-top:35px">
+          <div class="form-group">
+            <label>Straße:</label>
+            <input type="text" class="form-control" name="street" ngModel id="street" #streetRef="ngModel" required />
+            <div *ngIf="streetRef.errors && (streetRef.dirty || streetRef.touched)" class="alert alert-danger">
+              <div [hidden]="!streetRef.errors.required">
+                Bitte Geben Sie Ihre Adresse Ein!
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Hausnummer:</label>
+            <input type="text" class="form-control" name="house" ngModel id="house" #houseRef="ngModel" required />
+            <div *ngIf="houseRef.errors && (houseRef.dirty || houseRef.touched)" class="alert alert-danger">
+              <div [hidden]="!houseRef.errors.required">
+                Bitte Geben Sie Ihre Hausnummer Ein!
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>PLZ:</label>
+            <input type="text" class="form-control" name="zipCode" ngModel id="zipCode" #zipCodeRef="ngModel"
+              required />
+            <div *ngIf="zipCodeRef.errors && (zipCodeRef.dirty || zipCodeRef.touched)" class="alert alert-danger">
+              <div [hidden]="!zipCodeRef.errors.required">
+                Bitte Geben Sie Ihre PLZ Ein!
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Stadt:</label>
+            <input type="text" class="form-control" name="city" ngModel id="city" #cityRef="ngModel" required />
+            <div *ngIf="cityRef.errors && (cityRef.dirty || cityRef.touched)" class="alert alert-danger">
+              <div [hidden]="!cityRef.errors.required">
+                Bitte Geben Sie Ihre Stadt Ein!
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Land:</label>
+            <input type="text" class="form-control" name="country" ngModel id="country" #countryRef="ngModel"
+              required />
+            <div *ngIf="countryRef.errors && (countryRef.dirty || countryRef.touched)" class="alert alert-danger">
+              <div [hidden]="!countryRef.errors.required">
+                Bitte Geben Sie Ihren Herkunftsland Ein!
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email:</label>
+            <input type="text" class="form-control" name="email" ngModel id="email" #emailRef="ngModel" required />
+            <div *ngIf="emailRef.errors && (emailRef.dirty || emailRef.touched)" class="alert alert-danger">
+              <div [hidden]="!emailRef.errors.required">
+                Bitte Geben Sie Ihre Email Ein!
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="type === types.Business" style="margin-top:35px">
+          <div class="form-group">
+            <label>Unternehmensname:</label>
+            <input type="text" class="form-control" name="companyName" ngModel id="companyName"
+              #companyNameRef="ngModel" required />
+            <div *ngIf="companyNameRef.errors && (companyNameRef.dirty || companyNameRef.touched)"
+              class="alert alert-danger">
+              <div [hidden]="!companyNameRef.errors.required">
+                Bitte Geben Die Unternehmensname Ein!
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Umsatzsteuernummer:</label>
+            <input type="text" class="form-control" name="ustNumber" ngModel id="ustNumber" />
+          </div>
+          <div class="form-group">
+            <label>Jahresumsatz:</label>
+            <input type="text" class="form-control" name="revenue" ngModel id="revenue" />
+          </div>
+        </div>
+        <div *ngIf="type === types.Private" style="margin-top:35px">
+          <div class="form-group">
+
+            <label>Geburdstag:</label>
+            <input type="date" class="form-control" name="birthDate" ngModel #birthDateRef="ngModel" required
+              id="birthDay" />
+            <div *ngIf="birthDateRef.errors && (birthDateRef.dirty || birthDateRef.touched)" class="alert alert-danger">
+              <div [hidden]="!birthDateRef.errors.required">
+                Bitte Geben Sie Ihren Geburdstag Ein!
+              </div>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-top: 20px; width: 250px"
+          id="registerButtonDashboard" [disabled]="!form.valid">
+          Registrieren
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <br>
+  <div class="footer">
+    <label style="flex: 1">
+      © Smart Money GmbH 2021
+    </label>
+    <div>
+      <img src="assets/SimplyTest.png" alt="" style="flex: 1" />
+    </div>
+  </div>
+</body>

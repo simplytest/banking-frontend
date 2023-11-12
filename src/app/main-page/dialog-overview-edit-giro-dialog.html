@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Giro Konto Editieren</h1>
+
+<div mat-dialog-content>
+  <mat-form-field subscriptSizing="dynamic" floatLabel="always">
+    <mat-label>Dispo Kredit Limit</mat-label>
+    <input type="number" matInput [(ngModel)]="dispoLimit" placeholder="0">
+    <span matTextPrefix>$&nbsp;</span>
+  </mat-form-field>
+  <button mat-raised-button (click)="editDispoLimit()">Dispo Kredit Limit Ändern</button>
+  <mat-form-field subscriptSizing="dynamic" floatLabel="always">
+    <mat-label>Überweisungslimit</mat-label>
+    <input type="number" matInput [(ngModel)]="sendLimit" placeholder="0">
+    <span matTextPrefix>$&nbsp;</span>
+  </mat-form-field>
+  <button mat-raised-button (click)="editSendLimit()">Überweisungslimit Editieren</button>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onNoClick()" cdkFocusInitial>Fertig</button>
+</div>

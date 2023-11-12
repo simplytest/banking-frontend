@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Geld überweisen</h1>
+
+<div mat-dialog-content>
+  <mat-form-field floatLabel="always" subscriptSizing="dynamic">
+    <mat-label>Geld Betrag</mat-label>
+    <input type="number" matInput [(ngModel)]="sendData.amount" placeholder="0">
+    <span matTextPrefix>$&nbsp;</span>
+  </mat-form-field>
+  <mat-form-field subscriptSizing="dynamic">
+    <mat-label>Ziel IBAN</mat-label>
+    <input matInput [(ngModel)]="sendData.target.iban" placeholder="0">
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="sendMoney()" cdkFocusInitial>Geld Überweisen</button>
+</div>

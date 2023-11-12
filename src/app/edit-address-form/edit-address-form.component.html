@@ -1,0 +1,65 @@
+<body>
+  <div class="container-1">
+    <h1>Smart Money</h1>
+  </div>
+
+  <div class="container">
+    <div class="container-2">
+      <button (click)="goToMainPage()" class="btn btn-primary">
+        Zur Hauptseite
+      </button>
+      <button [routerLink]="'/'" class="btn btn-primary">
+        Zum Dashboard
+      </button>
+    </div>
+
+    <div *ngIf="address">
+      <form #form="ngForm" (ngSubmit)="onSubmit(form.value)">
+        <div ngModelGroup="currentAddress" style="display: flex; flex-direction: column; gap: 10px">
+          <div class="form-group">
+            <label>Straße:</label>
+            <input type="text" class="form-control" name="street" [(ngModel)]="address.street" />
+          </div>
+
+          <div class="form-group">
+            <label>Haus:</label>
+            <input type="text" class="form-control" name="house" [(ngModel)]="address.house" />
+          </div>
+
+          <div class="form-group">
+            <label>Plz:</label>
+            <input type="text" class="form-control" name="zipCode" [(ngModel)]="address.zipCode" />
+          </div>
+
+          <div class="form-group">
+            <label>Stadt:</label>
+            <input type="text" class="form-control" name="city" [(ngModel)]="address.city" />
+          </div>
+
+          <div class="form-group">
+            <label>Land:</label>
+            <input type="text" class="form-control" name="country" [(ngModel)]="address.country" />
+          </div>
+
+          <div class="form-group">
+            <label>Email:</label>
+            <input type="text" class="form-control" name="email" [(ngModel)]="address.email" />
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="margin-top: 25px; width: 250px">
+          Adresse Ändern
+        </button>
+      </form>
+    </div>
+  </div>
+  <br>
+  <div class="footer">
+    <label style="flex: 1">
+      © Smart Money GmbH 2021
+    </label>
+    <div>
+      <img src="assets/SimplyTest.png" alt="" style="flex: 1" />
+    </div>
+  </div>
+</body>

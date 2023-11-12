@@ -1,0 +1,41 @@
+<body>
+  <div class="container-1">
+    <h1>Smart Money</h1>
+  </div>
+
+  <div class="container">
+    <h3>Konto Typ Auswahl:</h3>
+    <div id="outer" class="container-2">
+      <button type="button" (click)="setAccountGiro()" class="btn btn-primary">
+        Giro-Konto
+      </button>
+
+      <button type="button" (click)="setAccountFixedRate()" class="btn btn-primary">
+        Festgeld-Konto
+      </button>
+
+      <button type="button" (click)="setAccountOnCall()" class="btn btn-primary">
+        Tagesgeld-Konto
+      </button>
+
+      <button type="button" (click)="openDialogCreateRealEstateAccount()" class="btn btn-primary">
+        Immobilien-Finanzierungskonto
+      </button>
+    </div>
+    <br />
+    <div>
+      <button (click)="goToMainPage()" class="btn btn-primary" style="width:250px">
+        Zurück
+      </button>
+    </div>
+  </div>
+  <br>
+  <div class="footer">
+    <label style="flex: 1">
+      © Smart Money GmbH 2021
+    </label>
+    <div>
+      <img src="assets/SimplyTest.png" alt="" style="flex: 1" />
+    </div>
+  </div>
+</body>

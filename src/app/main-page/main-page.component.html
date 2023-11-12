@@ -1,0 +1,91 @@
+<body>
+  <div class="container-1">
+    <h1>Smart Money</h1>
+  </div>
+
+  <div class="container">
+    <div class="container-2">
+      <button type="button" (click)="editUserData()" class="btn btn-primary">
+        Kundenadresse ändern
+      </button>
+      <button type="button" (click)="deleteContract()" class="btn btn-primary">
+        Kontrakt Kündigen
+      </button>
+      <button type="button" [routerLink]="'/'" class="btn btn-primary">
+        Zum Dashboard
+      </button>
+    </div>
+
+    <div *ngIf="contract" style="margin:10px; font-size:20px">
+      <label id="customerLabel">
+        Hallo Herr {{contract.customer.data.lastName}}!
+      </label>
+    </div>
+
+    <div style="margin:10px">
+      <table *ngIf="contract" class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>
+              Konto ID
+            </th>
+            <th>
+              Konto Typ
+            </th>
+            <th>
+              Kontostand
+            </th>
+            <th>
+              Optionen
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of contract.accounts | keyvalue">
+            <th>
+              {{item.key}}
+            </th>
+            <th>
+              {{item.value.type.split(".").at(-1)}}
+            </th>
+            <th>
+              {{item.value.data.balance}}
+            </th>
+            <td class="container-3">
+              <button mat-button (click)="closeAccount(item.key)" matTooltip="Konto schließen">
+                <i class="fa fa-trash"></i>
+              </button>
+              <button mat-button (click)="openDialogSendMoney(item.key)" matTooltip="Geld überweisen">
+                <i class="fa fa-money"></i>
+              </button>
+              <button mat-button (click)="openDialogTransferMoney(item.key)"
+                matTooltip="Geld auf eigenes Konto transferieren">
+                <i class="fa fa-exchange"></i>
+              </button>
+              <button mat-button *ngIf="item.value.type.includes('Giro')" (click)="openDialogReceiveMoney(item.key)"
+                matTooltip="Geld Empfangen">
+                <mat-icon>call_received</mat-icon>
+              </button>
+              <button mat-button *ngIf="item.value.type.includes('Giro')" (click)="openDialogEditGiroAccount()"
+                matTooltip="Giro Konto Editieren">
+                <i class="fa fa-edit"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <button (click)="addAccount()" class="btn btn-primary" style="width:250px">
+        Konto erstellen
+      </button>
+    </div>
+  </div>
+  <div class="footer">
+    <label style="flex: 1">
+      © Smart Money GmbH 2021
+    </label>
+    <div>
+      <img src="assets/SimplyTest.png" alt="" style="flex: 1" />
+    </div>
+  </div>
+</body>

@@ -1,0 +1,51 @@
+<body>
+  <div class="container-1" id="smartMoneyTitle">
+    <h1>Smart Money</h1>
+  </div>
+
+  <div class="container">
+    <form #form="ngForm" (ngSubmit)="onSubmit(form.value)" style="display: flex; flex-direction: column; gap: 15px">
+      <div class="form-group">
+        <label>Contract ID:</label>
+        <input type="text" #contractIDRef="ngModel" class="form-control" name="contractID" ngModel required>
+        <div *ngIf="contractIDRef.errors && (contractIDRef.dirty || contractIDRef.touched)" class="alert alert-danger">
+          <div [hidden]="!contractIDRef.errors.required">
+            Pflichtfeld
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Passwort:</label>
+        <input type="password" #passwordRef="ngModel" class="form-control" name="password" ngModel required>
+        <div *ngIf="passwordRef.errors && (passwordRef.dirty || passwordRef.touched)" class="alert alert-danger">
+          <div [hidden]="!passwordRef.errors.required">
+            Pflichtfeld
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="submit" class="btn btn-primary"
+          [disabled]="(contractIDRef.errors && (contractIDRef.dirty || contractIDRef.touched || contractIDRef.untouched)) || (passwordRef.errors && (passwordRef.dirty || passwordRef.touched  || passwordRef.untouched))">
+          Login
+        </button>
+      </div>
+
+      <div>
+        <button [routerLink]="'/registerNewCustomer'" class="btn btn-primary" id="registerButton">
+          Registrieren
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="footer">
+    <label style="flex: 1">
+      © Smart Money GmbH 2021
+    </label>
+    <div>
+      <img src="assets/SimplyTest.png" alt="" style="flex: 1" />
+    </div>
+  </div>
+</body>

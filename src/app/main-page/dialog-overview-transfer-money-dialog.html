@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Geld übertragen</h1>
+
+<div mat-dialog-content>
+  <mat-form-field floatLabel="always" subscriptSizing="dynamic">
+    <mat-label>Geld Übertragungs Beitrag</mat-label>
+    <input matInput [(ngModel)]="transferData.amount">
+    <span matTextPrefix>$&nbsp;</span>
+  </mat-form-field>
+  <mat-radio-group [(ngModel)]="transferData.target.id" style="display: flex; flex-direction: column;">
+    <mat-radio-button *ngFor="let item of data.accounts" [value]="item[0]">
+      {{item[0]}} ({{item[1].type.split(".").at(-1)}})
+    </mat-radio-button>
+  </mat-radio-group>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="transferMoney()" cdkFocusInitial>Geld Übertragen</button>
+</div>
