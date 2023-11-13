@@ -171,17 +171,15 @@ export class DialogOverviewSendMoneyDialog
 
     sendMoney()
     {
-        this.service.sendMoney(this.data.token, Id.parse(this.data.account).child, this.sendData).subscribe(result =>
-        {
-            if (result.error)
+        this.service.sendMoney(this.data.token, Id.parse(this.data.account).child, this.sendData).subscribe(
+            () =>
             {
-                alert(JSON.stringify(result.error));
-                return;
-            }
 
-            this.openDialog();
-            this.dialogRef.close();
-        });
+                this.openDialog();
+                this.dialogRef.close();
+            },
+            error => alert(JSON.stringify(error.error))
+        );
     }
 
     openDialog()
@@ -216,18 +214,17 @@ export class DialogOverviewTransferMoneyDialog
 
     transferMoney()
     {
-        this.service.transferMoney(this.data.token, Id.parse(this.data.current).child, this.transferData).subscribe(result =>
-        {
-            if (result.error)
+        this.service.transferMoney(this.data.token, Id.parse(this.data.current).child, this.transferData).subscribe(
+            () =>
             {
-                alert(JSON.stringify(result.error));
+                this.openDialog();
+                this.dialogRef.close();
+            },
+            error =>
+            {
+                alert(JSON.stringify(error.error));
                 this.openDialogFalse();
-                return;
-            }
-
-            this.openDialog();
-            this.dialogRef.close();
-        });
+            });
     }
 
     openDialog()
@@ -264,17 +261,14 @@ export class DialogOverviewReceiveMoneyDialog
 
     receiveMoney()
     {
-        this.service.receiveMoney(this.data.token, Id.parse(this.data.account).child, this.data.amount).subscribe(result =>
-        {
-            if (result.error)
+        this.service.receiveMoney(this.data.token, Id.parse(this.data.account).child, this.data.amount).subscribe(
+            () =>
             {
-                alert(JSON.stringify(result.error));
-                return;
-            }
-
-            this.openDialog();
-            this.dialogRef.close();
-        });
+                this.openDialog();
+                this.dialogRef.close();
+            },
+            error => alert(JSON.stringify(error.error))
+        );
     }
 
     openDialog()
@@ -308,16 +302,12 @@ export class DialogOverviewEditGiroAccountDialog
 
     editDispoLimit()
     {
-        this.service.changeDispoLimit(this.data.token, this.dispoLimit).subscribe(result =>
-        {
-            if (result.error)
+        this.service.changeDispoLimit(this.data.token, this.dispoLimit).subscribe(
+            () =>
             {
-                alert(JSON.stringify(result.error));
-                return;
-            }
-
-            this.openDialogChangeDispoLimit();
-        });
+                this.openDialogChangeDispoLimit();
+            }, error => alert(JSON.stringify(error.error))
+        );
     }
 
     openDialogChangeDispoLimit()
@@ -327,16 +317,14 @@ export class DialogOverviewEditGiroAccountDialog
 
     editSendLimit()
     {
-        this.service.changeSendLimit(this.data.token, this.sendLimit).subscribe(result =>
-        {
-            if (result.error)
+        this.service.changeSendLimit(this.data.token, this.sendLimit).subscribe(
+            () =>
             {
-                alert(JSON.stringify(result.error));
-                return;
-            }
 
-            this.openDialogChangeSendLimit();
-        });
+                this.openDialogChangeSendLimit();
+            },
+            error => alert(JSON.stringify(error.error))
+        );
     }
 
     openDialogChangeSendLimit()

@@ -42,16 +42,12 @@ export class RegisterNewCustomerComponent implements OnInit
             data.birthDay = birthDate;
         }
 
-        this.service.register(data).subscribe(result =>
-        {
-            if (result.error)
+        this.service.register(data).subscribe(
+            result =>
             {
-                alert(JSON.stringify(result.error));
-                return;
-            }
-
-            this.router.navigate(["/mainPage", result.result.JWT]);
-        });
+                this.router.navigate(["/mainPage", result.result.JWT]);
+            },
+            error => alert(JSON.stringify(error.error)));
     }
 
     setBusinessCustomer()
