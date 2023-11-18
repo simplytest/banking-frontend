@@ -55,10 +55,10 @@
               <button mat-button (click)="closeAccount(item.key)" matTooltip="Konto schließen">
                 <i class="fa fa-trash"></i>
               </button>
-              <button mat-button (click)="openDialogSendMoney(item.key)" matTooltip="Geld überweisen">
+              <button mat-button *ngIf="!item.value.type.includes('Estate')" (click)="openDialogSendMoney(item.key)" matTooltip="Geld überweisen">
                 <i class="fa fa-money"></i>
               </button>
-              <button mat-button (click)="openDialogTransferMoney(item.key)"
+              <button mat-button *ngIf="!item.value.type.includes('Estate')" (click)="openDialogTransferMoney(item.key)"
                 matTooltip="Geld auf eigenes Konto transferieren">
                 <i class="fa fa-exchange"></i>
               </button>
