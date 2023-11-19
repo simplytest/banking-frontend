@@ -18,7 +18,8 @@
 
     <div *ngIf="contract" style="margin:10px; font-size:20px">
       <label id="customerLabel">
-        Hallo Herr {{contract.customer.data.lastName}}!
+        Hallo {{contract.customer.data.firstName}}! <br>
+        Ihre Kontonummer ist: {{contract.id.getParent()}}
       </label>
     </div>
 
@@ -55,7 +56,8 @@
               <button mat-button (click)="closeAccount(item.key)" matTooltip="Konto schließen">
                 <i class="fa fa-trash"></i>
               </button>
-              <button mat-button *ngIf="!item.value.type.includes('Estate')" (click)="openDialogSendMoney(item.key)" matTooltip="Geld überweisen">
+              <button mat-button *ngIf="!item.value.type.includes('Estate')" (click)="openDialogSendMoney(item.key)"
+                matTooltip="Geld überweisen">
                 <i class="fa fa-money"></i>
               </button>
               <button mat-button *ngIf="!item.value.type.includes('Estate')" (click)="openDialogTransferMoney(item.key)"

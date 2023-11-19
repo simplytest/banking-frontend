@@ -43,6 +43,7 @@ export class MainPageComponent implements OnInit
         this.service.getContract(this.token).subscribe(contract =>
         {
             this.contract = contract;
+            this.contract.id = Id.from(this.contract.id);
         });
     }
 
