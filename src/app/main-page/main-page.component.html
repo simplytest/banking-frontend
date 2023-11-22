@@ -5,69 +5,71 @@
 
   <div class="container">
     <div class="container-2">
-      <button type="button" (click)="editUserData()" class="btn btn-primary">
-        Kundenadresse ändern
+      <button type="button" (click)="editUserData()" class="btn btn-primary" data-testid="kundendaten_button">
+        Kundendaten ändern
       </button>
-      <button type="button" (click)="deleteContract()" class="btn btn-primary">
-        Kontrakt Kündigen
+      <button type="button" (click)="deleteContract()" class="btn btn-primary" data-testid="kuendigen_button">
+        Vertrag kündigen
       </button>
-      <button type="button" [routerLink]="'/'" class="btn btn-primary">
+      <button type="button" [routerLink]="'/'" class="btn btn-primary" data-testid="dashboard_button">
         Zum Dashboard
       </button>
     </div>
 
     <div *ngIf="contract" style="margin:10px; font-size:20px">
-      <label id="customerLabel">
-        Hallo Herr {{contract.customer.data.lastName}}!
+      <label data-testid="customer_Label">
+        Hallo {{contract.customer.data.firstName}}! <br>
+        Ihre Kontonummer ist: {{contract.id.getParent()}}
       </label>
     </div>
 
     <div style="margin:10px">
-      <table *ngIf="contract" class="table table-bordered table-hover">
+      <table *ngIf="contract" class="table table-bordered table-hover" id="accountTable">
         <thead>
           <tr>
-            <th>
+            <th data-testid="kontoID_table_head">
               Konto ID
             </th>
-            <th>
+            <th data-testid="kontoTyp_table_head">
               Konto Typ
             </th>
-            <th>
+            <th data-testid="kontostand_table_head">
               Kontostand
             </th>
-            <th>
+            <th data-testid="optionen_table_head">
               Optionen
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of contract.accounts | keyvalue">
-            <th>
+          <tr *ngFor="let item of contract.accounts | keyvalue; let i = index">
+            <th id="{{i}}.kontoID">
               {{item.key}}
             </th>
-            <th>
-              {{item.value.type.split(".").at(-1)}}
+            <th id="{{i}}.kontotyp">
+              {{item.value.type.split(".").at(-1).replace('Account','')}}
             </th>
-            <th>
-              {{item.value.data.balance}}
+            <th id="{{i}}.kontostand">
+              {{item.value.data.balance}} $
             </th>
             <td class="container-3">
-              <button mat-button (click)="closeAccount(item.key)" matTooltip="Konto schließen">
+              <button mat-button (click)="closeAccount(item.key)" matTooltip="Konto schließen" id="{{i}}-kontoschließen">
                 <i class="fa fa-trash"></i>
               </button>
-              <button mat-button (click)="openDialogSendMoney(item.key)" matTooltip="Geld überweisen">
+              <button mat-button *ngIf="!item.value.type.includes('Estate')" (click)="openDialogSendMoney(item.key)"
+                matTooltip="Geld überweisen" id="{{i}}-ueberweisen">
                 <i class="fa fa-money"></i>
               </button>
-              <button mat-button (click)="openDialogTransferMoney(item.key)"
-                matTooltip="Geld auf eigenes Konto transferieren">
+              <button mat-button *ngIf="!item.value.type.includes('Estate')" (click)="openDialogTransferMoney(item.key)"
+                matTooltip="Geld auf eigenes Konto transferieren" id="{{i}}-transferieren">
                 <i class="fa fa-exchange"></i>
               </button>
               <button mat-button *ngIf="item.value.type.includes('Giro')" (click)="openDialogReceiveMoney(item.key)"
-                matTooltip="Geld Empfangen">
+                matTooltip="Geld empfangen" id="{{i}}-empfangen">
                 <mat-icon>call_received</mat-icon>
               </button>
               <button mat-button *ngIf="item.value.type.includes('Giro')" (click)="openDialogEditGiroAccount()"
-                matTooltip="Giro Konto Editieren">
+                matTooltip="Girokonto editieren" id="{{i}}-editieren">
                 <i class="fa fa-edit"></i>
               </button>
             </td>
@@ -75,17 +77,17 @@
         </tbody>
       </table>
 
-      <button (click)="addAccount()" class="btn btn-primary" style="width:250px">
+      <button (click)="addAccount()" class="btn btn-primary" style="width:250px" data-testid="erstellen">
         Konto erstellen
       </button>
     </div>
   </div>
   <div class="footer">
     <label style="flex: 1">
-      © Smart Money GmbH 2021
+      © Smart Money GmbH 2023
     </label>
     <div>
-      <img src="assets/SimplyTest.png" alt="" style="flex: 1" />
+      <img src="assets/SimplyTest.png" alt="" style="flex: 1" height="50px" />
     </div>
   </div>
 </body>

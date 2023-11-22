@@ -2,7 +2,7 @@
 
 <div mat-dialog-content>
   <mat-form-field floatLabel="always" subscriptSizing="dynamic">
-    <mat-label>Geld Betrag</mat-label>
+    <mat-label>Geldbetrag</mat-label>
     <input type="number" matInput [(ngModel)]="sendData.amount" placeholder="0">
     <span matTextPrefix>$&nbsp;</span>
   </mat-form-field>
@@ -13,6 +13,6 @@
 </div>
 
 <div mat-dialog-actions align="end">
-  <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button (click)="sendMoney()" cdkFocusInitial>Geld Überweisen</button>
+  <button mat-button (click)="onNoClick()">Abbrechen</button>
+  <button mat-button (click)="sendMoney()" cdkFocusInitial>Geld überweisen</button>
 </div>

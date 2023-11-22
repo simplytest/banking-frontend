@@ -1,25 +1,38 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { CreateAccountComponent } from "./create-account.component";
+import { HttpClientModule } from "@angular/common/http";
+import { MatDialogModule } from "@angular/material/dialog";
+import { AppRoutingModule } from "../app-routing.module";
 
-import { CreateAccountComponent } from './create-account.component';
+describe("CreateAccountComponent", () =>
+{
+    let component: CreateAccountComponent;
+    let fixture: ComponentFixture<CreateAccountComponent>;
+    beforeEach(waitForAsync(() =>
+    {
+        TestBed.configureTestingModule({
+            declarations: [
+                CreateAccountComponent,
+            ],
+            imports: [
+                AppRoutingModule,
+                HttpClientModule,
+                MatDialogModule,
+            ]
+        })
+            .compileComponents();
+    }));
 
-describe('CreateAccountComponent', () => {
-  let component: CreateAccountComponent;
-  let fixture: ComponentFixture<CreateAccountComponent>;
+    beforeEach(() =>
+    {
+        fixture = TestBed.createComponent(CreateAccountComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ CreateAccountComponent ]
-    })
-    .compileComponents();
-  }));
+    it("Komponente wurde erstellt", () =>
+    {
+        expect(component).toBeTruthy();
+    });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(CreateAccountComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
 });
