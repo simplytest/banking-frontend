@@ -8,7 +8,6 @@ Given ("I navigate to the Banking App dashboard page", () => {
 When("When I click on Registrieren button", () => {
   cy.get("#registerButton").invoke("removeAttr","target").click();
 })
-
 When("I type a Contract ID {}",(contractID) => {
   cy.get("[name='contractID']").type(contractID);
 })
@@ -21,12 +20,9 @@ When("I click on login button", () => {
 When("I type an invalid Password {}", (password) => {
   cy.get("[name='password']").type(password)
 })
-When("I click on login button", () => {
-  stub = cy.stub();
-  cy.on("window:alert",stub);
-  cy.get("[type='submit']").click();
-});
+
 Then("I should be presented with an alert box containing text {}", (expectedAlertText) => {
-  expect(stub).to.have.been.calledWith(expectedAlertText)
+  cy.get("#mat-mdc-dialog-title-0").contains(expectedAlertText);
+  //expect(stub).to.have.been.calledWith(expectedAlertText)
 });
 

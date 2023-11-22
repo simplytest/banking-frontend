@@ -20,8 +20,9 @@ When("I enter an email {}", (email) => {
   cy.get("#email").type(email);
 })
 When("I enter a birthDate {}", (birthDate) => {
-  cy.get("#birthDate").type(birthDate);
+  cy.get("#birthDay").type(birthDate);
 })
-When("When I click on Registrieren button", () => {
-  cy.get("#registerButton").invoke("removeAttr","target").click();
+
+When("When I click on Registrieren button again", () => {
+  cy.get('[data-testid=\"register_button\"]').invoke("removeAttr","target").click();
 })
