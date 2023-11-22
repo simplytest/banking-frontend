@@ -6,34 +6,34 @@
   <div class="container">
     <form #form="ngForm" (ngSubmit)="onSubmit(form.value)" style="display: flex; flex-direction: column; gap: 15px">
       <div class="form-group">
-        <label>Contract ID:</label>
-        <input type="text" #contractIDRef="ngModel" class="form-control" name="contractID" ngModel required>
+        <label data-testid="contract_label">Contract ID:</label>
+        <input data-testid="contract_input" type="text" #contractIDRef="ngModel" class="form-control" name="contractID" ngModel required>
         <div *ngIf="contractIDRef.errors && (contractIDRef.dirty || contractIDRef.touched)" class="alert alert-danger">
-          <div [hidden]="!contractIDRef.errors.required">
+          <div data-testid="contract_error_label" [hidden]="!contractIDRef.errors.required">
             Pflichtfeld
           </div>
         </div>
       </div>
 
       <div class="form-group">
-        <label>Passwort:</label>
-        <input type="password" #passwordRef="ngModel" class="form-control" name="password" ngModel required>
+        <label data-testid="password_label">Passwort:</label>
+        <input data-testid="password_input" type="password" #passwordRef="ngModel" class="form-control" name="password" ngModel required>
         <div *ngIf="passwordRef.errors && (passwordRef.dirty || passwordRef.touched)" class="alert alert-danger">
-          <div [hidden]="!passwordRef.errors.required">
+          <div data-testid="password_error_label" [hidden]="!passwordRef.errors.required">
             Pflichtfeld
           </div>
         </div>
       </div>
 
       <div>
-        <button type="submit" class="btn btn-primary"
+        <button data-testid="login_button" type="submit" class="btn btn-primary"
           [disabled]="(contractIDRef.errors && (contractIDRef.dirty || contractIDRef.touched || contractIDRef.untouched)) || (passwordRef.errors && (passwordRef.dirty || passwordRef.touched  || passwordRef.untouched))">
           Login
         </button>
       </div>
 
       <div>
-        <button [routerLink]="'/registerNewCustomer'" class="btn btn-primary" id="registerButton">
+        <button data-testid="register_button" [routerLink]="'/registerNewCustomer'" class="btn btn-primary" id="registerButton">
           Registrieren
         </button>
       </div>
