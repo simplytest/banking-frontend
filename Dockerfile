@@ -6,8 +6,11 @@ WORKDIR /usr/local/app
 
 ADD . / ./
 
-RUN npm install
-RUN npm run build
+RUN curl -fsSL https://get.pnpm.io/install.sh | sh -
+RUN source /root/.bashrc
+
+RUN pnpm install
+RUN pnpm run build
 
 # Setup Nginx
 

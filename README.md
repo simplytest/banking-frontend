@@ -5,8 +5,8 @@ This repository hosts the source code for the frontend of our demo banking appli
 ## 🏗️ Build
 
 ``` bash
-$ npm install
-$ npm run build && npm run start
+$ pnpm install
+$ pnpm run build && pnpm run start
 ```
 
 ## 🐋 Docker Setup
