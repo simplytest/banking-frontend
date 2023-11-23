@@ -1,4 +1,4 @@
-FROM node:20-slim AS base
+FROM fedora:38 AS base
 
 WORKDIR /usr/local/app
 
@@ -6,11 +6,9 @@ WORKDIR /usr/local/app
 
 ADD . / ./
 
+RUN dnf install -y nodejs
 RUN curl -fsSL https://get.pnpm.io/install.sh | sh -
-RUN source /root/.bashrc
-
-RUN pnpm install
-RUN pnpm run build
+RUN source /root/.bashrc && pnpm install && pnpm run build
 
 # Setup Nginx
 
