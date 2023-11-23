@@ -1,4 +1,5 @@
 on:
+  workflow_dispatch:
   workflow_run:
     workflows: ["☕ Build"]
     types:
@@ -22,5 +23,8 @@ jobs:
           password: ${{ secrets.PASSWORD }}
 
           script: |
+            docker stop Banking-Frontend-Demo || true
+            docker rm Banking-Frontend-Demo || true
+
             docker pull ghcr.io/simplytest/banking-frontend:latest
             docker run -d -p 4200:4200 --rm --name=Banking-Frontend-Demo ghcr.io/simplytest/banking-frontend:latest
