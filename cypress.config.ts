@@ -6,7 +6,6 @@ import { createEsbuildPlugin } from "@badeball/cypress-cucumber-preprocessor/esb
 export default defineConfig({
   e2e: {
     specPattern: "**/*.feature",
-    excludeSpecPattern: ['**/1-getting-started', '**/2-advanced-examples'],
     async setupNodeEvents(
       on: Cypress.PluginEvents,
       config: Cypress.PluginConfigOptions
