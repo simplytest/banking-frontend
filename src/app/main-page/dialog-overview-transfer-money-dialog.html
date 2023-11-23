@@ -1,19 +1,19 @@
-<h1 mat-dialog-title>Geld übertragen</h1>
+<h1 mat-dialog-title data-testid="title">Geld übertragen</h1>
 
 <div mat-dialog-content>
   <mat-form-field floatLabel="always" subscriptSizing="dynamic">
     <mat-label>Betrag</mat-label>
-    <input matInput [(ngModel)]="transferData.amount">
+    <input data-testid="amount_input" matInput [(ngModel)]="transferData.amount">
     <span matTextPrefix>$&nbsp;</span>
   </mat-form-field>
   <mat-radio-group [(ngModel)]="transferData.target.id" style="display: flex; flex-direction: column;">
-    <mat-radio-button *ngFor="let item of data.accounts" [value]="item[0]">
-      {{item[0]}} ({{item[1].type.split(".").at(-1)}})
+    <mat-radio-button *ngFor="let item of data.accounts; let i = index" id="{{item[0]}}" [value]="item[0]">
+      {{item[0]}} ({{item[1].type.split(".").at(-1).replace('Account','')}})
     </mat-radio-button>
   </mat-radio-group>
 </div>
 
 <div mat-dialog-actions align="end">
-  <button mat-button (click)="onNoClick()">Abbrechen</button>
-  <button mat-button (click)="transferMoney()" cdkFocusInitial>Geld übertragen</button>
+  <button mat-button (click)="onNoClick()" data-testid="cancel_button">Abbrechen</button>
+  <button mat-button (click)="transferMoney()" cdkFocusInitial data-testid="transfer_money_button">Geld übertragen</button>
 </div>

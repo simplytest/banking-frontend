@@ -106,7 +106,7 @@ describe("RegisterNewCustomerComponent", () =>
         }
     });
 
-    it("Nach Klick auf den Button 'Business Kunde' ändern sich die Eingabefelder zum Businesskunden ", () =>
+    it("Nach Klick auf den Button 'Privatkunde' ändern sich die Eingabefelder zum Privatkunden ", () =>
     {
         const BusinessKundeButton : HTMLElement = fixture.debugElement.query(By.css("button[data-testid='private_customer_button'")).nativeElement;
         BusinessKundeButton.dispatchEvent(new Event("click"));
