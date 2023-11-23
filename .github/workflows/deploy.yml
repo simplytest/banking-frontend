@@ -23,4 +23,4 @@ jobs:
 
           script: |
             docker pull ghcr.io/simplytest/banking-frontend:latest
-            docker run -p 5005:5005 --rm --name=Banking-Frontend-Demo ghcr.io/simplytest/banking-frontend:latest
+            docker run -p 4200:4200 --rm --name=Banking-Frontend-Demo ghcr.io/simplytest/banking-frontend:latest
