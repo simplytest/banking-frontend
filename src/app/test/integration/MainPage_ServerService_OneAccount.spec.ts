@@ -1,10 +1,31 @@
-import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { HttpClientModule } from "@angular/common/http";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { MatDialogModule } from "@angular/material/dialog";
 import { BrowserModule } from "@angular/platform-browser";
-import { MainPageComponent } from "src/app/main-page/main-page.component";
-import { AppRoutingModule } from "src/app/app-routing.module";
+import { Observable } from "rxjs";
 import { ContractServerService } from "src/app/_services/contract-server.service";
+import { AppRoutingModule } from "src/app/app-routing.module";
+import { MainPageComponent } from "src/app/main-page/main-page.component";
+
+import { Contract } from "src/app/types/contract";
+import MockedResultData from "../testData/customer_only_giro.json";
+
+class ContractServerServiceMock extends ContractServerService
+{
+    constructor()
+    {
+        super(null);
+    }
+
+    getContract()
+    {
+        return new Observable<Contract>(subscriber =>
+        {
+            subscriber.next(MockedResultData as unknown as Contract);
+            subscriber.complete();
+        });
+    }
+}
 
 describe("Integration Mainpage <-> ContractServerService", () =>
 {
@@ -16,11 +37,17 @@ describe("Integration Mainpage <-> ContractServerService", () =>
         TestBed.configureTestingModule({
             declarations: [MainPageComponent],
 
-            imports: [BrowserModule,
+            imports:
+            [
+                BrowserModule,
                 AppRoutingModule,
                 HttpClientModule,
-                MatDialogModule],
-            providers: [ContractServerService]
+                MatDialogModule
+            ],
+            providers:
+            [
+                { provide: ContractServerService, useClass: ContractServerServiceMock }
+            ],
         })
             .compileComponents();
     }));
