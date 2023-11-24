@@ -1,5 +1,8 @@
 Feature: Banking App - Main Page
 
+  Scenario:
+
+
 
   Scenario Outline:  create Giro-Konto
     Given I navigate to the Banking App dashboard page
@@ -20,7 +23,7 @@ Feature: Banking App - Main Page
     When I type a Password <password>
     When I click on login button
     When I click on Konto erstellen button
-    When I click on Giro-Konto button
+    When I click on Festgeld-Konto button
     Then I should be presented with a Konto type text <kontoTyp>
     Examples:
       | contractID | password | kontoTyp       |

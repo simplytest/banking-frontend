@@ -1,9 +1,10 @@
 // cypress/support/cypress-cucumber-preprocessor.js
 
-const cucumber = require('cypress-cucumber-preprocessor').default;
+import cucumber from "cypress-cucumber-preprocessor";
 
-module.exports = (on, config) => {
-  on('file:preprocessor', cucumber());
+export default (on, config) =>
+{
+    on("file:preprocessor", cucumber());
 
-  return config;
-}
+    return config;
+};
