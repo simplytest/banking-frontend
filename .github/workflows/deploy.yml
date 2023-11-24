@@ -1,0 +1,30 @@
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["☕ Build"]
+    types:
+      - completed
+
+name: 🚀 Deploy
+
+jobs:
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🔐 SSH Setup
+        uses: appleboy/ssh-action@55dabf81b49d4120609345970c91507e2d734799
+        with:
+          host: ${{ secrets.HOST }}
+          port: ${{ secrets.PORT }}
+
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+
+          script: |
+            docker stop Banking-Frontend-Demo || true
+            docker rm Banking-Frontend-Demo || true
+
+            docker pull ghcr.io/simplytest/banking-frontend:latest
+            docker run -d -p 4200:4200 --rm --name=Banking-Frontend-Demo ghcr.io/simplytest/banking-frontend:latest

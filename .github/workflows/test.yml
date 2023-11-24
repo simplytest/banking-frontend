@@ -1,0 +1,33 @@
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+name: 🧪 Run Tests
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v3
+
+      - name: 🍃 Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: 🍃 Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+
+      - name: 🏗️ Install Dependencies
+        run: |
+          pnpm install
+
+      - name: 🧪 Run Tests
+        run: |
+          pnpm run test

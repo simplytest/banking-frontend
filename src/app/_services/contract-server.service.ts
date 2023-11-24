@@ -20,8 +20,7 @@ const endpoint = "http://localhost:5005/api";
 export class ContractServerService
 {
     constructor(private http: HttpClient)
-    {
-    }
+    {}
 
     /*
         #########################

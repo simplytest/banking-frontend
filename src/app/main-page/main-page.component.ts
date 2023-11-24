@@ -30,12 +30,8 @@ export class MainPageComponent implements OnInit
         this.route.params.subscribe(({ id: token }) =>
         {
             this.token = token;
+            this.getContracts();
         });
-    }
-
-    ngAfterViewInit()
-    {
-        this.getContracts();
     }
 
     getContracts()
