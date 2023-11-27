@@ -13,6 +13,6 @@
 </div>
 
 <div mat-dialog-actions align="end">
-  <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button (click)="setAccountRealEstateFinancing()" cdkFocusInitial>Kredit anfordern</button>
+  <button data-testid="cancel_button" mat-button (click)="onNoClick()">Cancel</button>
+  <button data-testid="create_real_estate_button" mat-button (click)="setAccountRealEstateFinancing()" cdkFocusInitial>Kredit anfordern</button>
 </div>
