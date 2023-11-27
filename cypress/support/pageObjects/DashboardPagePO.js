@@ -14,7 +14,7 @@ class DashboardPagePO extends BasePO {
 
     clickOnLoginButton()
     {
-        cy.get("[type='submit']").invoke("removeAttr", "target").click();
+        cy.get("[data-testid=\"login_button\"]").invoke("removeAttr", "target").click();
     }
 
 }

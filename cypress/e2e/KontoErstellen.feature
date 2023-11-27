@@ -1,54 +1,22 @@
 Feature: Banking App - Main Page
 
-  Scenario:
-
-
-
-  Scenario Outline:  create Giro-Konto
-    Given I navigate to the Banking App dashboard page
-    When I type a Contract ID <contractID>
-    When I type a Password <password>
-    When I click on login button
+  Scenario : Create different Bank Accounts
+    Given I navigate to the Banking App main page
     When I click on Konto erstellen button
     When I click on Giro-Konto button
-    Then I should be presented with a Konto type text <kontoTyp>
-    Examples:
-      | contractID | password | kontoTyp    |
-      | 00001      | 123      | Giro        |
-
-
-  Scenario Outline:  create Festgeld-Konto
-    Given I navigate to the Banking App dashboard page
-    When I type a Contract ID <contractID>
-    When I type a Password <password>
-    When I click on login button
+    Then I should be presented with a Konto type text "Ciro"
     When I click on Konto erstellen button
     When I click on Festgeld-Konto button
-    Then I should be presented with a Konto type text <kontoTyp>
-    Examples:
-      | contractID | password | kontoTyp       |
-      | 00001      | 123      | FixedRate |
-
-  Scenario Outline:  create Festgeld-Konto
-    Given I navigate to the Banking App dashboard page
-    When I type a Contract ID <contractID>
-    When I type a Password <password>
-    When I click on login button
+    Then I should be presented with a Konto type text "FixedRate"
     When I click on Konto erstellen button
     When I click on Tagesgeld-Konto button
-    Then I should be presented with a Konto type text <kontoTyp>
-    Examples:
-      | contractID | password | kontoTyp|
-      | 00001      | 123      | OnCall  |
-
-  Scenario Outline:  create Festgeld-Konto
-    Given I navigate to the Banking App dashboard page
-    When I type a Contract ID <contractID>
-    When I type a Password <password>
-    When I click on login button
+    Then I should be presented with a Konto type text ""
     When I click on Konto erstellen button
     When I click on Immobilien-Finanzierungskonto button
-    Then I should be presented with a Konto type text <kontoTyp>
-    Examples:
-      | contractID | password | kontoTyp     |
-      | 00001      | 123      |  RealEstate  |
+    Then I should be presented with an Immobilien-Finanzierungskonto Erstellen alert box containing text <expectedAlertText>
+    When I type Kredit Beitrag <kreditBeitrag> and Tilgung Rate <tilgungRate>
+    When I click on Kredit Anfordern Button
+    Then I should be presented with a Konto type text <any>
+
+
+

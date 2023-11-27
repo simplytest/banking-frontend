@@ -2,29 +2,49 @@
 
 import BasePO from "./BasePO";
 
-class MainPagePO extends BasePO
-{
+class MainPagePO extends BasePO {
+
+    elements = {
+        kontoErstellenButton : () => cy.get('[data-testid="erstellen_button"]'),
+        giroKontoButton : () => cy.get("[test-dataid=\"giro_account_button\"]"),
+        festgeldKontoButton: () => cy.get("[test-dataid=\"fixed_rate_button\"]"),
+        tagesgeldKontoButton : () => cy.get("[test-dataid=\"onCall_button\"]"),
+        immobilienFinanzierungskontoButton : () => cy.get("[test-dataid=\"realEstate_button\"]"),
+        //kontoTypeText : () =>
+    }
+
+    navigateToMainPage () {
+        super.navigate("mainPage/eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzAxMDc4MTg4fQ.qR0ONmc72xgvYUqmys4c80Pp0asGu7Icp0DF6kAk0TKO88uI5mbkLGiaIMowa65myYkFOwU4P8NHO3c7gaCcJg");
+    }
+
     clickOnKontoErstellenButton()
     {
-        cy.get("[data-testid=\"erstellen\"]").click();
+        this.elements.kontoErstellenButton().click();
 
     }
     clickOnGiroKontoButton()
     {
-        cy.get("div#outer > button:nth-of-type(1)").click();
+        this.elements.giroKontoButton().click();
     }
     clickOnFestgeldKontoButton()
     {
-        cy.get("div#outer > button:nth-of-type(2)").click();
+        this.elements.festgeldKontoButton().click();
     }
     clickOnTagesgeldKontoButton()
     {
-        cy.get("div#outer > button:nth-of-type(3)").click();
+        this.elements.tagesgeldKontoButton().click();
     }
     clickOnImmobilienFinanzierungskontoButton()
     {
-        cy.get("div#outer > button:nth-of-type(4)").click();
+        this.elements.immobilienFinanzierungskontoButton.click();
     }
+    typeKreditBeitrag(kreditBeitrag){
+        cy.get("#mat-input-0").type(kreditBeitrag);
+    }
+    typeTilgungRate(tilgungRate) {
+        cy.get("#mat-input-1").type(tilgungRate);
+    }
+
 
 }
 
