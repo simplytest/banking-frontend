@@ -28,6 +28,9 @@ jobs:
         run: |
           pnpm install
 
+      - name: 🌐 Setup Chrome
+        uses: browser-actions/setup-chrome@11cef13cde73820422f9263a707fb8029808e191
+
       - name: 🧪 Run Tests
         run: |
           pnpm run test
