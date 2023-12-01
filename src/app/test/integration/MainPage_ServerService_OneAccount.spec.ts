@@ -42,14 +42,13 @@ describe("Integration Mainpage <-> ContractServerService", () =>
                 BrowserModule,
                 AppRoutingModule,
                 HttpClientModule,
-                MatDialogModule
+                MatDialogModule,
             ],
             providers:
             [
-                { provide: ContractServerService, useClass: ContractServerServiceMock }
+                { provide: ContractServerService, useClass: ContractServerServiceMock },
             ],
-        })
-            .compileComponents();
+        }).compileComponents();
     }));
 
     beforeEach(() =>
@@ -66,19 +65,18 @@ describe("Integration Mainpage <-> ContractServerService", () =>
 
     it("Daten werden korrekt angezeigt", () =>
     {
-
         /* Begrüßung */
 
-        const greeting : HTMLElement = fixture.nativeElement.querySelectorAll("label[data-testid='customer_Label'");
+        const greeting: HTMLElement = fixture.nativeElement.querySelectorAll("label[data-testid='customer_Label'");
 
         expect(greeting.textContent).toBe("Hallo: !" +
         "Ihre Kontonummer ist: 00001 ");
 
         /*  Kontodaten      */
 
-        const id : HTMLElement = fixture.nativeElement.querySelectorAll("#0.kontoID");
-        const typ : HTMLElement = fixture.nativeElement.querySelectorAll("#0.kontotyp");
-        const balance : HTMLElement = fixture.nativeElement.querySelectorAll("#0.kontostand");
+        const id: HTMLElement = fixture.nativeElement.querySelectorAll("#0.kontoID");
+        const typ: HTMLElement = fixture.nativeElement.querySelectorAll("#0.kontotyp");
+        const balance: HTMLElement = fixture.nativeElement.querySelectorAll("#0.kontostand");
 
         expect(id.textContent).toBe(" 00001:00001 ");
         expect(typ.textContent).toBe(" Giro ");
@@ -86,16 +84,16 @@ describe("Integration Mainpage <-> ContractServerService", () =>
 
         /*  Kontofunktionen      */
 
-        const delete_acc : HTMLElement = fixture.nativeElement.querySelectorAll("#0-kontoschließen");
-        const send : HTMLElement = fixture.nativeElement.querySelectorAll("#0-ueberweisen");
-        const transfer : HTMLElement = fixture.nativeElement.querySelectorAll("#0-transferieren");
-        const recieve : HTMLElement = fixture.nativeElement.querySelectorAll("#0-empfangen");
-        const edit : HTMLElement = fixture.nativeElement.querySelectorAll("#0-editieren");
+        const delete_acc: HTMLElement = fixture.nativeElement.querySelectorAll("#0-kontoschließen");
+        const send: HTMLElement = fixture.nativeElement.querySelectorAll("#0-ueberweisen");
+        const transfer: HTMLElement = fixture.nativeElement.querySelectorAll("#0-transferieren");
+        const receive: HTMLElement = fixture.nativeElement.querySelectorAll("#0-empfangen");
+        const edit: HTMLElement = fixture.nativeElement.querySelectorAll("#0-editieren");
 
         expect(delete_acc).toBeTruthy();
         expect(send).toBeTruthy();
         expect(transfer).toBeTruthy();
-        expect(recieve).toBeTruthy();
+        expect(receive).toBeTruthy();
         expect(edit).toBeTruthy();
     });
 });

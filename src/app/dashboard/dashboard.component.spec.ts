@@ -15,7 +15,8 @@ describe("DashboardComponent", () =>
     {
         TestBed.configureTestingModule({
             declarations: [DashboardComponent],
-            imports: [
+            imports:
+            [
                 AppRoutingModule,
                 BrowserModule,
                 MatDialogModule,
@@ -42,8 +43,8 @@ describe("DashboardComponent", () =>
     {
         /*  Label   */
 
-        const Contract_ID_Label : HTMLElement = fixture.debugElement.query(By.css("label[data-testid='contract_label']")).nativeElement;
-        const Passwort_Label : HTMLElement = fixture.debugElement.query(By.css("label[data-testid='password_label']")).nativeElement;
+        const Contract_ID_Label: HTMLElement = fixture.debugElement.query(By.css("label[data-testid='contract_label']")).nativeElement;
+        const Passwort_Label: HTMLElement = fixture.debugElement.query(By.css("label[data-testid='password_label']")).nativeElement;
 
         expect(Contract_ID_Label.textContent).toEqual("Contract ID:");
         expect(Passwort_Label.textContent).toEqual("Passwort:");
@@ -55,8 +56,8 @@ describe("DashboardComponent", () =>
 
         /*  Buttons   */
 
-        const Login_Label : HTMLElement = fixture.debugElement.query(By.css("button[data-testid='login_button']")).nativeElement;
-        const Registrieren_Label : HTMLElement = fixture.debugElement.query(By.css("button[data-testid='register_button']")).nativeElement;
+        const Login_Label: HTMLElement = fixture.debugElement.query(By.css("button[data-testid='login_button']")).nativeElement;
+        const Registrieren_Label: HTMLElement = fixture.debugElement.query(By.css("button[data-testid='register_button']")).nativeElement;
 
         expect(Login_Label.textContent).toEqual(" Login ");
         expect(Registrieren_Label.textContent).toEqual(" Registrieren ");

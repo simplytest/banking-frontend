@@ -8,19 +8,21 @@ describe("CreateAccountComponent", () =>
 {
     let component: CreateAccountComponent;
     let fixture: ComponentFixture<CreateAccountComponent>;
+
     beforeEach(waitForAsync(() =>
     {
         TestBed.configureTestingModule({
-            declarations: [
+            declarations:
+            [
                 CreateAccountComponent,
             ],
-            imports: [
+            imports:
+            [
                 AppRoutingModule,
                 HttpClientModule,
                 MatDialogModule,
             ]
-        })
-            .compileComponents();
+        }).compileComponents();
     }));
 
     beforeEach(() =>
@@ -34,5 +36,4 @@ describe("CreateAccountComponent", () =>
     {
         expect(component).toBeTruthy();
     });
-
 });
