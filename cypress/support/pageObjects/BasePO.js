@@ -1,6 +1,5 @@
-/// <reference types="cypress" />
-class BasePO {
-
+class BasePO
+{
     navigate(path)
     {
         cy.fixture("config.json").then((data) =>

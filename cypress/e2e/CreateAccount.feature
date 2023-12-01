@@ -13,10 +13,3 @@ Feature: Banking App - Create Account Page
     Examples:
       | contractID | password | greeting    | header | kontoTyp |
       | 00001      | 123      | Hallo John!  Ihre Kontonummer ist:  | Konto Typ Auswahl:| Giro |
-
-
-
-
-
-
-

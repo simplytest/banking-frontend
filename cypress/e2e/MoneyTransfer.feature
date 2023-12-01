@@ -37,7 +37,3 @@ Feature: Money Transfer
     Then I should be presented with an alert box containing "Geld gesendet!" text
     When I click on Close button
     Then my account balance is updated with the amount '<betrag>'
-
-
-
-

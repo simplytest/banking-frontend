@@ -15,5 +15,3 @@ Feature: Banking App - RegisterNewCustomer Page
     Examples:
       | firstName | lastName | password | street    | house | zipCode | city   | country     | email       | birthDate  | greeting   |
       | John      | Doe      | 123      | Hauptstr. | 1     | 10555   | Berlin | Deutschland | john@doe.de | 2000-09-09 | Hallo John!|
-
-
