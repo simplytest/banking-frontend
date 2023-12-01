@@ -7,7 +7,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc94dc26-2acb-4bef-9a56-1ca07e9ca44d" name="Changes" comment="Added MainPagePO.js, MainPageSteps.js und KontoErstellen.feature" />
+    <list default="true" id="cc94dc26-2acb-4bef-9a56-1ca07e9ca44d" name="Changes" comment="Added MainPagePO.js, MainPageSteps.js und KontoErstellen.feature">
+      <change afterPath="$PROJECT_DIR$/cypress/e2e/MoneyTransfer.feature" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cypress/support/pageObjects/CreateAccountPagePO.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cypress/support/step_definitions/CreateAccountPageSteps.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cypress.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cypress.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cypress/e2e/KontoErstellen.feature" beforeDir="false" afterPath="$PROJECT_DIR$/cypress/e2e/CreateAccount.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cypress/e2e/Login.feature" beforeDir="false" afterPath="$PROJECT_DIR$/cypress/e2e/Login.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cypress/support/cypress-cucumber-preprocessor.js" beforeDir="false" afterPath="$PROJECT_DIR$/cypress/support/cypress-cucumber-preprocessor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cypress/support/pageObjects/DashboardPagePO.js" beforeDir="false" afterPath="$PROJECT_DIR$/cypress/support/pageObjects/DashboardPagePO.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cypress/support/pageObjects/MainPagePO.js" beforeDir="false" afterPath="$PROJECT_DIR$/cypress/support/pageObjects/MainPagePO.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cypress/support/step_definitions/DashboardPageSteps.js" beforeDir="false" afterPath="$PROJECT_DIR$/cypress/support/step_definitions/DashboardPageSteps.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cypress/support/step_definitions/MainPageSteps.js" beforeDir="false" afterPath="$PROJECT_DIR$/cypress/support/step_definitions/MainPageSteps.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cypress/support/step_definitions/RegisterNewCustomerPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/cypress/support/step_definitions/RegisterNewCustomerSteps.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tslint.json" beforeDir="false" afterPath="$PROJECT_DIR$/tslint.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,10 +39,10 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
@@ -39,9 +57,9 @@
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="ProjectErrors" />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 6
-}</component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 7
+}]]></component>
   <component name="ProjectId" id="2YahPl8T47zkpxso3248J6aC2wJ" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -52,7 +70,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;veronica__branch&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -60,13 +78,15 @@
     &quot;nodejs.protractor.protractor_package&quot;: &quot;/Users/veronicamiller/IdeaProjects/banking-frontend/node_modules/protractor&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Applications/IntelliJ IDEA.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/veronicamiller/IdeaProjects/banking-frontend/node_modules/typescript/lib&quot;,
+    &quot;tslint.code.style.apply.dismiss&quot;: &quot;true&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="npm.Angular CLI Server">
+  <component name="RunManager" selected="Cucumber.js.Login.feature">
     <configuration name="Tests (BankingSoftwareFrontEnd)" type="JavaScriptTestRunnerKarma">
       <config-file value="$PROJECT_DIR$/karma.conf.js" />
+      <karma-package-dir value="$PROJECT_DIR$/node_modules/@angular/cli" />
       <working-directory value="$PROJECT_DIR$" />
       <node-interpreter value="project" />
       <envs />
@@ -85,6 +105,13 @@
       <method v="2" />
     </configuration>
     <configuration name=".eslintrc.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/.eslintrc.js" working-dir="$PROJECT_DIR$">
+      <method v="2" />
+    </configuration>
+    <configuration name="KontoErstellen.feature" type="cucumber.js" factoryName="Cucumber.js" temporary="true">
+      <option name="myFilePath" value="$PROJECT_DIR$/cypress/e2e/KontoErstellen.feature" />
+      <option name="myNameFilter" />
+      <option name="cucumberJsArguments" value="" />
+      <option name="workingDirectory" value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
     <configuration name="Login.feature" type="cucumber.js" factoryName="Cucumber.js" temporary="true">
@@ -124,6 +151,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Cucumber.js.Login.feature" />
+        <item itemvalue="Cucumber.js.KontoErstellen.feature" />
         <item itemvalue="npm.cucumber" />
         <item itemvalue="Cucumber.js.Scenario: Konten Erstellen" />
         <item itemvalue="Node.js..eslintrc.js" />
@@ -147,6 +175,8 @@
       <workItem from="1701074187670" duration="16379000" />
       <workItem from="1701105312879" duration="4940000" />
       <workItem from="1701114092773" duration="536000" />
+      <workItem from="1701169238341" duration="30990000" />
+      <workItem from="1701275546004" duration="30667000" />
     </task>
     <task id="LOCAL-00001" summary="Added Page Object structure">
       <option name="closed" value="true" />

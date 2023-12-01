@@ -1,8 +1,6 @@
 import { Given, Then, When } from "@badeball/cypress-cucumber-preprocessor";
-import BasePO from "../pageObjects/BasePO";
 
 import DashboardPagePO from "../pageObjects/DashboardPagePO";
-
 
 const dashboardPage = new DashboardPagePO();
 
@@ -17,25 +15,29 @@ When("When I click on Registrieren button", () =>
 });
 When("I type a Contract ID {}", (contractID) =>
 {
-    cy.get("[name='contractID']").type(contractID);
+  dashboardPage.typeContractID()
 });
 When("I type a Password {}", (password) =>
 {
-    cy.get("[name='password']").type(password);
+  dashboardPage.typePassword();
 });
 When("I click on login button", () =>
 {
-
     dashboardPage.clickOnLoginButton();
 });
 When("I type an invalid Password {}", (password) =>
 {
-    cy.get("[name='password']").type(password);
+
+    dashboardPage.typeInvalidPassword();
 });
 
 Then("I should be presented with an alert box containing text {}", (expectedAlertText) =>
 {
-    cy.get("#mat-mdc-dialog-title-0").contains(expectedAlertText);
+    dashboardPage.validateAlertText();
 
+});
+When("I have logged in with my credentials", (contractID,password) => {
+  dashboardPage.typeContractID();
+  dashboardPage.typePassword();
 });
 
