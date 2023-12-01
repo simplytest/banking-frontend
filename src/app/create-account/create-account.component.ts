@@ -9,7 +9,7 @@ import { AccountType } from "../types/account";
 @Component({
     selector: "app-create-account",
     templateUrl: "./create-account.component.html",
-    styleUrls: ["./create-account.component.css"]
+    styleUrls: ["./create-account.component.css"],
 })
 export class CreateAccountComponent implements OnInit
 {
@@ -73,7 +73,7 @@ export class CreateAccountComponent implements OnInit
                 token: this.token,
                 contract: this.contract,
             },
-            panelClass: "flex-dialog"
+            panelClass: "flex-dialog",
         });
 
         dialogRef.afterClosed().subscribe(() =>

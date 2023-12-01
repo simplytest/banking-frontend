@@ -26,7 +26,7 @@ jobs:
 
       - name: 🏗️ Build and Publish
         run: |
-          docker buildx build -t banking-frontend:${{  github.ref_name }} -t banking-frontend:latest --load .
+          docker buildx build -t banking-frontend:${{  github.ref_name }} -t banking-frontend:latest -f docker/Dockerfile --load .
 
           docker image tag banking-frontend ghcr.io/simplytest/banking-frontend
           docker push -a ghcr.io/simplytest/banking-frontend
