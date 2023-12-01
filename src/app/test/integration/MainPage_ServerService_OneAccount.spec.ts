@@ -42,12 +42,12 @@ describe("Integration Mainpage <-> ContractServerService", () =>
                 BrowserModule,
                 AppRoutingModule,
                 HttpClientModule,
-                MatDialogModule
+                MatDialogModule,
             ],
             providers:
             [
-                { provide: ContractServerService, useClass: ContractServerServiceMock }
-            ]
+                { provide: ContractServerService, useClass: ContractServerServiceMock },
+            ],
         }).compileComponents();
     }));
 
