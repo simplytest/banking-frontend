@@ -9,7 +9,8 @@ Feature: Banking App - Dashboard Page
     Then I should be presented with a greeting text <greeting>
     Examples:
       | contractID | password | greeting    |
-      | 00001      | 123      | Hallo John!  Ihre Kontonummer ist:  |
+      | 00001      | 123      | Hallo John! |
+      | 00001      | 123      | Ihre Kontonummer ist |
 
   Scenario Outline: Validate invalid login credentials
     Given I navigate to the Banking App dashboard page
@@ -21,4 +22,3 @@ Feature: Banking App - Dashboard Page
     Examples:
       | contractID | password | expectedAlertText        |
       | 00001      | 12       | Kontrakt nicht gefunden! |
-
