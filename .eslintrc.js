@@ -42,16 +42,20 @@ module.exports = {
         "no-multi-spaces": "error",
         "no-trailing-spaces": "error",
         "no-multiple-empty-lines": ["error", { "max": 1 }],
+        "comma-dangle": ["error", {
+            "arrays": "always-multiline",
+            "objects": "always-multiline",
+        }],
         "semi-spacing": "error",
         "key-spacing": [2, {
             "singleLine": {
                 "beforeColon": false,
-                "afterColon": true
+                "afterColon": true,
             },
             "multiLine": {
                 "beforeColon": false,
                 "afterColon": true,
-            }
-        }]
+            },
+        }],
     },
 };

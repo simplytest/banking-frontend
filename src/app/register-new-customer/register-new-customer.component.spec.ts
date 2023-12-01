@@ -11,7 +11,8 @@ describe("RegisterNewCustomerComponent", () =>
     let component: RegisterNewCustomerComponent;
     let fixture: ComponentFixture<RegisterNewCustomerComponent>;
 
-    const privateAccountLabels : string [] = [
+    const privateAccountLabels =
+    [
         "Vorname",
         "Nachname",
         "Passwort",
@@ -25,7 +26,8 @@ describe("RegisterNewCustomerComponent", () =>
         " © Smart Money GmbH 2023 "
     ];
 
-    const businessAccountLabels : string [] = [
+    const businessAccountLabels =
+    [
         "Vorname",
         "Nachname",
         "Passwort",
@@ -45,15 +47,15 @@ describe("RegisterNewCustomerComponent", () =>
     {
         TestBed.configureTestingModule({
             declarations: [RegisterNewCustomerComponent],
-            imports: [
+            imports:
+            [
                 BrowserModule,
                 FormsModule,
                 AppRoutingModule,
                 HttpClientModule,
                 NgbModule,
             ]
-        })
-            .compileComponents();
+        }) .compileComponents();
     }));
 
     beforeEach(() =>
@@ -70,52 +72,42 @@ describe("RegisterNewCustomerComponent", () =>
 
     it("Privatkunde ist voreingestellt", () =>
     {
-        const Geburtstag : HTMLElement = fixture.nativeElement.querySelector("input[data-testid='birthday_input'");
+        const Geburtstag: HTMLElement = fixture.nativeElement.querySelector("input[data-testid='birthday_input'");
         expect(Geburtstag).toBeTruthy();
 
-        const Unternehmensname : HTMLElement = fixture.nativeElement.querySelector("input[data-testid='company_input'");
+        const Unternehmensname: HTMLElement = fixture.nativeElement.querySelector("input[data-testid='company_input'");
         expect(Unternehmensname).toBeFalsy();
 
-        const Umsatzsteuernummer : HTMLElement = fixture.nativeElement.querySelector("input[data-testid='taxnumber_input'");
+        const Umsatzsteuernummer: HTMLElement = fixture.nativeElement.querySelector("input[data-testid='taxnumber_input'");
         expect(Umsatzsteuernummer).toBeFalsy();
 
-        const Jahresumsatz : HTMLElement = fixture.nativeElement.querySelector("input[data-testid='annual_sales_input'");
+        const Jahresumsatz: HTMLElement = fixture.nativeElement.querySelector("input[data-testid='annual_sales_input'");
         expect(Jahresumsatz).toBeFalsy();
     });
 
     it("Labels sind vorhanden und korrekt benamt", () =>
     {
-        const ComponentLabels : HTMLElement [] = fixture.nativeElement.querySelectorAll("label");
-
-        for (let i = 0; i < ComponentLabels.length; i++)
-        {
-            expect(ComponentLabels[i].textContent).toContain(privateAccountLabels[i]);
-        }
+        const ComponentLabels: HTMLElement[] = fixture.nativeElement.querySelectorAll("label");
+        ComponentLabels.forEach((label, index) => expect(label.textContent).toContain(privateAccountLabels[index]));
     });
 
     it("Nach Klick auf den Button 'Business Kunde' ändern sich die Eingabefelder zum Businesskunden ", () =>
     {
-        const BusinessKundeButton : HTMLElement = fixture.debugElement.query(By.css("button[data-testid='business_customer_button'")).nativeElement;
+        const BusinessKundeButton: HTMLElement = fixture.debugElement.query(By.css("button[data-testid='business_customer_button'")).nativeElement;
         BusinessKundeButton.dispatchEvent(new Event("click"));
         fixture.detectChanges();
-        const ComponentLabels : HTMLElement [] = fixture.nativeElement.querySelectorAll("label");
 
-        for (let i = 0; i < ComponentLabels.length; i++)
-        {
-            expect(ComponentLabels[i].textContent).toContain(businessAccountLabels[i]);
-        }
+        const ComponentLabels: HTMLElement[] = fixture.nativeElement.querySelectorAll("label");
+        ComponentLabels.forEach((label, index) => expect(label.textContent).toContain(businessAccountLabels[index]));
     });
 
     it("Nach Klick auf den Button 'Privatkunde' ändern sich die Eingabefelder zum Privatkunden ", () =>
     {
-        const BusinessKundeButton : HTMLElement = fixture.debugElement.query(By.css("button[data-testid='private_customer_button'")).nativeElement;
+        const BusinessKundeButton: HTMLElement = fixture.debugElement.query(By.css("button[data-testid='private_customer_button'")).nativeElement;
         BusinessKundeButton.dispatchEvent(new Event("click"));
         fixture.detectChanges();
-        const ComponentLabels : HTMLElement [] = fixture.nativeElement.querySelectorAll("label");
 
-        for (let i = 0; i < ComponentLabels.length; i++)
-        {
-            expect(ComponentLabels[i].textContent).toContain(privateAccountLabels[i]);
-        }
+        const ComponentLabels: HTMLElement[] = fixture.nativeElement.querySelectorAll("label");
+        ComponentLabels.forEach((label, index) => expect(label.textContent).toContain(privateAccountLabels[index]));
     });
 });

@@ -1,20 +1,22 @@
-import { AppPage } from './app.po';
-import { browser, logging } from 'protractor';
+import { browser } from "protractor";
+import { AppPage } from "./app.po";
 
-describe('workspace-project App', () => {
-  let page: AppPage;
+describe("workspace-project App", () =>
+{
+    let page: AppPage;
 
-  beforeEach(() => {
-    page = new AppPage();
-  });
+    beforeEach(() =>
+    {
+        page = new AppPage();
+    });
 
-  it('should display title ', async () => {
-    page.navigateTo();
-    await page.testRegisterButton();
+    it("should display title ", async () =>
+    {
+        page.navigateTo();
+        await page.testRegisterButton();
 
-    await page.fillInRegisterForm();
-    browser.sleep(2000);
-  });
-
+        await page.fillInRegisterForm();
+        browser.sleep(2000);
+    });
 
 });

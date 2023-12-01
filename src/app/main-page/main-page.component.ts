@@ -12,7 +12,7 @@ import { Id } from "../types/id";
 @Component({
     selector: "app-main-page",
     templateUrl: "./main-page.component.html",
-    styleUrls: ["./main-page.component.css"]
+    styleUrls: ["./main-page.component.css"],
 })
 export class MainPageComponent implements OnInit
 {
@@ -75,9 +75,9 @@ export class MainPageComponent implements OnInit
             data:
             {
                 account,
-                token: this.token
+                token: this.token,
             },
-            panelClass: "flex-dialog"
+            panelClass: "flex-dialog",
         });
 
         dialogRef.afterClosed().subscribe(() =>
@@ -98,7 +98,7 @@ export class MainPageComponent implements OnInit
                 current: account,
                 accounts: without_self,
             },
-            panelClass: "flex-dialog"
+            panelClass: "flex-dialog",
         });
 
         dialogRef.afterClosed().subscribe(() =>
@@ -116,7 +116,7 @@ export class MainPageComponent implements OnInit
                 account,
                 token: this.token,
             },
-            panelClass: "flex-dialog"
+            panelClass: "flex-dialog",
         });
 
         dialogRef.afterClosed().subscribe(() =>
@@ -132,7 +132,7 @@ export class MainPageComponent implements OnInit
             {
                 token: this.token,
             },
-            panelClass: "flex-dialog"
+            panelClass: "flex-dialog",
         });
 
         dialogRef.afterClosed().subscribe(() =>

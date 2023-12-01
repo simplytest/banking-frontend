@@ -43,6 +43,7 @@ const expectedJson = {
         }
     }
 };
+
 let requestJson;
 
 const actualjson = {
@@ -86,13 +87,12 @@ const actualjson = {
 
 describe("HttpClient testing", () =>
 {
-    let contractService : ContractServerService;
-    let controller : HttpTestingController;
+    let contractService: ContractServerService;
+    let controller: HttpTestingController;
 
     beforeEach(() =>
     {
         TestBed.configureTestingModule({
-
             imports: [HttpClientTestingModule],
             providers: [ContractServerService]
         });
@@ -109,11 +109,10 @@ describe("HttpClient testing", () =>
                 requestJson = contract;
             }
         );
-        const request = controller.expectOne(url);
 
+        const request = controller.expectOne(url);
         request.flush(actualjson);
 
         expect(expectedJson).toEqual(requestJson);
     });
-
 });

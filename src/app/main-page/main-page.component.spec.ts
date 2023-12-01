@@ -16,10 +16,13 @@ describe("MainPageComponent", () =>
         TestBed.configureTestingModule({
             declarations: [MainPageComponent],
 
-            imports: [BrowserModule,
+            imports:
+            [
+                BrowserModule,
                 AppRoutingModule,
                 HttpClientModule,
-                MatDialogModule,],
+                MatDialogModule,
+            ],
             providers: [ContractServerService]
         })
             .compileComponents();
@@ -39,18 +42,14 @@ describe("MainPageComponent", () =>
 
     it("Buttons werden ohne Daten angezeigt", () =>
     {
-
-        /*      Buttons      */
-
-        const datenAendernButton : HTMLElement = fixture.nativeElement.querySelector("button[data-testid='kundendaten_button'");
-        const vertragKuendigenButton : HTMLElement = fixture.nativeElement.querySelector("button[data-testid='kuendigen_button'");
-        const dashboardButton : HTMLElement = fixture.nativeElement.querySelector("button[data-testid='dashboard_button'");
-        const kontoErstellenButton : HTMLElement = fixture.nativeElement.querySelector("button[data-testid='erstellen_button'");
+        const datenAendernButton: HTMLElement = fixture.nativeElement.querySelector("button[data-testid='kundendaten_button'");
+        const vertragKuendigenButton: HTMLElement = fixture.nativeElement.querySelector("button[data-testid='kuendigen_button'");
+        const dashboardButton: HTMLElement = fixture.nativeElement.querySelector("button[data-testid='dashboard_button'");
+        const kontoErstellenButton: HTMLElement = fixture.nativeElement.querySelector("button[data-testid='erstellen_button'");
 
         expect(datenAendernButton.textContent).toEqual(" Kundendaten ändern ");
         expect(vertragKuendigenButton.textContent).toEqual(" Vertrag kündigen ");
         expect(dashboardButton.textContent).toEqual(" Zum Dashboard ");
         expect(kontoErstellenButton.textContent).toEqual(" Konto erstellen ");
-
     });
 });
