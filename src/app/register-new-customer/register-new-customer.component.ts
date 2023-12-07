@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { sha512_256 } from "js-sha512";
+import Cookies from "js-cookie";
 import { ContractServerService } from "../_services/contract-server.service";
 import { CustomerData, CustomerType } from "../types/data/customerData";
 
@@ -26,7 +26,7 @@ export class RegisterNewCustomerComponent implements OnInit
     async onSubmit(value: any)
     {
         const { firstName, lastName, currentAddress, password } = value;
-        const data: CustomerData = { firstName, lastName, password: sha512_256(password), address: currentAddress, type: CustomerType[this.type] };
+        const data: CustomerData = { firstName, lastName, password: password, address: currentAddress, type: CustomerType[this.type] };
 
         if (this.type === CustomerType.Business)
         {
@@ -45,7 +45,8 @@ export class RegisterNewCustomerComponent implements OnInit
         this.service.register(data).subscribe(
             result =>
             {
-                this.router.navigate(["/mainPage", result.result.JWT]);
+                Cookies.set("session", result.result.JWT);
+                this.router.navigate(["/mainPage"]);
             },
             error => alert(JSON.stringify(error.error)));
     }

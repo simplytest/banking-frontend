@@ -5,6 +5,7 @@ import { ContractServerService } from "../_services/contract-server.service";
 import { Contract } from "../types/contract";
 import { RealEstateAccountData } from "../types/data/realEstateData";
 import { AccountType } from "../types/account";
+import Cookies from "js-cookie";
 
 @Component({
     selector: "app-create-account",
@@ -22,10 +23,7 @@ export class CreateAccountComponent implements OnInit
 
     ngOnInit(): void
     {
-        this.route.params.subscribe(({ id: token }) =>
-        {
-            this.token = token;
-        });
+        this.token = Cookies.get("session");
     }
 
     ngAfterViewInit()
@@ -84,7 +82,7 @@ export class CreateAccountComponent implements OnInit
 
     goToMainPage()
     {
-        this.router.navigate(["/mainPage", this.token]);
+        this.router.navigate(["/mainPage"]);
     }
 }
 

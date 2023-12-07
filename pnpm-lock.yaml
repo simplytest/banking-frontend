@@ -74,9 +74,9 @@ dependencies:
   font-awesome:
     specifier: ^4.7.0
     version: 4.7.0
-  js-sha512:
-    specifier: ^0.8.0
-    version: 0.8.0
+  js-cookie:
+    specifier: ^3.0.5
+    version: 3.0.5
   rxjs:
     specifier: ~6.5.5
     version: 6.5.5
@@ -103,6 +103,9 @@ devDependencies:
   '@types/jasminewd2':
     specifier: ~2.0.3
     version: 2.0.13
+  '@types/js-cookie':
+    specifier: ^3.0.6
+    version: 3.0.6
   '@types/node':
     specifier: ^14.18.63
     version: 14.18.63
@@ -3158,6 +3161,10 @@ packages:
       '@types/jasmine': 3.6.11
     dev: true
 
+  /@types/js-cookie@3.0.6:
+    resolution: {integrity: sha512-wkw9yd1kEXOPnvEeEV1Go1MmxtBJL0RR79aOTAApecWFVu7w0NNXNqhcWgvw2YgZDYadliXkl14pa3WXw5jlCQ==}
+    dev: true
+
   /@types/json-schema@7.0.15:
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
 
@@ -5848,8 +5855,9 @@ packages:
     hasBin: true
     dev: true
 
-  /js-sha512@0.8.0:
-    resolution: {integrity: sha512-PWsmefG6Jkodqt+ePTvBZCSMFgN7Clckjd0O7su3I0+BW2QWUTJNzjktHsztGLhncP2h8mcF9V9Y2Ha59pAViQ==}
+  /js-cookie@3.0.5:
+    resolution: {integrity: sha512-cEiJEAEoIbWfCZYKWhVwFuvPX1gETRYPw6LlaTKoxD3s2AkXzkCjnp6h0V77ozyqj0jakteJ4YqDJT830+lVGw==}
+    engines: {node: '>=14'}
     dev: false
 
   /js-tokens@4.0.0:
@@ -7517,6 +7525,7 @@ packages:
   /semver@5.7.2:
     resolution: {integrity: sha512-cBznnQ9KjJqU67B52RMC65CMarK2600WFnbkcaiwWq3xy/5haFJlshgnpjovMVJ+Hff49d8GEn0b87C5pDQ10g==}
     hasBin: true
+    requiresBuild: true
     dev: true
 
   /semver@6.3.1:
