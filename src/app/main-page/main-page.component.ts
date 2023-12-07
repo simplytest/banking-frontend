@@ -64,6 +64,10 @@ export class MainPageComponent implements OnInit
         this.service.dismissContract(this.token).subscribe(() =>
         {
             this.router.navigate(["/"]);
+        },
+        error =>
+        {
+            alert(JSON.stringify(error.error));
         });
     }
 
