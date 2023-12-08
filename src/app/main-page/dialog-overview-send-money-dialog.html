@@ -1,9 +1,9 @@
-<h1 mat-dialog-title>Geld überweisen</h1>
+<h1 mat-dialog-title data-testid="title">Geld überweisen</h1>
 
 <div mat-dialog-content>
   <mat-form-field floatLabel="always" subscriptSizing="dynamic">
     <mat-label>Geldbetrag</mat-label>
-    <input type="number" matInput [(ngModel)]="sendData.amount" placeholder="0">
+    <input data-testid="send_amount" type="number" matInput [(ngModel)]="sendData.amount" placeholder="0">
     <span matTextPrefix>$&nbsp;</span>
   </mat-form-field>
   <mat-form-field subscriptSizing="dynamic">

@@ -6,7 +6,7 @@
     <input data-testid="amount_input" matInput [(ngModel)]="transferData.amount">
     <span matTextPrefix>$&nbsp;</span>
   </mat-form-field>
-  <mat-radio-group [(ngModel)]="transferData.target.id" style="display: flex; flex-direction: column;">
+  <mat-radio-group data-testid="radio_group" [(ngModel)]="transferData.target.id" style="display: flex; flex-direction: column;">
     <mat-radio-button *ngFor="let item of data.accounts; let i = index" id="{{item[0]}}" [value]="item[0]">
       {{item[0]}} ({{item[1].type.split(".").at(-1).replace('Account','')}})
     </mat-radio-button>

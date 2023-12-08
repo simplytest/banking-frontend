@@ -1,9 +1,9 @@
-<h1 mat-dialog-title>Geld empfangen</h1>
+<h1 mat-dialog-title data-testid="receiveMoney_title">Geld empfangen</h1>
 
 <div mat-dialog-content>
   <mat-form-field floatLabel="always">
-    <mat-label>Geldbetrag</mat-label>
-    <input type="number" matInput [(ngModel)]="data.amount" placeholder="0">
+    <mat-label data-testid="receiveMoney_lable">Geldbetrag</mat-label>
+    <input data-testid="receiveMoney_input" type="number" matInput [(ngModel)]="data.amount" placeholder="0">
     <span matTextPrefix>$&nbsp;</span>
   </mat-form-field>
 </div>
