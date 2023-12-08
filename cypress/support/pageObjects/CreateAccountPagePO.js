@@ -6,12 +6,12 @@ class CreateAccountPagePO extends BasePO
         giroKontoButton: () => cy.get("[test-dataid=\"giro_account_button\"]"),
         festgeldKontoButton: () => cy.get("[test-dataid=\"fixed_rate_button\"]"),
         tagesgeldKontoButton: () => cy.get("[test-dataid=\"onCall_button\"]"),
-        immobilienFinanzierungskontoButton: () => cy.get("[test-dataid=\"realEstate_button\"]"),
+        immobilienFinanzierungskontoButton: () => cy.get("[test-dataid=\"realEstate_button\"]")
     };
 
     navigateToCreateAccountPage ()
     {
-        super.navigate("createAccount/eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzAxMTc5Mzg4fQ.BDez8tseWCffeck6MdgIzrOyQOUN-bcgAN-wCBySlSLR0M7zmkksvj33Z9KqiTqTBresf5wSrCYjUviOkOaxEw");
+        super.navigate("createAccount/eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzAxODg2OTE3fQ.bgQo-rEmTDO3MeiNac6EwPqrReYLeFX22_S8opo1CId7oZMGiWbe83u3eZ23xoxoiVs9YrXoehaDQrfQEBiDcQ");
     }
 
     clickOnGiroKontoButton()
@@ -28,15 +28,15 @@ class CreateAccountPagePO extends BasePO
     }
     clickOnImmobilienFinanzierungskontoButton()
     {
-        this.elements.immobilienFinanzierungskontoButton.click();
+        cy.get("[test-dataid=\"realEstate_button\"]").click();
     }
     typeKreditBeitrag(kreditBeitrag)
     {
-        cy.get("#mat-input-0").type(kreditBeitrag);
+        cy.get("[id=\"mat-input-0\"]").type(kreditBeitrag);
     }
     typeTilgungRate(tilgungRate)
     {
-        cy.get("#mat-input-1").type(tilgungRate);
+        cy.get("id=\"mat-input-7\"").type(tilgungRate);
     }
 }
 

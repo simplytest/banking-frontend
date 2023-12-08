@@ -1,7 +1,13 @@
-import { When } from "@badeball/cypress-cucumber-preprocessor";
+/// <reference types="cypress" />
+
+import { Then,When } from "@badeball/cypress-cucumber-preprocessor";
 import RegisterNewCustomerPagePO from "../pageObjects/RegisterNewCustomerPagePO";
 
 const registerNewCustomerSteps = new RegisterNewCustomerPagePO();
+
+When ("I click on Business Kunde button", () => {
+    cy.get("[data-testid=\"business_customer_button\"]").click();
+})
 
 When("I type a first name {string} and a last name {string}", (firstName, lastName) =>
 {
@@ -37,7 +43,18 @@ When("I enter a birthDate {}", (birthDate) =>
     registerNewCustomerSteps.typeBirthDate(birthDate);
 });
 
+When("I enter a companyName {}", (companyName) => {
+    cy.get("[data-testid=\"company_input\"]").type(companyName);
+})
+When("I enter a ustNumber {}", (ustNumber) => {
+    cy.get("[data-testid=\"taxnumber_input\"]").type(ustNumber);
+})
+When("I enter a revenue {}", (companyName) => {
+    cy.get("[data-testid=\"annual_sales_input\"]").type(companyName);
+})
+
 When("When I click on Registrieren button again", () =>
 {
     registerNewCustomerSteps.clickOnRegistrierenButtonAgain();
 });
+

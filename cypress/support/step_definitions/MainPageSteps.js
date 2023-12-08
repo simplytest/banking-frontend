@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 import { Given, Then, When } from "@badeball/cypress-cucumber-preprocessor";
 import MainPagePO from "../pageObjects/MainPagePO";
 
@@ -30,7 +32,7 @@ When("I click on Double Arrows button", () =>
 
 Then("I should be presented with an alert box containing \"Geld übertragen\" text", () =>
 {
-    cy.get("mat-mdc-dialog-title-0").contains("Geld übertragen");
+    cy.get("[data-testid=\"title\"]").contains("Geld übertragen");
 });
 
 When("I type a Betrag {}", (betrag) =>
@@ -40,17 +42,17 @@ When("I type a Betrag {}", (betrag) =>
 
 When("I select the desired account", () =>
 {
-    cy.get("[id=\"00001:00005-input\"]").click();
+    cy.get("id=\"00001:00005-input\"").click();
 });
 
 When("I click on Geld übertragen button", () =>
 {
-    cy.get("[data-testid=\"transfer_money_button\"]").click();
+    cy.get("data-testid=\"transfer_money_button\"").click();
 });
 
 Then("I should be presented with an alert box containing \"Geld übertragen!\" text", () =>
 {
-    cy.get("[id=\"mat-mdc-dialog-title-3\"]").contains("Geld übertragen!");
+    cy.get("#mat-mdc-dialog-title-0").contains("Geld übertragen!");
 });
 
 When("I click on Close button", () =>
@@ -95,7 +97,7 @@ When("I click on money button", () =>
 
 Then("I should be presented with an alert box containing \"Geld überweisen\" text", () =>
 {
-    cy.get("[id=\"mat-mdc-dialog-title-10\"]").contains("Geld überweisen");
+    cy.get("#mat-mdc-dialog-title-0").contains("Geld überweisen");
 });
 
 When("I type a desired Geldbetrag {}", (geldbetrag) =>

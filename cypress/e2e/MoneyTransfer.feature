@@ -1,4 +1,4 @@
-@smoke
+
 Feature: Money Transfer
 
   Scenario: Receive money into my account
@@ -30,7 +30,7 @@ Feature: Money Transfer
     Given I navigate to the Banking App dashboard page
     And I have logged in with my credentials
     When I click on money button
-    Then I should be presented with an alert box containing "Geld überweisen" text
+    Then I should be presented with an alert box containing "Geld überweisen"
     When I type a desired Geldbetrag '<betrag>'
     When I type a Ziel IBAN <IBAN>
     When I click on Geld überweisen button

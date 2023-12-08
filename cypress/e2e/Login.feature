@@ -10,6 +10,9 @@ Feature: Banking App - Dashboard Page
     Examples:
       | contractID | password | greeting    |
       | 00001      | 123      | Hallo John! |
+      | 00002      | 123      | Hallo Amanda! |
+
+
 
 
   Scenario Outline: Validate invalid login credentials
