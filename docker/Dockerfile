@@ -15,5 +15,6 @@ RUN source /root/.bashrc && pnpm install && pnpm run build
 FROM nginx:latest
 
 COPY --from=base /usr/local/app/dist/BankingSoftwareFrontEnd /usr/share/nginx/html
+COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80

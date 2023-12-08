@@ -2,11 +2,12 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ContractServerService } from "../_services/contract-server.service";
 import { Address } from "../types/address";
+import Cookies from "js-cookie";
 
 @Component({
     selector: "app-edit-address-form",
     templateUrl: "./edit-address-form.component.html",
-    styleUrls: ["./edit-address-form.component.css"]
+    styleUrls: ["./edit-address-form.component.css"],
 })
 export class EditAddressFormComponent implements OnInit
 {
@@ -19,11 +20,8 @@ export class EditAddressFormComponent implements OnInit
 
     ngOnInit()
     {
-        this.route.params.subscribe(({ id: token }) =>
-        {
-            this.token = token;
-            this.getContracts();
-        });
+        this.token = Cookies.get("session");
+        this.getContracts();
     }
 
     getContracts()

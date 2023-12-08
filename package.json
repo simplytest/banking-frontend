@@ -4,6 +4,8 @@
   "type": "module",
   "scripts": {
     "test": "ng test --watch=false",
+    "build": "ng build --configuration=production",
+    "start": "ng serve",
     "cypress:open": "cypress open",
     "test:e2e": "cypress run",
     "build": "ng build",
@@ -37,7 +39,7 @@
     "enhanced-resolve": "3.3.0",
     "eslint": "^8.54.0",
     "font-awesome": "^4.7.0",
-    "js-sha512": "^0.8.0",
+    "js-cookie": "^3.0.5",
     "rxjs": "~6.5.5",
     "tslib": "^2.6.2",
     "zone.js": "~0.13.3"
@@ -50,6 +52,7 @@
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.3",
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^14.18.63",
     "eslint-plugin-cypress": "^2.15.1",
     "jasmine-core": "~3.8.0",

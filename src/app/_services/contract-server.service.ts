@@ -1,6 +1,5 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { sha512_256 } from "js-sha512";
 import { Account, AccountType } from "../types/account";
 import { Address } from "../types/address";
 import { Contract } from "../types/contract";
@@ -11,11 +10,12 @@ import { SendMoneyData } from "../types/data/sendMoney";
 import { TransferMoneyData } from "../types/data/transferMoney";
 import { Interface } from "../types/interface";
 import { Result } from "../types/result";
+import { environment } from "../../environments/environment";
 
-const endpoint = "http://localhost:5005/api";
+const endpoint = `${environment.api_url}/api`;
 
 @Injectable({
-    providedIn: "root"
+    providedIn: "root",
 })
 export class ContractServerService
 {
@@ -35,7 +35,7 @@ export class ContractServerService
 
     login(id: number, password: string)
     {
-        return this.http.post<Result<string>>(`${endpoint}/contracts/login/${id}`, sha512_256(password));
+        return this.http.post<Result<string>>(`${endpoint}/contracts/login/${id}`, password);
     }
 
     getContract(token: string)

@@ -9,15 +9,15 @@ import { RegisterNewCustomerComponent } from "./register-new-customer/register-n
 const routes: Routes = [
     { path: "", redirectTo: "/dashboard", pathMatch: "full" },
     { path: "dashboard", component: DashboardComponent },
-    { path: "registerForm/:id", component: EditAddressFormComponent },
+    { path: "registerForm", component: EditAddressFormComponent },
     { path: "registerNewCustomer", component: RegisterNewCustomerComponent },
-    { path: "mainPage/:id", component: MainPageComponent },
-    { path: "createAccount/:id", component: CreateAccountComponent },
+    { path: "mainPage", component: MainPageComponent },
+    { path: "createAccount", component: CreateAccountComponent },
 ];
 
 @NgModule({
     imports: [RouterModule.forRoot(routes, {})],
-    exports: [RouterModule]
+    exports: [RouterModule],
 })
 export class AppRoutingModule
 { }

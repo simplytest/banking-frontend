@@ -5,11 +5,12 @@ import { ContractServerService } from "../_services/contract-server.service";
 import { Contract } from "../types/contract";
 import { RealEstateAccountData } from "../types/data/realEstateData";
 import { AccountType } from "../types/account";
+import Cookies from "js-cookie";
 
 @Component({
     selector: "app-create-account",
     templateUrl: "./create-account.component.html",
-    styleUrls: ["./create-account.component.css"]
+    styleUrls: ["./create-account.component.css"],
 })
 export class CreateAccountComponent implements OnInit
 {
@@ -22,10 +23,7 @@ export class CreateAccountComponent implements OnInit
 
     ngOnInit(): void
     {
-        this.route.params.subscribe(({ id: token }) =>
-        {
-            this.token = token;
-        });
+        this.token = Cookies.get("session");
     }
 
     ngAfterViewInit()
@@ -73,7 +71,7 @@ export class CreateAccountComponent implements OnInit
                 token: this.token,
                 contract: this.contract,
             },
-            panelClass: "flex-dialog"
+            panelClass: "flex-dialog",
         });
 
         dialogRef.afterClosed().subscribe(() =>
@@ -84,7 +82,7 @@ export class CreateAccountComponent implements OnInit
 
     goToMainPage()
     {
-        this.router.navigate(["/mainPage", this.token]);
+        this.router.navigate(["/mainPage"]);
     }
 }
 

@@ -14,6 +14,6 @@ $ pnpm run build && pnpm run start
 To build the docker image, simply build the dockerfile present in the root directory.
 
 ```bash
-$ docker buildx build -t banking-frontend .
+$ docker buildx build -t banking-frontend -f docker/Dockerfile .
 $ docker run -p 4200:80 banking-frontend
 ```

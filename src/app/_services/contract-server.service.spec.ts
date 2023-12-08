@@ -9,7 +9,7 @@ const expectedJson = {
     "id": {
         "counter": 1,
         "parent": 1,
-        "child": 0
+        "child": 0,
     },
     "customer": {
         "type": "com.simplytest.core.customers.CustomerPrivate",
@@ -26,9 +26,9 @@ const expectedJson = {
                 "street": "Wiener Straße",
                 "house": "1",
                 "city": "Nürnberg",
-                "email": "Test@e-Mail.de"
-            }
-        }
+                "email": "Test@e-Mail.de",
+            },
+        },
     },
     "accounts": {},
     "00001:00001": {
@@ -39,9 +39,9 @@ const expectedJson = {
             "dispoRate": 0.0,
             "balance": 0.0,
             "boundPeriod": 0.0,
-            "interestRate": 0.0
-        }
-    }
+            "interestRate": 0.0,
+        },
+    },
 };
 
 let requestJson;
@@ -50,7 +50,7 @@ const actualjson = {
     "id": {
         "counter": 1,
         "parent": 1,
-        "child": 0
+        "child": 0,
     },
     "customer": {
         "type": "com.simplytest.core.customers.CustomerPrivate",
@@ -67,9 +67,9 @@ const actualjson = {
                 "street": "Wiener Straße",
                 "house": "1",
                 "city": "Nürnberg",
-                "email": "Test@e-Mail.de"
-            }
-        }
+                "email": "Test@e-Mail.de",
+            },
+        },
     },
     "accounts": {},
     "00001:00001": {
@@ -80,9 +80,9 @@ const actualjson = {
             "dispoRate": 0.0,
             "balance": 0.0,
             "boundPeriod": 0.0,
-            "interestRate": 0.0
-        }
-    }
+            "interestRate": 0.0,
+        },
+    },
 };
 
 describe("HttpClient testing", () =>
@@ -94,7 +94,7 @@ describe("HttpClient testing", () =>
     {
         TestBed.configureTestingModule({
             imports: [HttpClientTestingModule],
-            providers: [ContractServerService]
+            providers: [ContractServerService],
         });
 
         contractService = TestBed.inject(ContractServerService);

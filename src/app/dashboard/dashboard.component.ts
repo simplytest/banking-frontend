@@ -3,11 +3,12 @@ import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { Router } from "@angular/router";
 import { ContractServerService } from "../_services/contract-server.service";
 import { Contract } from "../types/contract";
+import Cookies from "js-cookie";
 
 @Component({
     selector: "app-dashboard",
     templateUrl: "./dashboard.component.html",
-    styleUrls: ["./dashboard.component.css"]
+    styleUrls: ["./dashboard.component.css"],
 })
 export class DashboardComponent implements OnInit
 {
@@ -34,7 +35,8 @@ export class DashboardComponent implements OnInit
                 return;
             }
 
-            this.router.navigate(["/mainPage", token.result]);
+            Cookies.set("session", token.result);
+            this.router.navigate(["/mainPage"]);
         },
         () =>
         {

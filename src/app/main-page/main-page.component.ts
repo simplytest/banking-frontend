@@ -8,6 +8,7 @@ import { Account } from "../types/account";
 import { Interface } from "../types/interface";
 import { TransferMoneyData } from "../types/data/transferMoney";
 import { Id } from "../types/id";
+import Cookies from "js-cookie";
 
 @Component({
     selector: "app-main-page",
@@ -27,11 +28,8 @@ export class MainPageComponent implements OnInit
 
     ngOnInit(): void
     {
-        this.route.params.subscribe(({ id: token }) =>
-        {
-            this.token = token;
-            this.getContracts();
-        });
+        this.token = Cookies.get("session");
+        this.getContracts();
     }
 
     getContracts()
@@ -66,6 +64,10 @@ export class MainPageComponent implements OnInit
         this.service.dismissContract(this.token).subscribe(() =>
         {
             this.router.navigate(["/"]);
+        },
+        error =>
+        {
+            alert(JSON.stringify(error.error));
         });
     }
 
