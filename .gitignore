@@ -1,6 +1,11 @@
 node_modules
 dist
 
+cypress/screenshots
+cypress/downloads
+
+results
+
 .angular
 .vscode
 .idea
