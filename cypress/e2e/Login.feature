@@ -9,11 +9,8 @@ Feature: Banking App - Dashboard Page
     Then I should be presented with a greeting text <greeting>
     Examples:
       | contractID | password | greeting    |
-      | 00001      | 123      | Hallo John! |
-      | 00002      | 123      | Hallo Amanda! |
-
-
-
+      | 00002      | 123      | Hallo John! |
+      | 00003      | 123      | Hallo Amanda! |
 
   Scenario Outline: Validate invalid login credentials
     Given I navigate to the Banking App dashboard page
@@ -23,4 +20,4 @@ Feature: Banking App - Dashboard Page
     Then I should be presented with an alert box containing text <expectedAlertText>
     Examples:
       | contractID | password | expectedAlertText        |
-      | 00001      | 12       | Kontrakt nicht gefunden! |
+      | 00002      | 12       | Kontrakt nicht gefunden! |

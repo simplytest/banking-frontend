@@ -95,7 +95,7 @@ When("I click on money button", () =>
     cy.get("[id=\"0-ueberweisen\"]").click();
 });
 
-Then("I should be presented with an alert box containing \"Geld überweisen\" text", () =>
+Then("I should be presented with an alert box containing \"Geld überweisen\"", () =>
 {
     cy.get("#mat-mdc-dialog-title-0").contains("Geld überweisen");
 });

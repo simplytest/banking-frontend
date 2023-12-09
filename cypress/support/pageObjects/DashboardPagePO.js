@@ -23,12 +23,12 @@ class DashboardPagePO extends BasePO
         this.elements.loginButton().invoke("removeAttr", "target").click();
     }
 
-    typeContractID(contractID = "0002")
+    typeContractID(contractID = "1")
     {
         cy.get("[name='contractID']").type(contractID);
     }
 
-    typePassword(password = "123")
+    typePassword(password = "demo")
     {
         cy.get("[name='password']").type(password);
     }
