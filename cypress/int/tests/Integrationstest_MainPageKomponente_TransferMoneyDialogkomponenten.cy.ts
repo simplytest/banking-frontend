@@ -63,7 +63,8 @@ describe("Integration: MainPagekomponente mit kompletten positivem TransferMoney
             .focus()
             .should("have.value", "0")
             .clear()
-            .type("100");
+            .type("100")
+            .should("have.value", "0");
 
         // Der Radiobutton für das Konto, auf welchen der Wert übertragen werden soll, wird ausgewählt.
         cy.get("mat-radio-button[id='00001:00002']").click();
@@ -119,7 +120,8 @@ describe("Integration: MainPagekomponente mit kompletten positivem TransferMoney
             .focus()
             .should("have.value", "0")
             .clear()
-            .type("300");
+            .type("300")
+            .should("have.value", "300");
 
         // Der Radiobutton für das Konto, auf welchen der Wert übertragen werden soll, wird ausgewählt.
         cy.get("mat-radio-button[id='00001:00003']").click();
@@ -181,7 +183,8 @@ describe("Integration: MainPagekomponente mit kompletten positivem TransferMoney
             .focus()
             .should("have.value", "0")
             .clear()
-            .type("600");
+            .type("600")
+            .should("have.value", "600");
 
         // Der Radiobutton für das Konto, auf welchen der Wert übertragen werden soll, wird ausgewählt.
         cy.get("mat-radio-button[id='00001:00004']").click();
