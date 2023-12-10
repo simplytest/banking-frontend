@@ -63,7 +63,9 @@ describe("Integration: MainPagekomponente mit kompletten positivem TransferMoney
             .focus()
             .should("have.value", "0")
             .clear()
-            .type("100")
+            .type("1")
+            .type("0")
+            .type("0")
             .invoke("val")
             .should("eq","100")
 
@@ -120,15 +122,12 @@ describe("Integration: MainPagekomponente mit kompletten positivem TransferMoney
         cy.get("[data-testid='amount_input']")
             .focus()
             .should("have.value", "0")
-            .clear();
-
-        cy.get("[data-testid='amount_input']")
-            .focus()
-            .type("300");
-
-        cy.get("[data-testid='amount_input']")
-            .focus()
-            .should("have.value", "300");
+            .clear()
+            .type("3")
+            .type("0")
+            .type("0")
+            .invoke("val")
+            .should("eq","300")
 
         // Der Radiobutton für das Konto, auf welchen der Wert übertragen werden soll, wird ausgewählt.
         cy.get("mat-radio-button[id='00001:00003']").click();
@@ -186,7 +185,7 @@ describe("Integration: MainPagekomponente mit kompletten positivem TransferMoney
         cy.get("button[id='0-transferieren']").click();
 
         // Der zu übertragende Wert = 300$ wird eingetragen
-        cy
+
         cy.get("[data-testid='amount_input']")
             .focus()
             .should("have.value", "0")
