@@ -191,7 +191,9 @@ describe("Integration: MainPagekomponente mit kompletten positivem TransferMoney
             .focus()
             .should("have.value", "0")
             .clear()
-            .type("600")
+            .type("6")
+            .type("0")
+            .type("0")
             .invoke("val")
             .should("eq","600")
 
