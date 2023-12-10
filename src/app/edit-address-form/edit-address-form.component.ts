@@ -45,6 +45,6 @@ export class EditAddressFormComponent implements OnInit
 
     goToMainPage()
     {
-        this.router.navigate(["/mainPage", this.token]);
+        this.router.navigate(["/mainPage"]);
     }
 }
