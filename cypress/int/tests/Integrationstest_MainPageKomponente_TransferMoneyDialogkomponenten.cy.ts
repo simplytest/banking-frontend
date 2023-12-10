@@ -64,7 +64,7 @@ describe("Integration: MainPagekomponente mit kompletten positivem TransferMoney
             .should("have.value", "0")
             .clear()
             .type("100")
-            .should("have.value", "0");
+            .should("have.value", "100");
 
         // Der Radiobutton für das Konto, auf welchen der Wert übertragen werden soll, wird ausgewählt.
         cy.get("mat-radio-button[id='00001:00002']").click();
