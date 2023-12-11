@@ -43,7 +43,7 @@ export class MainPageComponent implements OnInit
 
     addAccount()
     {
-        this.router.navigate(["/createAccount", this.token]);
+        this.router.navigate(["/createAccount"]);
     }
 
     closeAccount(account: string)
@@ -56,7 +56,7 @@ export class MainPageComponent implements OnInit
 
     editUserData()
     {
-        this.router.navigate(["/registerForm", this.token]);
+        this.router.navigate(["/registerForm"]);
     }
 
     deleteContract()

@@ -25,7 +25,7 @@ Then("I should be presented with a Konto type text {}", (kontoTyp) =>
     cy.get("[id=\"1.kontotyp\"]").contains(kontoTyp);
 });
 
-When("I click on Double Arrows button", () =>
+When("I click on Double Arrows button to sent money to my other account", () =>
 {
     cy.get("[id=\"0-transferieren\"]").click();
 });
@@ -35,62 +35,89 @@ Then("I should be presented with an alert box containing \"Geld übertragen\" te
     cy.get("[data-testid=\"title\"]").contains("Geld übertragen");
 });
 
-When("I type a Betrag {}", (betrag) =>
-{
-    cy.get("[id=\"mat-input-0\"]").type(betrag);
+When("I type a Betrag {string}", (geldbetrag) =>
+{   
+    cy.get("[data-testid='amount_input']").focus().clear();
+    const betrag = geldbetrag.split("");
+    for(let part of betrag)
+    {   
+    cy.get("[data-testid='amount_input']")
+    .focus()
+    .type(part);
+    }
 });
 
 When("I select the desired account", () =>
 {
-    cy.get("id=\"00001:00005-input\"").click();
+    cy.get("[id$=':00002']").click();
 });
 
 When("I click on Geld übertragen button", () =>
 {
-    cy.get("data-testid=\"transfer_money_button\"").click();
+    cy.get("[data-testid=\"transfer_money_button\"]").click();
 });
 
 Then("I should be presented with an alert box containing \"Geld übertragen!\" text", () =>
 {
-    cy.get("#mat-mdc-dialog-title-0").contains("Geld übertragen!");
+    cy.get("[data-testid='title'").contains("Geld übertragen!");
 });
 
 When("I click on Close button", () =>
 {
-    cy.get("[class=\"mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base\"]").click();
+    cy.get("[data-testid='close_button']").click();
 });
 
-Then("my account balance is updated with the amount {}", (betrag) =>
+Then("my account balance is updated with the amount {string}", (betrag) =>
 {
-    cy.get("[id=\"1.kontostand\"]").contains(betrag);
+    cy.get("[id=\"0.kontostand\"]").should("have.text"," " + betrag + " $ ");
 });
 
-When("I click on Arrow button", () =>
+Then("my account balance at the end has an amount of {string}", (betrag) =>
+{
+    cy.get("[id=\"0.kontostand\"]").should("have.text"," " + betrag + " $ ");
+});
+
+Then("the account balance fromt my second account is updated with the amount {string}", (betrag) =>
+{
+    cy.get("[id=\"1.kontostand\"]").should("have.text"," " + betrag + " $ ");
+});
+
+When("I click on Arrow button to receive money into my account", () =>
 {
     cy.get("[id=\"0-empfangen\"]").click();
 });
 
 Then("I should be presented with an alert box containing \"Geld empfangen\" text", () =>
 {
-    cy.get("[id=\"mat-mdc-dialog-title-4\"]").contains("Geld empfangen");
+    cy.get("#mat-mdc-dialog-title-0").contains("Geld empfangen");
 });
 
-When("I type a Geldbetrag {}", (geldbetrag) =>
+Then("I should be presented with an alert box containing \"Geld überweisen\" text", () =>
 {
-    cy.get("[id=mat-input-2]").type(geldbetrag);
+    cy.get("[data-testid='title']").contains("Geld überweisen");
+});
+
+
+When("I type a Geldbetrag {}", (betrag) =>
+{
+    const amount = betrag.split(""); 
+    for(let part of betrag) 
+    {
+    cy.get("[data-testid='receiveMoney_input']").focus().type(part);
+    }
 });
 
 When("I click on Geld empfangen button", () =>
 {
-    cy.get("#mat-mdc-dialog-4 > div > div > dialog-overview-receive-money-dialog > div.mat-mdc-dialog-actions.mdc-dialog__actions.mat-mdc-dialog-actions-align-end > button:nth-child(2) > span.mdc-button__label").click();
+    cy.get(".mat-mdc-dialog-actions.mat-mdc-dialog-actions-align-end.mdc-dialog__actions > button:nth-of-type(2) > .mdc-button__label").click();
 });
 
 Then("I should be presented with an alert box containing \"Geld empfangen!\" text", () =>
 {
-    cy.get("[id=\"mat-mdc-dialog-title-5\"]").contains("Geld empfangen!");
+    cy.get("id=\"mat-mdc-dialog-title-3\"").contains("Geld empfangen!");
 });
 
-When("I click on money button", () =>
+When("I click on money button to send money to someone else account", () =>
 {
     cy.get("[id=\"0-ueberweisen\"]").click();
 });
@@ -102,20 +129,33 @@ Then("I should be presented with an alert box containing \"Geld überweisen\"", 
 
 When("I type a desired Geldbetrag {}", (geldbetrag) =>
 {
-    cy.get("[id=\"mat-input-8\"]").type(geldbetrag);
+    cy.get("[data-testid='send_amount']").focus().clear();
+    const amount = geldbetrag.split(""); 
+    for(let part of amount) 
+    {
+        cy.get("[data-testid='send_amount']").type(part);
+    }
+    
 });
 
 When("I type a Ziel IBAN {}", (iban) =>
 {
-    cy.get("[id=\"mat-mdc-form-field-label-18\"]").type(iban);
+    cy.get("[data-testid='send_iban']").type(iban);
 });
 
 When("I click on Geld überweisen button", () =>
 {
-    cy.get("#mat-mdc-dialog-10 > div > div > dialog-overview-send-money-dialog > div.mat-mdc-dialog-actions.mdc-dialog__actions.mat-mdc-dialog-actions-align-end > button:nth-child(2) > span.mdc-button__label").click();
+    cy.get("[data-testid='send_money_button'").click();
 });
 
 Then("I should be presented with an alert box containing \"Geld gesendet!\" text", () =>
 {
-    cy.get("[id=\"mat-mdc-dialog-title-13\"]").contains("Geld gesendet!");
+    cy.get("[data-testid='title']").contains("Geld gesendet!");
 });
+
+Then("I should be presented with an alert box containing \"Geld erhalten!\" text", () =>
+{
+    cy.get("[data-testid='title']").contains("Geld Erhalten!");
+});
+
+

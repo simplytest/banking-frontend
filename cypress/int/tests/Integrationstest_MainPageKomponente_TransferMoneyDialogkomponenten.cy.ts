@@ -63,7 +63,11 @@ describe("Integration: MainPagekomponente mit kompletten positivem TransferMoney
             .focus()
             .should("have.value", "0")
             .clear()
-            .type("100");
+            .type("1")
+            .type("0")
+            .type("0")
+            .invoke("val")
+            .should("eq","100")
 
         // Der Radiobutton für das Konto, auf welchen der Wert übertragen werden soll, wird ausgewählt.
         cy.get("mat-radio-button[id='00001:00002']").click();
@@ -72,7 +76,7 @@ describe("Integration: MainPagekomponente mit kompletten positivem TransferMoney
         cy.get("[data-testid='transfer_money_button']").click();
 
         // Der sich öffnende Dialog "Geld übertragen!" wird geschlossen.
-        cy.get("[data-testid='money_transfer_success_close']").click();
+        cy.get("[data-testid='close_button']").click();
 
         // Es wird überprüft, dass der Wert korrekt vom Girokonto abgezogen wurde.
         cy.get("th[id='0.kontostand']").should("have.text", " 900 $ ");
@@ -119,7 +123,11 @@ describe("Integration: MainPagekomponente mit kompletten positivem TransferMoney
             .focus()
             .should("have.value", "0")
             .clear()
-            .type("300");
+            .type("3")
+            .type("0")
+            .type("0")
+            .invoke("val")
+            .should("eq","300")
 
         // Der Radiobutton für das Konto, auf welchen der Wert übertragen werden soll, wird ausgewählt.
         cy.get("mat-radio-button[id='00001:00003']").click();
@@ -128,7 +136,7 @@ describe("Integration: MainPagekomponente mit kompletten positivem TransferMoney
         cy.get("[data-testid='transfer_money_button']").click();
 
         // Der sich öffnende Dialog "Geld übertragen!" wird geschlossen.
-        cy.get("[data-testid='money_transfer_success_close']").click();
+        cy.get("[data-testid='close_button']").click();
 
         // Es wird überprüft, dass der Wert korrekt vom Girokonto abgezogen wurde.
         cy.get("th[id='0.kontostand']").should("have.text", " 600 $ ");
@@ -177,11 +185,16 @@ describe("Integration: MainPagekomponente mit kompletten positivem TransferMoney
         cy.get("button[id='0-transferieren']").click();
 
         // Der zu übertragende Wert = 300$ wird eingetragen
+
         cy.get("[data-testid='amount_input']")
             .focus()
             .should("have.value", "0")
             .clear()
-            .type("600");
+            .type("6")
+            .type("0")
+            .type("0")
+            .invoke("val")
+            .should("eq","600")
 
         // Der Radiobutton für das Konto, auf welchen der Wert übertragen werden soll, wird ausgewählt.
         cy.get("mat-radio-button[id='00001:00004']").click();
@@ -190,7 +203,7 @@ describe("Integration: MainPagekomponente mit kompletten positivem TransferMoney
         cy.get("[data-testid='transfer_money_button']").click();
 
         // Der sich öffnende Dialog "Geld übertragen!" wird geschlossen.
-        cy.get("[data-testid='money_transfer_success_close']").click();
+        cy.get("[data-testid='close_button']").click();
 
         // Es wird überprüft, dass der Wert korrekt vom Girokonto abgezogen wurde.
         cy.get("th[id='0.kontostand']").should("have.text", " 0 $ ");
