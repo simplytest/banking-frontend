@@ -61,14 +61,6 @@ jobs:
           skip_after_successful_duplicate: true
           concurrent_skipping: "same_content_newer"
 
-      - name: 📋 E2E Test Report
-        uses: phoenix-actions/test-reporting@v8
-        if: steps.skip_check.outputs.should_skip != 'true' && (success() || failure())
-        with:
-          name: 📋 E2E Test Report
-          reporter: java-junit
-          path: "results/e2e*.xml"
-
       - name: 📋 Integration Test Report
         uses: phoenix-actions/test-reporting@v8
         if: steps.skip_check.outputs.should_skip != 'true' && (success() || failure())
@@ -76,3 +68,11 @@ jobs:
           name: 📋 Integration Test Report
           reporter: java-junit
           path: "results/integration*.xml"
+
+      - name: 📋 E2E Test Report
+        uses: phoenix-actions/test-reporting@v8
+        if: steps.skip_check.outputs.should_skip != 'true' && (success() || failure())
+        with:
+          name: 📋 E2E Test Report
+          reporter: java-junit
+          path: "results/e2e*.xml"
