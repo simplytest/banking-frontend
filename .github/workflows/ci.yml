@@ -40,6 +40,12 @@ jobs:
         with:
           resource: http://localhost:4200
 
+      - name: SonarQube Scan
+        env:
+          SONAR_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONARQUBE_HOST }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Demo-App-frontend -Dsonar.projectName='Demo App frontend'
+        
       - name: 🧪 Integration Tests
         run: |
           pnpm run test:int
