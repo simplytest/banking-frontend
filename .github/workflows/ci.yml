@@ -40,6 +40,11 @@ jobs:
         with:
           resource: http://localhost:4200
 
+      - uses: sonarsource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONARQUBE_HOST }}
+          
       - name: 🧪 Integration Tests
         run: |
           pnpm run test:int
