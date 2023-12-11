@@ -5,8 +5,8 @@
   "scripts": {
     "build": "ng build --configuration=production",
     "cypress:open": "cypress open",
-    "test:e2e": "cypress run --reporter junit --reporter-options \"mochaFile=results/e2e-[hash].xml\"",
-    "test:int": "cypress run --component --reporter junit --reporter-options \"mochaFile=results/integration-[hash].xml\"",
+    "test:e2e": "cypress run --reporter junit --reporter-options \"mochaFile=results/e2e-[suiteName].xml\"",
+    "test:int": "cypress run --component --reporter junit --reporter-options \"mochaFile=results/integration-[suiteName].xml\"",
     "start": "ng serve",
     "clear-cypress-cache": "cypress cache clear"
   },
