@@ -8,4 +8,7 @@ export interface Account
     balance: number;
     boundPeriod: number;
     interestRate: number;
+
+    remainingAmount?: number;
+    maxSpecialRepayment?: number;
 }

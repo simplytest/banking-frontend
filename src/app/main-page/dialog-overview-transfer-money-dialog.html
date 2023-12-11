@@ -5,6 +5,9 @@
     <mat-label i18n="@@money-amount">Geldbetrag</mat-label>
     <input data-testid="amount_input" matInput [(ngModel)]="transferData.amount">
     <span matTextPrefix>€&nbsp;</span>
+    <mat-error *ngIf="!allowed()">
+      Betrag ist nicht zulässig
+    </mat-error>
   </mat-form-field>
   <mat-radio-group data-testid="radio_group" [(ngModel)]="transferData.target.id"
     style="display: flex; flex-direction: column;">

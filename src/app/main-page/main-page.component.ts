@@ -1,14 +1,15 @@
 import { Component, Inject, OnInit } from "@angular/core";
+import { ErrorStateMatcher } from "@angular/material/core";
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { ActivatedRoute, Router } from "@angular/router";
+import Cookies from "js-cookie";
 import { ContractServerService } from "../_services/contract-server.service";
+import { Account } from "../types/account";
 import { Contract } from "../types/contract";
 import { SendMoneyData } from "../types/data/sendMoney";
-import { Account } from "../types/account";
-import { Interface } from "../types/interface";
 import { TransferMoneyData } from "../types/data/transferMoney";
 import { Id } from "../types/id";
-import Cookies from "js-cookie";
+import { Interface } from "../types/interface";
 
 @Component({
     selector: "app-main-page",
@@ -193,6 +194,21 @@ export class DialogOverviewSendMoneyDialog
     }
 }
 
+
+export class TransferErrorMatcher implements ErrorStateMatcher 
+{
+    constructor(private dialog: DialogOverviewTransferMoneyDialog)
+    {
+
+    }
+
+    isErrorState(): boolean 
+    {
+        return !this.dialog.allowed();
+    }
+  }
+  
+
 @Component({
     selector: "dialog-overview-transfer-money-dialog",
     templateUrl: "dialog-overview-transfer-money-dialog.html",
@@ -200,6 +216,7 @@ export class DialogOverviewSendMoneyDialog
 export class DialogOverviewTransferMoneyDialog
 {
     public transferData: TransferMoneyData;
+    public matcher: TransferErrorMatcher;
 
     constructor(
       public dialogRef: MatDialogRef<DialogOverviewTransferMoneyDialog>,
@@ -210,6 +227,36 @@ export class DialogOverviewTransferMoneyDialog
     )
     {
         this.transferData = { amount: 0, target: { id: undefined } };
+        this.matcher = new TransferErrorMatcher(this);
+    }
+
+    getAccount(id: string | Id)
+    {
+        const account = this.data.accounts.find(x => x[0] === id);
+        return account?.[1]?.data;
+    }
+
+    allowed()
+    {
+        const { target, amount } = this.transferData;
+        const account = this.getAccount(target.id);
+
+        if (!account || !account.maxSpecialRepayment)
+        {
+            return true;
+        }
+
+        if (account.balance + amount > 0)
+        {
+            return false;
+        }
+
+        if (amount > account.maxSpecialRepayment)
+        {
+            return false;
+        }
+
+        return true;
     }
 
     onNoClick()
@@ -227,7 +274,6 @@ export class DialogOverviewTransferMoneyDialog
             },
             error =>
             {
-                alert(JSON.stringify(error.error));
                 this.openDialogFalse();
             });
     }
