@@ -40,14 +40,12 @@ jobs:
         with:
           resource: http://localhost:4200
 
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - uses: sonarsource/sonarqube-scan-action@master
+      - name: 👀 Sonar Scan
+        uses: sonarsource/sonarqube-scan-action@v2.0.1
         env:
           SONAR_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONARQUBE_HOST }}
-          
+
       - name: 🧪 Integration Tests
         run: |
           pnpm run test:int
