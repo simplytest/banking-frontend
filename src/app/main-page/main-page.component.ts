@@ -188,20 +188,18 @@ export class DialogOverviewSendMoneyDialog
     }
 }
 
-
-export class TransferErrorMatcher implements ErrorStateMatcher 
+export class TransferErrorMatcher implements ErrorStateMatcher
 {
     constructor(private dialog: DialogOverviewTransferMoneyDialog)
     {
 
     }
 
-    isErrorState(): boolean 
+    isErrorState(): boolean
     {
         return !this.dialog.allowed();
     }
-  }
-  
+}
 
 @Component({
     selector: "dialog-overview-transfer-money-dialog",
@@ -233,6 +231,12 @@ export class DialogOverviewTransferMoneyDialog
     allowed()
     {
         const { target, amount } = this.transferData;
+
+        if (amount < 0)
+        {
+            return false;
+        }
+
         const account = this.getAccount(target.id);
 
         if (!account || !account.maxSpecialRepayment)
@@ -266,7 +270,7 @@ export class DialogOverviewTransferMoneyDialog
                 this.openDialog();
                 this.dialogRef.close();
             },
-            error =>
+            () =>
             {
                 this.openDialogFalse();
             });
