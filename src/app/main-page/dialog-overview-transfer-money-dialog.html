@@ -5,7 +5,7 @@
     <mat-label>Betrag</mat-label>
     <input data-testid="amount_input" matInput [(ngModel)]="transferData.amount" [errorStateMatcher]="matcher">
     <span matTextPrefix>$&nbsp;</span>
-    <mat-error *ngIf="!allowed()">
+    <mat-error *ngIf="allowed() === -1">
       Betrag ist nicht zulässig
     </mat-error>
   </mat-form-field>
@@ -21,7 +21,7 @@
   <button mat-button (click)="onNoClick()" data-testid="cancel_button">
     Abbrechen
   </button>
-  <button data-testid="transfer_money_button" mat-button (click)="transferMoney()" disabled="{{!allowed()}}"
+  <button data-testid="transfer_money_button" mat-button (click)="transferMoney()" disabled="{{allowed() !== 0}}"
     cdkFocusInitial>
     Geld übertragen
   </button>

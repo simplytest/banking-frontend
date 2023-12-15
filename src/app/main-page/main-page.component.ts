@@ -197,7 +197,7 @@ export class TransferErrorMatcher implements ErrorStateMatcher
 
     isErrorState(): boolean
     {
-        return !this.dialog.allowed();
+        return this.dialog.allowed() === -1;
     }
 }
 
@@ -228,33 +228,42 @@ export class DialogOverviewTransferMoneyDialog
         return account?.[1]?.data;
     }
 
-    allowed()
+    /**
+     * @returns -2 in case the target is invalid, -1 in case the amount is invalid, 0 on success
+     */
+    allowed(): -2 | -1 | 0
     {
-        const { target, amount } = this.transferData;
+        const { target, amount: _amount } = this.transferData;
+        const amount = Number.parseInt(_amount as unknown as string);
 
-        if (!Number.isInteger(amount) || amount <= 0)
+        if (!Number.isFinite(amount) || amount <= 0)
         {
-            return false;
+            return -1;
         }
 
         const account = this.getAccount(target.id);
 
-        if (!account || !Number.isInteger(account.maxSpecialRepayment))
+        if (!account)
         {
-            return true;
+            return -2;
+        }
+
+        if (!Number.isInteger(account.maxSpecialRepayment))
+        {
+            return 0;
         }
 
         if (account.balance + amount > 0)
         {
-            return false;
+            return -1;
         }
 
         if (amount > account.maxSpecialRepayment)
         {
-            return false;
+            return -1;
         }
 
-        return true;
+        return 0;
     }
 
     onNoClick()
