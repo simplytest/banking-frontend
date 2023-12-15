@@ -207,6 +207,8 @@ export class TransferErrorMatcher implements ErrorStateMatcher
 })
 export class DialogOverviewTransferMoneyDialog
 {
+    private static readonly Error = { BadAccount: -2, BadAmount: -1, Success: 0 } as const;
+
     public transferData: TransferMoneyData;
     public matcher: TransferErrorMatcher;
 
@@ -234,33 +236,35 @@ export class DialogOverviewTransferMoneyDialog
     allowed(): -2 | -1 | 0
     {
         const { target, amount: _amount } = this.transferData;
+
+        const Error = DialogOverviewTransferMoneyDialog.Error;
         const amount = Number.parseInt(_amount as unknown as string);
 
         if (!Number.isFinite(amount) || amount <= 0)
         {
-            return -1;
+            return Error.BadAmount;
         }
 
         const account = this.getAccount(target.id);
 
         if (!account)
         {
-            return -2;
+            return Error.BadAccount;
         }
 
         if (!Number.isInteger(account.maxSpecialRepayment))
         {
-            return 0;
+            return Error.Success;
         }
 
         if (account.balance + amount > 0)
         {
-            return -1;
+            return Error.BadAmount;
         }
 
         if (amount > account.maxSpecialRepayment)
         {
-            return -1;
+            return Error.BadAmount;
         }
 
         return 0;
