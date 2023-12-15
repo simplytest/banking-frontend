@@ -232,14 +232,14 @@ export class DialogOverviewTransferMoneyDialog
     {
         const { target, amount } = this.transferData;
 
-        if (amount < 0)
+        if (!Number.isInteger(amount) || amount <= 0)
         {
             return false;
         }
 
         const account = this.getAccount(target.id);
 
-        if (!account || !account.maxSpecialRepayment)
+        if (!account || !Number.isInteger(account.maxSpecialRepayment))
         {
             return true;
         }
