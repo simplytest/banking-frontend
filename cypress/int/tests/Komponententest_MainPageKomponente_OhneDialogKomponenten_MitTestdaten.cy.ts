@@ -44,7 +44,7 @@ describe("Unittest: MainPagekomponente ohne Dialoge, mit Testdaten", () =>
                 MatRadioModule,
                 MatIconModule,
                 MatTooltipModule],
-            providers: [{ provide: ContractServerService, useClass: MockContractServerService }]
+            providers: [{ provide: ContractServerService, useClass: MockContractServerService }],
         });
 
         /*  MainpageKomponentenElemente */
@@ -79,7 +79,7 @@ describe("Unittest: MainPagekomponente ohne Dialoge, mit Testdaten", () =>
         cy.get("th[id='0.kontostand']").should("have.text", " 1000 $ ");
         cy.get("th[id='1.kontostand']").should("have.text", " 1000 $ ");
         cy.get("th[id='2.kontostand']").should("have.text", " 1000 $ ");
-        cy.get("th[id='3.kontostand']").should("have.text", " -10000 $ ");
+        cy.get("th[id='3.kontostand']").should("have.text", " -1000 $ ");
 
         cy.get("button[id='0-kontoschließen']").should("exist");
         cy.get("button[id='0-ueberweisen']").should("exist");
@@ -107,7 +107,7 @@ describe("Unittest: MainPagekomponente ohne Dialoge, mit Testdaten", () =>
                 AppRoutingModule,
                 HttpClientModule,
                 MatDialogModule],
-            providers: [{ provide: ContractServerService, useClass: MockContractServerService }]
+            providers: [{ provide: ContractServerService, useClass: MockContractServerService }],
         });
 
         // Dialogbutton "Geld übertragen des Girokontos wird geklickt"

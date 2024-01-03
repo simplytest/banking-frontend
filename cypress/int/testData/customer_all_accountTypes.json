@@ -56,14 +56,14 @@
         "00001:00004": {
             "type": "com.simplytest.core.accounts.AccountRealEstate",
             "data": {
-                "remainingAmount": 10000.0,
-                "clearanceRate": 0.0,
-                "runtimeAmount": 0.0,
-                "repaymentRate": 1.0,
-                "creditAmount": 0.0,
+                "remainingAmount": 0.0,
+                "creditAmount": 1000.0,
                 "payedAmount": 0.0,
-                "monthlyRate": 0.08333333333333333,
-                "balance": -10000.0,
+                "maxSpecialRepayment": 50.0,
+                "runtimeAmount": 0.0,
+                "repaymentRate": 100.0,
+                "monthlyAmount": 8333.333333333334,
+                "balance": -1000.0,
                 "boundPeriod": 0.0,
                 "interestRate": 0.0
             }

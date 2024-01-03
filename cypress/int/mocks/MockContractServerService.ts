@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { Contract } from "src/app/types/contract";
-import { CustomerData, } from "src/app/types/data/customerData";
+import { CustomerData } from "src/app/types/data/customerData";
 import { CustomerResult } from "src/app/types/data/customerResult";
 import { Result } from "src/app/types/result";
 import MockedResultData from "../testData/customer_all_accountTypes.json";
@@ -40,7 +40,7 @@ export class MockContractServerService
 
     private loginData = {
         id: "TestAccount",
-        password: "TestPasswort"
+        password: "TestPasswort",
     };
 
     private token = "mockToken";
@@ -91,7 +91,7 @@ export class MockContractServerService
         const mockResult: Result<CustomerResult> = {
             result: {
                 JWT: "mocked_token",
-                id: 1
+                id: 1,
             },
         };
         return of(mockResult);
@@ -159,7 +159,7 @@ export class MockContractServerService
                 boundPeriod: 0,
                 interestRate: 0,
             },
-            type: "RealEstateAccount"
+            type: "RealEstateAccount",
 
         };
         return of(mockAccount);

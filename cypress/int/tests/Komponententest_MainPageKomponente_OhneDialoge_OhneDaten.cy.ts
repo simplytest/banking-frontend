@@ -21,7 +21,7 @@ describe("MainPagekomponente Komponententest (Unittest)", () =>
                 AppRoutingModule,
                 HttpClientTestingModule,
                 MatDialogModule],
-            providers: [ContractServerService]
+            providers: [ContractServerService],
         });
 
         /*  MainpageKomponentenElemente sind vorhanden */

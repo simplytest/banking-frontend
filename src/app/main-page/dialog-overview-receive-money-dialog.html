@@ -9,6 +9,6 @@
 </div>
 
 <div mat-dialog-actions align="end">
-  <button mat-button (click)="onNoClick()">Abbrechen</button>
-  <button mat-button (click)="receiveMoney()" cdkFocusInitial>Geld empfangen</button>
+  <button data-testid="cancel_button" mat-button (click)="onNoClick()">Abbrechen</button>
+  <button data-testid="send_money_button" mat-button (click)="receiveMoney()" cdkFocusInitial>Geld empfangen</button>
 </div>

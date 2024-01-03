@@ -36,14 +36,14 @@ Then("I should be presented with an alert box containing \"Geld übertragen\" te
 });
 
 When("I type a Betrag {string}", (geldbetrag) =>
-{   
+{
     cy.get("[data-testid='amount_input']").focus().clear();
     const betrag = geldbetrag.split("");
-    for(let part of betrag)
-    {   
-    cy.get("[data-testid='amount_input']")
-    .focus()
-    .type(part);
+    for (let part of betrag)
+    {
+        cy.get("[data-testid='amount_input']")
+            .focus()
+            .type(part);
     }
 });
 
@@ -69,17 +69,17 @@ When("I click on Close button", () =>
 
 Then("my account balance is updated with the amount {string}", (betrag) =>
 {
-    cy.get("[id=\"0.kontostand\"]").should("have.text"," " + betrag + " $ ");
+    cy.get("[id=\"0.kontostand\"]").should("have.text", " " + betrag + " $ ");
 });
 
 Then("my account balance at the end has an amount of {string}", (betrag) =>
 {
-    cy.get("[id=\"0.kontostand\"]").should("have.text"," " + betrag + " $ ");
+    cy.get("[id=\"0.kontostand\"]").should("have.text", " " + betrag + " $ ");
 });
 
 Then("the account balance fromt my second account is updated with the amount {string}", (betrag) =>
 {
-    cy.get("[id=\"1.kontostand\"]").should("have.text"," " + betrag + " $ ");
+    cy.get("[id=\"1.kontostand\"]").should("have.text", " " + betrag + " $ ");
 });
 
 When("I click on Arrow button to receive money into my account", () =>
@@ -97,13 +97,12 @@ Then("I should be presented with an alert box containing \"Geld überweisen\" te
     cy.get("[data-testid='title']").contains("Geld überweisen");
 });
 
-
 When("I type a Geldbetrag {}", (betrag) =>
 {
-    const amount = betrag.split(""); 
-    for(let part of betrag) 
+    const amount = betrag.split("");
+    for (let part of betrag)
     {
-    cy.get("[data-testid='receiveMoney_input']").focus().type(part);
+        cy.get("[data-testid='receiveMoney_input']").focus().type(part);
     }
 });
 
@@ -130,12 +129,12 @@ Then("I should be presented with an alert box containing \"Geld überweisen\"", 
 When("I type a desired Geldbetrag {}", (geldbetrag) =>
 {
     cy.get("[data-testid='send_amount']").focus().clear();
-    const amount = geldbetrag.split(""); 
-    for(let part of amount) 
+    const amount = geldbetrag.split("");
+    for (let part of amount)
     {
         cy.get("[data-testid='send_amount']").type(part);
     }
-    
+
 });
 
 When("I type a Ziel IBAN {}", (iban) =>
@@ -157,5 +156,4 @@ Then("I should be presented with an alert box containing \"Geld erhalten!\" text
 {
     cy.get("[data-testid='title']").contains("Geld Erhalten!");
 });
-
 

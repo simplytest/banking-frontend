@@ -5,7 +5,7 @@
     <mat-label>Betrag</mat-label>
     <input data-testid="amount_input" matInput [(ngModel)]="transferData.amount" [errorStateMatcher]="matcher">
     <span matTextPrefix>$&nbsp;</span>
-    <mat-error *ngIf="!allowed()">
+    <mat-error data-testid="error_label" *ngIf="!allowed()">
       Betrag ist nicht zulässig
     </mat-error>
   </mat-form-field>

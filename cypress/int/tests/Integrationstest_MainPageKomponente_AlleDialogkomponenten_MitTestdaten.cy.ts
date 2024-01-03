@@ -34,7 +34,7 @@ describe("Integration: MainPagekomponente mit allen Dialogkomponenten und Testda
                 MoneySendDialog,
                 TransferMoneyDialog,
                 TransferMoneyFalseDialog,
-                ReceiveMoneyDialog,],
+                ReceiveMoneyDialog],
 
             imports: [BrowserModule,
                 FormsModule,
@@ -52,7 +52,7 @@ describe("Integration: MainPagekomponente mit allen Dialogkomponenten und Testda
                 MatRadioModule,
                 MatIconModule,
                 MatTooltipModule],
-            providers: [{ provide: ContractServerService, useClass: MockContractServerService }]
+            providers: [{ provide: ContractServerService, useClass: MockContractServerService }],
         });
 
         // Dialogbutton Geld überweisen des Girokontos wird geklickt"
@@ -63,7 +63,8 @@ describe("Integration: MainPagekomponente mit allen Dialogkomponenten und Testda
 
         // Defaultwert ist = 0
         cy.get("[data-testid='send_amount']")
-            .focus()
+            .focus();
+        cy.get("[data-testid='send_amount']")
             .should("have.value", "0");
 
     });
@@ -79,7 +80,7 @@ describe("Integration: MainPagekomponente mit allen Dialogkomponenten und Testda
                 MoneySendDialog,
                 TransferMoneyDialog,
                 TransferMoneyFalseDialog,
-                ReceiveMoneyDialog,],
+                ReceiveMoneyDialog],
 
             imports: [BrowserModule,
                 FormsModule,
@@ -97,7 +98,7 @@ describe("Integration: MainPagekomponente mit allen Dialogkomponenten und Testda
                 MatRadioModule,
                 MatIconModule,
                 MatTooltipModule],
-            providers: [{ provide: ContractServerService, useClass: MockContractServerService }]
+            providers: [{ provide: ContractServerService, useClass: MockContractServerService }],
         });
 
         // Dialogbutton Geld übertragen des Girokontos wird geklickt"
@@ -108,7 +109,8 @@ describe("Integration: MainPagekomponente mit allen Dialogkomponenten und Testda
 
         // Defaultwert ist = 0
         cy.get("[data-testid='amount_input']")
-            .focus()
+            .focus();
+        cy.get("[data-testid='amount_input']")
             .should("have.value", "0");
 
         // Es wird überprüft, dass die Radiobuttons der "TransferDialogkomponente" vorhanden sind
