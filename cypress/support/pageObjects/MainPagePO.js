@@ -4,7 +4,7 @@ class MainPagePO extends BasePO
 {
 
     elements = {
-        kontoErstellenButton: () => cy.get("[data-testid=\"erstellen_button\"]"),
+        kontoErstellenButton: () => cy.get("[data-testid='erstellen_button']"),
     };
 
     navigateToMainPage ()

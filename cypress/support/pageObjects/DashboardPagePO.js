@@ -8,9 +8,11 @@ class DashboardPagePO extends BasePO
     }
 
     elements = {
-        loginButton: () => cy.get('[data-testid="login_button"]'),
+        loginButton: () => cy.get("[data-testid='login_button']"),
         registrierenButton: () => cy.get("#registerButton"),
         expectedAlertText: () => cy.get("[data-testid='title']"),
+        contractIDInput: () => cy.get("[data-testid='contract_input']"),
+        passwordInput: () => cy.get("[data-testid='password_input']")
     };
 
     clickOnRegistrierenButton()
@@ -25,12 +27,12 @@ class DashboardPagePO extends BasePO
 
     typeContractID(contractID = "1")
     {
-        cy.get("[name='contractID']").type(contractID);
+        this.elements.contractIDInput().type(contractID);
     }
 
     typePassword(password = "demo")
     {
-        cy.get("[name='password']").type(password);
+        this.elements.passwordInput().type(password);
     }
 
     validateAlertText(expectedAlertText)

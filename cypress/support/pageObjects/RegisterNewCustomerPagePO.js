@@ -2,51 +2,67 @@ import BasePO from "./BasePO";
 
 class RegisterNewCustomerPagePO extends BasePO
 {
+
+    elements = {
+        firstNameInput: () => cy.get("[data-testid='firstname_input']"),
+        lastNameInput: () => cy.get("[data-testid='lastname_input']"),
+        passwordInput: () => cy.get("[data-testid='password_input']"),
+        streetInput: () => cy.get("[data-testid='street_input']"),
+        houseNumberInput: () => cy.get("[data-testid='housenumber_input']"),
+        zipCodeInput: () => cy.get("[data-testid='zipcode_input']"),
+        cityInput: () => cy.get("[data-testid='city_input']"),
+        countryInput: () => cy.get("[data-testid='land_input']"),
+        eMailInput: () => cy.get("[data-testid='e-mail_input']"),
+        birthdayInput: () => cy.get("[data-testid='birthday_input']"),
+        registerButton: () => cy.get("[data-testid='register_button']")
+    };
+
+
     typeFirstName(firstName)
     {
-        cy.get("#firstName").type(firstName);
+        this.elements.firstNameInput().type(firstName);
     }
 
-    typeLastName(lastName)
+    typeLastName(lastName) 
     {
-        cy.get("#lastName").type(lastName);
+        this.elements.lastNameInput().type(lastName);
     }
 
     typePassword(password)
     {
-        cy.get("#password").type(password);
+        this.elements.passwordInput().type(password);
     }
     typeStreet(street)
     {
-        cy.get("#street").type(street);
+        this.elements.streetInput().type(street);
     }
     typeHouse(house)
     {
-        cy.get("#house").type(house);
+        this.elements.houseNumberInput().type(house);
     }
     typeZipCode(zipCode)
     {
-        cy.get("#zipCode").type(zipCode);
+        this.elements.zipCodeInput().type(zipCode);
     }
     typeCity(city)
     {
-        cy.get("#city").type(city);
+        this.elements.cityInput().type(city);
     }
     typeCountry(country)
     {
-        cy.get("#country").type(country);
+        this.elements.countryInput().type(country);
     }
     typeEmail(email)
     {
-        cy.get("#email").type(email);
+        this.elements.eMailInput().type(email);
     }
     typeBirthDate(birthDate)
     {
-        cy.get("#birthDay").type(birthDate);
+        this.elements.birthdayInput().type(birthDate);
     }
     clickOnRegistrierenButtonAgain()
     {
-        cy.get("[data-testid=\"register_button\"]").invoke("removeAttr", "target").click();
+        this.elements.registerButton().invoke("removeAttr", "target").click();
     }
 }
 

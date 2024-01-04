@@ -3,12 +3,12 @@ import BasePO from "./BasePO";
 class CreateAccountPagePO extends BasePO
 {
     elements = {
-        giroKontoButton: () => cy.get("[test-dataid=\"giro_account_button\"]"),
-        festgeldKontoButton: () => cy.get("[test-dataid=\"fixed_rate_button\"]"),
-        tagesgeldKontoButton: () => cy.get("[test-dataid=\"onCall_button\"]"),
-        immobilienFinanzierungskontoButton: () => cy.get("[test-dataid=\"realEstate_button\"]"),
-        kreditBeitragInput: () => cy.get("[test-dataid=\"credit_value\"]"),
-        kreditTilgungsrateInput: () => cy.get("[test-dataid=\"rate_value\"]")
+        giroKontoButton: () => cy.get("[test-dataid='giro_account_button']"),
+        festgeldKontoButton: () => cy.get("[test-dataid='fixed_rate_button']"),
+        tagesgeldKontoButton: () => cy.get("[test-dataid='onCall_button']"),
+        immobilienFinanzierungskontoButton: () => cy.get("[test-dataid='realEstate_button']"),
+        kreditBeitragInput: () => cy.get("[test-dataid='credit_value']"),
+        kreditTilgungsrateInput: () => cy.get("[test-dataid='rate_value']")
     };
 
     navigateToCreateAccountPage ()
