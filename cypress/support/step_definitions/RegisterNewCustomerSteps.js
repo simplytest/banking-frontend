@@ -5,6 +5,9 @@ import RegisterNewCustomerPagePO from "../pageObjects/RegisterNewCustomerPagePO"
 
 const registerNewCustomerSteps = new RegisterNewCustomerPagePO();
 
+
+/*      When        */
+
 When ("I click on Business Kunde button", () => {
     cy.get("[data-testid=\"business_customer_button\"]").click();
 })

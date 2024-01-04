@@ -1,14 +1,14 @@
-<h1 mat-dialog-title>Immobilien-Finanzierungskonto Erstellen</h1>
+<h1 mat-dialog-title data-testid="title">Immobilien-Finanzierungskonto Erstellen</h1>
 
 <div mat-dialog-content>
   <mat-form-field subscriptSizing="dynamic">
     <mat-label>Kredit Betrag</mat-label>
-    <input type="number" matInput [(ngModel)]="realEstateData.amount" placeholder="0">
+    <input data-testid="credit_value" type="number" matInput [(ngModel)]="realEstateData.amount" placeholder="0">
     <span matTextPrefix>$&nbsp;</span>
   </mat-form-field>
   <mat-form-field subscriptSizing="dynamic">
     <mat-label>Tilgung Rate</mat-label>
-    <input matInput [(ngModel)]="realEstateData.repaymentRate" placeholder="0">
+    <input data-testid="rate_value" matInput [(ngModel)]="realEstateData.repaymentRate" placeholder="0">
   </mat-form-field>
 </div>
 

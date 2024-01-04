@@ -6,7 +6,9 @@ class CreateAccountPagePO extends BasePO
         giroKontoButton: () => cy.get("[test-dataid=\"giro_account_button\"]"),
         festgeldKontoButton: () => cy.get("[test-dataid=\"fixed_rate_button\"]"),
         tagesgeldKontoButton: () => cy.get("[test-dataid=\"onCall_button\"]"),
-        immobilienFinanzierungskontoButton: () => cy.get("[test-dataid=\"realEstate_button\"]")
+        immobilienFinanzierungskontoButton: () => cy.get("[test-dataid=\"realEstate_button\"]"),
+        kreditBeitragInput: () => cy.get("[test-dataid=\"credit_value\"]"),
+        kreditTilgungsrateInput: () => cy.get("[test-dataid=\"rate_value\"]")
     };
 
     navigateToCreateAccountPage ()
@@ -28,15 +30,15 @@ class CreateAccountPagePO extends BasePO
     }
     clickOnImmobilienFinanzierungskontoButton()
     {
-        cy.get("[test-dataid=\"realEstate_button\"]").click();
+        this.elements.immobilienFinanzierungskontoButton().click();
     }
     typeKreditBeitrag(kreditBeitrag)
-    {
-        cy.get("[id=\"mat-input-0\"]").type(kreditBeitrag);
+    { 
+        this.elements.kreditBeitragInput().type(kreditBeitrag);
     }
     typeTilgungRate(tilgungRate)
     {
-        cy.get("id=\"mat-input-7\"").type(tilgungRate);
+        this.elements.kreditTilgungsrateInput().type(tilgungRate);
     }
 }
 

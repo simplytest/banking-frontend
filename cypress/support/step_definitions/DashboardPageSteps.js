@@ -5,10 +5,15 @@ import DashboardPagePO from "../pageObjects/DashboardPagePO";
 
 const dashboardPage = new DashboardPagePO();
 
+/*      Given        */
+
 Given("I navigate to the Banking App dashboard page", () =>
 {
     dashboardPage.navigate("");
 });
+
+
+/*      When        */
 
 When("When I click on Registrieren button", () =>
 {
@@ -35,11 +40,6 @@ When("I type an invalid Password {}", (password) =>
     dashboardPage.typePassword(password);
 });
 
-Then("I should be presented with an alert box containing text {}", (expectedAlertText) =>
-{
-    dashboardPage.validateAlertText(expectedAlertText);
-});
-
 When("I have logged in with my credentials", () =>
 {
     dashboardPage.typeContractID();
@@ -47,3 +47,12 @@ When("I have logged in with my credentials", () =>
     
     dashboardPage.clickOnLoginButton();
 });
+
+
+/*      Then        */
+
+Then("I should be presented with an alert box containing text {}", (expectedAlertText) =>
+{
+    dashboardPage.validateAlertText(expectedAlertText);
+});
+
