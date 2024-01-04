@@ -8,7 +8,7 @@ class DashboardPagePO extends BasePO
     }
 
     elements = {
-        loginButton: () => cy.get('[data-testid="login_button"]'),
+        loginButton: () => cy.get("[data-testid=\"login_button\"]"),
         registrierenButton: () => cy.get("#registerButton"),
         expectedAlertText: () => cy.get("#mat-mdc-dialog-title-0"),
     };
