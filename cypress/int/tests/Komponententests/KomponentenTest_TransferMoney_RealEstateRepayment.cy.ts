@@ -19,6 +19,8 @@ import { MainPageComponent, DialogOverviewSendMoneyDialog, DialogOverviewTransfe
 
 function angularInputFieldHelperByDataTestID(value, identifier)
 {
+    cy.get("[data-testid='" + identifier + "']").focus();
+    cy.get("[data-testid='" + identifier + "']").clear();
     const betrag = value.split("");
     for (const part of betrag)
     {
@@ -30,47 +32,96 @@ const mockDialogData = {
     token: "mockToken",
     current: "00001:00001",
     accounts: [
-        ["00001:00002", { data: { /* ... Daten für das Konto ... */ }, type: "com.simplytest.core.accounts.AccountFixedRate" }],
-        ["00001:00003", { data: { /* ... Daten für ein anderes Konto ... */ }, type: "com.simplytest.core.accounts.AccountOnCall" }],
-        ["00001:00004", { data: { /* ... Daten für ein anderes Konto ... */ }, type: "com.simplytest.core.accounts.AccountRealEstate" }],
+        ["00001:00002", { data: { balance: 1000.0, boundPeriod: 0.0, interestRate: 0.0 }, type: "com.simplytest.core.accounts.AccountFixedRate" }],
+        ["00001:00003", { data: { runtime: 0.0, balance: 1000.0, boundPeriod: 0.0, interestRate: 0.0 }, type: "com.simplytest.core.accounts.AccountOnCall" }],
+        ["00001:00004", { data: { remainingAmount: 0.0, creditAmount: 1000.0, payedAmount: 0.0, maxSpecialRepayment: 50.0, runtimeAmount: 0.0,
+            repaymentRate: 100.0, monthlyAmount: 8333.333333333334, balance: -1000.0, boundPeriod: 0.0, interestRate: 0.0 },
+        type: "com.simplytest.core.accounts.AccountRealEstate" }],
     ],
 };
 
-describe("Integration: RealEstateRepayment, Mainpage und Transferdialogkomponente", () =>
+function angularKonfiguration()
+{
+    cy.viewport(1280, 720);
+    cy.mount(DialogOverviewTransferMoneyDialog, {
+        declarations: [
+            MainPageComponent,
+            DialogOverviewSendMoneyDialog,
+            DialogOverviewTransferMoneyDialog,
+            TransferMoneyDialog],
+
+        imports: [BrowserModule,
+            FormsModule,
+            RouterModule,
+            AppRoutingModule,
+            MatButtonModule,
+            MatFormFieldModule,
+            MatInputModule,
+            HttpClientModule,
+            FontAwesomeModule,
+            NgbModule,
+            MatDialogModule,
+            BrowserAnimationsModule,
+            ReactiveFormsModule,
+            MatRadioModule,
+            MatIconModule,
+            MatTooltipModule],
+        providers: [{ provide: ContractServerService, useClass: MockContractServerService },
+            { provide: MatDialogRef, useValue: {} },
+            { provide: MAT_DIALOG_DATA, useValue: mockDialogData },
+            { provide: MatDialog, useClass: MatDialog },
+        ],
+    });
+}
+
+describe("Komponententest: TransferMoneyDialog RealEstate Repayment Rate Logik", () =>
 {
     it("Repayment Rate can be lower than 5%: Credit= 1000$, Rate= 10$", () =>
     {
-
-        cy.viewport(1280, 720);
-        cy.mount(DialogOverviewTransferMoneyDialog, {
-            declarations: [
-                MainPageComponent,
-                DialogOverviewSendMoneyDialog,
-                DialogOverviewTransferMoneyDialog,
-                TransferMoneyDialog],
-
-            imports: [BrowserModule,
-                FormsModule,
-                RouterModule,
-                AppRoutingModule,
-                MatButtonModule,
-                MatFormFieldModule,
-                MatInputModule,
-                HttpClientModule,
-                FontAwesomeModule,
-                NgbModule,
-                MatDialogModule,
-                BrowserAnimationsModule,
-                ReactiveFormsModule,
-                MatRadioModule,
-                MatIconModule,
-                MatTooltipModule],
-            providers: [{ provide: ContractServerService, useClass: MockContractServerService },
-                { provide: MatDialogRef, useValue: {} },
-                { provide: MAT_DIALOG_DATA, useValue: mockDialogData },
-                { provide: MatDialog, useClass: MatDialog },
-            ],
-        });
-
+        angularKonfiguration();
+        angularInputFieldHelperByDataTestID("10", "amount_input");
+        cy.get("[id$=':00004-input'").click();
+        cy.get("[data-testid='transfer_money_button']").should("be.enabled");
     });
+
+    it("Repayment Rate can be lower than 5%: Credit= 1000$, Rate= 49$, Boundary Value", () =>
+    {
+        angularKonfiguration();
+
+        angularInputFieldHelperByDataTestID("49", "amount_input");
+        cy.get("[id$=':00004-input'").click();
+        cy.get("[data-testid='transfer_money_button']").should("be.enabled");
+    });
+
+    it("Repayment Rate can be lower than 5%: Credit= 1000$, Rate= 50$, Boundary Value", () =>
+    {
+        angularKonfiguration();
+
+        angularInputFieldHelperByDataTestID("50", "amount_input");
+        cy.get("[id$=':00004-input'").click();
+        cy.get("[data-testid='transfer_money_button']").should("be.enabled");
+    });
+
+    it("Repayment Rate can not be higher than 5%: Credit= 1000$, Rate= 51$, Boundary Value", () =>
+    {
+        angularKonfiguration();
+
+        angularInputFieldHelperByDataTestID("51", "amount_input");
+        cy.get("[id$=':00004-input'").click();
+        cy.get("[data-testid='error_label']").should("have.text", " Betrag ist nicht zulässig ");
+        cy.get("[data-testid='error_label']").should("have.css", "color").and("eq", "rgb(244, 67, 54)");
+        cy.get("[data-testid='transfer_money_button']").should("be.disabled");
+    });
+
+    it("Repayment Rate can not be higher than 5%: Credit= 1000$, Rate= 100$", () =>
+    {
+        angularKonfiguration();
+
+        angularInputFieldHelperByDataTestID("100", "amount_input");
+        cy.get("[id$=':00004-input'").click();
+        cy.get("[data-testid='error_label']").should("have.text", " Betrag ist nicht zulässig ");
+        cy.get("[data-testid='error_label']").should("have.css", "color").and("eq", "rgb(244, 67, 54)");
+        cy.get("[data-testid='transfer_money_button']").should("be.disabled");
+    });
+
 });

@@ -3,7 +3,7 @@
         "counter": 4,
         "parent": 1,
         "child": 0
-    },
+    }, 
     "customer": {
         "type": "com.simplytest.core.customers.CustomerPrivate",
         "data": {
