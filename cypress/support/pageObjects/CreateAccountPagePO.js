@@ -8,7 +8,8 @@ class CreateAccountPagePO extends BasePO
         tagesgeldKontoButton: () => cy.get("[test-dataid='onCall_button']"),
         immobilienFinanzierungskontoButton: () => cy.get("[test-dataid='realEstate_button']"),
         kreditBeitragInput: () => cy.get("[test-dataid='credit_value']"),
-        kreditTilgungsrateInput: () => cy.get("[test-dataid='rate_value']")
+        kreditTilgungsrateInput: () => cy.get("[test-dataid='rate_value']"),
+        kreditAnfordernButton: () => cy.get("data-testid='create_real_estate_button'")
     };
 
     navigateToCreateAccountPage ()
@@ -40,6 +41,11 @@ class CreateAccountPagePO extends BasePO
     {
         this.elements.kreditTilgungsrateInput().type(tilgungRate);
     }
+
+    clickKreditAnfordernButton(){
+        this.elements.kreditAnfordernButton().click;
+    }
+
 }
 
 export default CreateAccountPagePO;

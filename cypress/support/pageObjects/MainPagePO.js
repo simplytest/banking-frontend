@@ -3,8 +3,14 @@ import BasePO from "./BasePO";
 class MainPagePO extends BasePO
 {
 
-    elements = {
+    mainElements = {
         kontoErstellenButton: () => cy.get("[data-testid='erstellen_button']"),
+    };
+
+    sendMoneyElements = {
+        amountInput: () => cy.get("[data-testid='send_amount']"),
+        
+
     };
 
     navigateToMainPage ()
@@ -14,7 +20,7 @@ class MainPagePO extends BasePO
 
     clickOnKontoErstellenButton()
     {
-        this.elements.kontoErstellenButton().click();
+        this.mainelements.kontoErstellenButton().click();
     }
 }
 

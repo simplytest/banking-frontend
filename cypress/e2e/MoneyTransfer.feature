@@ -13,7 +13,7 @@ Feature: Money Transfer
     Then I should be presented with a greeting text <greeting>
     When I click on Arrow button to receive money into my account
     And I should be presented with an alert box containing "Geld empfangen" text
-    And I type a Geldbetrag <geldbetrag>
+    And I type a Geldbetrag '<geldbetrag>'
     And I click on Geld empfangen button
     Then I should be presented with an alert box containing "Geld erhalten!" text
     When I click on Close button

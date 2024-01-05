@@ -36,7 +36,7 @@ When("I type Kredit Beitrag {} and Tilgung Rate {}", (kreditBeitrag, tilgungRate
 
 When("I click on Kredit Anfordern Button", () =>
 {
-    cy.get("[data-testid=\"create_real_estate_button\"]").click();
+    createAccountPage.clickKreditAnfordernButton();
 });
 
 
@@ -61,6 +61,9 @@ Then("I should be presented with a created Tagesgeld-Konto called OnCall", () =>
 Then("I should be presented with a created  Immobilien-Finanzierungskonto called RealEstate", () => {
     cy.get("[id=\"4.kontotyp\"]").contains("RealEstate");
 });
+
+// Eventuell nicht genutzt
+
 Then("Kontostand amount is {} $", () => {
     cy.get("id=\"4.kontostand\"]").contains(kreditBeitrag);
 });

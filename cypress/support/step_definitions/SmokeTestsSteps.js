@@ -31,7 +31,6 @@ function registerNewCustomer()
 
 function angularInputFieldHelperByDataTestID(value, identifier)
 {
-
     cy.get("[data-testid='" + identifier + "']").focus();
     cy.get("[data-testid='" + identifier + "']").clear();
     const betrag = value.split("");

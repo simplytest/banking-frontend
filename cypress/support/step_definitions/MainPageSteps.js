@@ -5,6 +5,19 @@ import MainPagePO from "../pageObjects/MainPagePO";
 
 const mainPage = new MainPagePO();
 
+function angularInputFieldHelperByDataTestID(value, identifier)
+{
+    const betrag = value.split("");
+    
+    cy.get("[data-testid='" + identifier + "']").focus();
+    cy.get("[data-testid='" + identifier + "']").clear();
+    
+    for (let part of betrag)
+    {
+        cy.get("[data-testid='" + identifier + "']").type(part);
+    }
+}
+
 /*      Given        */
 
 Given("I navigate to the Banking App main page", () =>
@@ -27,14 +40,7 @@ When("I click on Double Arrows button to sent money to my other account", () =>
 
 When("I type a Betrag {string}", (geldbetrag) =>
 {   
-    cy.get("[data-testid='amount_input']").focus().clear();
-    const betrag = geldbetrag.split("");
-    for(let part of betrag)
-    {   
-    cy.get("[data-testid='amount_input']")
-    .focus()
-    .type(part);
-    }
+    angularInputFieldHelperByDataTestID(geldbetrag,"amount_input");
 });
 
 When("I select the desired account", () =>
@@ -57,13 +63,9 @@ When("I click on Arrow button to receive money into my account", () =>
     cy.get("[id=\"0-empfangen\"]").click();
 });
 
-When("I type a Geldbetrag {}", (betrag) =>
+When("I type a Geldbetrag {string}", (betrag) =>
 {
-    const amount = betrag.split(""); 
-    for(let part of betrag) 
-    {
-    cy.get("[data-testid='receiveMoney_input']").focus().type(part);
-    }
+    angularInputFieldHelperByDataTestID(betrag,"receiveMoney_input");
 }); 
 
 When("I click on Geld empfangen button", () =>
@@ -76,15 +78,9 @@ When("I click on money button to send money to someone else account", () =>
     cy.get("[id=\"0-ueberweisen\"]").click();
 });
 
-When("I type a desired Geldbetrag {}", (geldbetrag) =>
+When("I type a desired Geldbetrag {string}", (geldbetrag) =>
 {
-    cy.get("[data-testid='send_amount']").focus().clear();
-    const amount = geldbetrag.split(""); 
-    for(let part of amount) 
-    {
-        cy.get("[data-testid='send_amount']").type(part);
-    }
-    
+    angularInputFieldHelperByDataTestID(geldbetrag,"send_amount");
 });
 
 When("I type a Ziel IBAN {}", (iban) =>
