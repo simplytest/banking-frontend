@@ -36,6 +36,8 @@ When("I type Kredit Beitrag {} and Tilgung Rate {}", (kreditBeitrag, tilgungRate
 
 When("I click on Kredit Anfordern Button", () =>
 {
+    createAccountPage.typeKreditBeitrag("1000");
+    createAccountPage.typeTilgungRate("100");
     createAccountPage.clickKreditAnfordernButton();
 });
 

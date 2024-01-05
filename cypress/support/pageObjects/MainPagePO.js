@@ -20,7 +20,7 @@ class MainPagePO extends BasePO
 
     clickOnKontoErstellenButton()
     {
-        this.mainelements.kontoErstellenButton().click();
+        this.mainElements.kontoErstellenButton().click();
     }
 }
 
