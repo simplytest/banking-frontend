@@ -15,7 +15,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { DialogOverviewTransferMoneyDialog, MainPageComponent } from "src/app/main-page/main-page.component";
 import { AppRoutingModule } from "src/app/app-routing.module";
 import { ContractServerService } from "src/app/_services/contract-server.service";
-import { MockContractServerService } from "../mocks/MockContractServerService";
+import { MockContractServerService } from "../../mocks/MockContractServerService";
 
 describe("Integrationstest: MainPagekomponente mit TransferMoneyDialogKomponente und Mockservice, Kein Geldtransfer", () =>
 {

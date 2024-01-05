@@ -109,5 +109,4 @@ Then("User gets an ErrorMessage 'Betrag ist nicht zulässig'", () =>
     cy.get("[data-testid='error_label']").should("have.text", " Betrag ist nicht zulässig ");
     cy.get("[data-testid='error_label']").should("have.css", "color").and("eq", "rgb(244, 67, 54)");
     cy.get("[data-testid='transfer_money_button']").should("be.disabled");
-
 });

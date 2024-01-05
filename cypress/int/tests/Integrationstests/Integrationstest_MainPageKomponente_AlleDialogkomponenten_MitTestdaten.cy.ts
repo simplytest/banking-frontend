@@ -14,7 +14,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AppRoutingModule } from "src/app/app-routing.module";
 import { ContractServerService } from "src/app/_services/contract-server.service";
-import { MockContractServerService } from "../mocks/MockContractServerService";
+import { MockContractServerService } from "../../mocks/MockContractServerService";
 import { MainPageComponent, DialogOverviewSendMoneyDialog, DialogOverviewTransferMoneyDialog, DialogOverviewReceiveMoneyDialog, DialogOverviewEditGiroAccountDialog, MoneySendDialog, TransferMoneyDialog, TransferMoneyFalseDialog, ReceiveMoneyDialog } from "src/app/main-page/main-page.component";
 
 describe("Integration: MainPagekomponente mit allen Dialogkomponenten und Testdaten", () =>
