@@ -70,7 +70,7 @@ describe("Integration Mainpage <-> ContractServerService", () =>
         const greeting: HTMLElement = fixture.nativeElement.querySelectorAll("label[data-testid='customer_Label'");
 
         expect(greeting.textContent).toBe("Hallo: !" +
-        "Ihre Kontonummer ist: 00001 ");
+        "Ihre Kundennummer ist: 00001 ");
 
         /*  Kontodaten      */
 

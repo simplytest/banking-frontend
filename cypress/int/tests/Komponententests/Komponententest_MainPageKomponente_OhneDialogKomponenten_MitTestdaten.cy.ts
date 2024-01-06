@@ -57,7 +57,7 @@ describe("Unittest: MainPagekomponente ohne Dialoge, mit Testdaten", () =>
 
         /*  Tableheader, wenn Daten vorhanden sind */
 
-        cy.get("[data-testid='customer_Label'").should("have.text", " Hallo giro_Only!  Ihre Kontonummer ist: 00001 ");
+        cy.get("[data-testid='customer_Label'").should("have.text", " Hallo giro_Only!  Ihre Kundennummer ist: 00001 ");
 
         cy.get("[data-testid='kontoID_table_head']").should("have.text", " Konto ID ");
         cy.get("[data-testid='kontoTyp_table_head']").should("have.text", " Konto Typ ");
