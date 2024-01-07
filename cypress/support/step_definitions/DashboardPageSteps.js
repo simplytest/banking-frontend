@@ -1,11 +1,26 @@
 /// <reference types="cypress" />
 
+import 'cypress-axe';
 import { Given, Then, When } from "@badeball/cypress-cucumber-preprocessor";
 import DashboardPagePO from "../pageObjects/DashboardPagePO";
 
 const dashboardPage = new DashboardPagePO();
 
 /*      Given        */
+
+
+Given("Ich bin auf der Banking App als Nutzer {string} mit Passwort {string} eingeloggt", (user, password) =>
+{
+    dashboardPage.navigateToDashboardPage();
+    dashboardPage.typeContractID(user);
+    dashboardPage.typePassword(password);
+    dashboardPage.clickOnLoginButton();
+    cy.get("[data-testid='customer_Label']").contains("Hallo");
+
+    cy.injectAxe();
+    cy.checkA11y(null, null, null, true);
+});
+
 
 Given("I navigate to the Banking App dashboard page", () =>
 {
