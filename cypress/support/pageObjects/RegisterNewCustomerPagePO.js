@@ -2,6 +2,22 @@ import BasePO from "./BasePO";
 
 class RegisterNewCustomerPagePO extends BasePO
 {
+
+    registerStandardPrivateCustomer()
+    {
+        this.typeFirstName("Demo");
+        this.typeLastName("User");
+        this.typePassword("test");
+        this.typeStreet("Teststraße");
+        this.typeHouse("1");
+        this.typeZipCode("12345");
+        this.typeCity("Testcity");
+        this.typeCountry("Testland");
+        this.typeEmail("test@email.com");
+        this.typeBirthDate("1999-12-14");
+        this.clickOnRegistrierenButtonAgain();
+    }
+
     typeFirstName(firstName)
     {
         cy.get("#firstName").type(firstName);

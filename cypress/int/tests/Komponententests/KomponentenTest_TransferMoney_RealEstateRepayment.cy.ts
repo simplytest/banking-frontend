@@ -17,7 +17,7 @@ import { ContractServerService } from "src/app/_services/contract-server.service
 import { MockContractServerService } from "../../mocks/MockContractServerService";
 import { MainPageComponent, DialogOverviewSendMoneyDialog, DialogOverviewTransferMoneyDialog, TransferMoneyDialog } from "src/app/main-page/main-page.component";
 
-function angularInputFieldHelperByDataTestID(value, identifier)
+function fillAngularInputFieldByDataTestID(value, identifier)
 {
     cy.get("[data-testid='" + identifier + "']").focus();
     cy.get("[data-testid='" + identifier + "']").clear();
@@ -40,7 +40,7 @@ const mockDialogData = {
     ],
 };
 
-function angularKonfiguration()
+function setupAngular()
 {
     cy.viewport(1280, 720);
     cy.mount(DialogOverviewTransferMoneyDialog, {
@@ -78,35 +78,36 @@ describe("Komponententest: TransferMoneyDialog RealEstate Repayment Rate Logik",
 {
     it("Repayment Rate can be lower than 5%: Credit= 1000$, Rate= 10$", () =>
     {
-        angularKonfiguration();
-        angularInputFieldHelperByDataTestID("10", "amount_input");
+        setupAngular();
+        
+        fillAngularInputFieldByDataTestID("10", "amount_input");
         cy.get("[id$=':00004-input'").click();
         cy.get("[data-testid='transfer_money_button']").should("be.enabled");
     });
 
     it("Repayment Rate can be lower than 5%: Credit= 1000$, Rate= 49$, Boundary Value", () =>
     {
-        angularKonfiguration();
+        setupAngular();
 
-        angularInputFieldHelperByDataTestID("49", "amount_input");
+        fillAngularInputFieldByDataTestID("49", "amount_input");
         cy.get("[id$=':00004-input'").click();
         cy.get("[data-testid='transfer_money_button']").should("be.enabled");
     });
 
     it("Repayment Rate can be lower than 5%: Credit= 1000$, Rate= 50$, Boundary Value", () =>
     {
-        angularKonfiguration();
+        setupAngular();
 
-        angularInputFieldHelperByDataTestID("50", "amount_input");
+        fillAngularInputFieldByDataTestID("50", "amount_input");
         cy.get("[id$=':00004-input'").click();
         cy.get("[data-testid='transfer_money_button']").should("be.enabled");
     });
 
     it("Repayment Rate can not be higher than 5%: Credit= 1000$, Rate= 51$, Boundary Value", () =>
     {
-        angularKonfiguration();
+        setupAngular();
 
-        angularInputFieldHelperByDataTestID("51", "amount_input");
+        fillAngularInputFieldByDataTestID("51", "amount_input");
         cy.get("[id$=':00004-input'").click();
         cy.get("[data-testid='error_label']").should("have.text", " Betrag ist nicht zulässig ");
         cy.get("[data-testid='error_label']").should("have.css", "color").and("eq", "rgb(244, 67, 54)");
@@ -115,9 +116,9 @@ describe("Komponententest: TransferMoneyDialog RealEstate Repayment Rate Logik",
 
     it("Repayment Rate can not be higher than 5%: Credit= 1000$, Rate= 100$", () =>
     {
-        angularKonfiguration();
+        setupAngular();
 
-        angularInputFieldHelperByDataTestID("100", "amount_input");
+        fillAngularInputFieldByDataTestID("100", "amount_input");
         cy.get("[id$=':00004-input'").click();
         cy.get("[data-testid='error_label']").should("have.text", " Betrag ist nicht zulässig ");
         cy.get("[data-testid='error_label']").should("have.css", "color").and("eq", "rgb(244, 67, 54)");

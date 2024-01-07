@@ -5,6 +5,9 @@ class MainPagePO extends BasePO
 
     elements = {
         kontoErstellenButton: () => cy.get("[data-testid=\"erstellen_button\"]"),
+        accountReceiveButton: (accountID) => cy.get(`[id='${accountID}-empfangen']`),
+        accountTransferButton: (accountID) => cy.get(`[id='${accountID}-transferieren']`),
+        accountBalanceCell: (accountID) => cy.get(`[id='${accountID}.kontostand']`),
     };
 
     navigateToMainPage ()
@@ -15,6 +18,21 @@ class MainPagePO extends BasePO
     clickOnKontoErstellenButton()
     {
         this.elements.kontoErstellenButton().click();
+    }
+
+    clickOnReceiveButton(accountID)
+    {
+        this.elements.accountReceiveButton(accountID).click();
+    }
+
+    clickOnTransferButton(accountID)
+    {
+        this.elements.accountTransferButton(accountID).click();
+    }
+
+    checkAccountBalance(accountID, expectedBalance)
+    {
+        this.elements.accountBalanceCell(accountID).should("have.text", " " + expectedBalance + " $ ");
     }
 }
 

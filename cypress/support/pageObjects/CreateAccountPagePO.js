@@ -50,6 +50,15 @@ class CreateAccountPagePO extends BasePO
             cy.get("[data-testid='rate_input']").type(part);
         }
     }
+
+    addRealEstateAccount(creditValue, repaymentRate)
+    {
+        this.clickOnImmobilienFinanzierungskontoButton();
+        this.typeKreditBeitrag(creditValue);
+        this.typeTilgungRate(repaymentRate);
+        cy.get("[data-testid='create_real_estate_button']").click();
+    }
+
 }
 
 export default CreateAccountPagePO;

@@ -5,108 +5,74 @@ import MainPagePO from "../pageObjects/MainPagePO";
 import DashboardPagePO from "../pageObjects/DashboardPagePO";
 import RegisterNewCustomerPagePO from "../pageObjects/RegisterNewCustomerPagePO";
 import CreateAccountPagePO from "../pageObjects/CreateAccountPagePO";
+import ReceiveMoneyPage from "../pageObjects/ReceiveMoneyPage";
+import TransferMoneyPage from "../pageObjects/TransferMoneyPage";
+import ConfirmationDialogPage from "../pageObjects/ConfirmationDialogPage";
 
 const mainPage = new MainPagePO();
 const dashboardPage = new DashboardPagePO();
 const registerNewCustomerPage = new RegisterNewCustomerPagePO();
 const createAccountPage = new CreateAccountPagePO();
+const receiveMoneyPage = new ReceiveMoneyPage();
+const transerMoneyPage = new TransferMoneyPage();
+const confirmDialog = new ConfirmationDialogPage();
 
-function registerNewCustomer()
-{
-    registerNewCustomerPage.typeFirstName("Demo");
-    registerNewCustomerPage.typeLastName("User");
-    registerNewCustomerPage.typePassword("test");
-    registerNewCustomerPage.typeStreet("Teststraße");
-    registerNewCustomerPage.typeHouse("1");
-    registerNewCustomerPage.typeZipCode("12345");
-    registerNewCustomerPage.typeCity("Testcity");
-    registerNewCustomerPage.typeCountry("Testland");
-    registerNewCustomerPage.typeEmail("test@email.com");
-    registerNewCustomerPage.typeBirthDate("1999-12-14");
-    registerNewCustomerPage.clickOnRegistrierenButtonAgain();
-}
-
-function registerNewRealEstate(creditValue, repaymentRate)
-{
-    createAccountPage.clickOnImmobilienFinanzierungskontoButton();
-    createAccountPage.typeKreditBeitrag(creditValue);
-    createAccountPage.typeTilgungRate(repaymentRate);
-    cy.get("[data-testid='create_real_estate_button']").click();
-}
-
-function angularInputFieldHelperByDataTestID(value, identifier)
-{
-
-    const betrag = value.split("");
-    for (let part of betrag)
-    {
-        cy.get("[data-testid='" + identifier + "']").type(part);
-    }
-}
-
-Given("User with {string} and {string}", (giroAccountValue, creditValue) =>
+Given("Ich bin registrierter Privatkunde mit Konto von Typ Giro Konto mit aktuellem Kontostand {string} €", (giroAccountValue) =>
 {
     dashboardPage.navigate("");
 
     dashboardPage.clickOnRegistrierenButton();
-    registerNewCustomer();
+    registerNewCustomerPage.registerStandardPrivateCustomer();
 
-    cy.get("[id='0-empfangen']").click();
+    mainPage.clickOnReceiveButton("0");
 
-    cy.get("[data-testid='receiveMoney_input']").focus();
-    cy.get("[data-testid='receiveMoney_input']").clear();
+    receiveMoneyPage.receiveMoney(giroAccountValue);
+});
 
-    angularInputFieldHelperByDataTestID( giroAccountValue, "receiveMoney_input");
-
-    cy.get("[data-testid='send_money_button']").click();
-
-    cy.get("[data-testid='close_button']").click();
-
+Given("Ich habe ein neues Immobilien-Finanzierungskonto mit Kredit von {string} €", (creditValue) =>
+{
     mainPage.clickOnKontoErstellenButton();
 
-    registerNewRealEstate(creditValue, "100");
+    createAccountPage.addRealEstateAccount(creditValue, "100");
 });
 
 /*      When        */
 
-When("User pays a {string} that is not higher than 5% of the total credit value", (rate) =>
+When("Ich von Giro Konto {string} € auf ein Immobilien-Finanzierungskonto übertrage", (rate) =>
 {
-    cy.get("[id='0-transferieren'").click();
-    cy.get("[data-testid='amount_input']").focus();
-    cy.get("[data-testid='amount_input']").clear();
-    angularInputFieldHelperByDataTestID(rate, "amount_input");
-    cy.get("[id$=':00002'").click();
-    cy.get("[data-testid='transfer_money_button'").click();
-    cy.get("[data-testid='close_button'").click();
+    mainPage.clickOnTransferButton("0");
+    transerMoneyPage.prepareTransfer(rate, "2");
+    transerMoneyPage.executeTransfer();
 });
 
-When("User try to pay a {string} that is higher than 5% of the total credit value", (rate) =>
+When("Ich versuche von Giro Konto {string} € auf ein Immobilien-Finanzierungskonto zu übertragen", (rate) =>
 {
-    cy.get("[id='0-transferieren'").click();
-
-    cy.get("[data-testid='amount_input']").focus();
-    cy.get("[data-testid='amount_input']").clear();
-    angularInputFieldHelperByDataTestID(rate, "amount_input");
-    cy.get("[id$=':00002'").click();
+    mainPage.clickOnTransferButton("0");
+    transerMoneyPage.prepareTransfer(rate, "2");
 });
 
 /*      Then        */
 
-Then("{string} lowers by the amount of the {string}", (creditValue, rate) =>
+Then("beträgt der aktuelle Kontostand von Giro Konto {string} €", (newBalance) =>
 {
-    const newRealEstateValue = (+creditValue - +rate);
-    cy.get("[id='1.kontostand']").should("have.text", " -" + newRealEstateValue + " $ ");
+    mainPage.checkAccountBalance("0", newBalance);
 });
 
-Then("{string} is lowered by the amount of the {string}", (giroAccountValue, rate) =>
+Then("beträgt der aktuelle Kontostand von Immobilien-Finanzierungskonto {string} €", (newBalance) =>
 {
-    const newRealEstateValue = (+giroAccountValue - +rate);
-    cy.get("[id='0.kontostand']").should("have.text", " " + newRealEstateValue + " $ ");
+    mainPage.checkAccountBalance("1", "-" + newBalance);
 });
 
-Then("User gets an ErrorMessage 'Betrag ist nicht zulässig'", () =>
+Then("Ich sehe die Erfolgsmeldung {string}", (message) =>
 {
-    cy.get("[data-testid='error_label']").should("have.text", " Betrag ist nicht zulässig ");
-    cy.get("[data-testid='error_label']").should("have.css", "color").and("eq", "rgb(244, 67, 54)");
-    cy.get("[data-testid='transfer_money_button']").should("be.disabled");
+    confirmDialog.elements.confirmMessage().should("have.text", message);
+    confirmDialog.close();
+});
+
+Then("Ich sehe die Fehlermeldung {string}", (errorMessage) =>
+{
+    transerMoneyPage.elements.transferErrorLabel().should("have.text", errorMessage);
+    transerMoneyPage.elements.transferErrorLabel().should("have.css", "color").and("eq", "rgb(244, 67, 54)");
+    transerMoneyPage.elements.transferButton().should("be.disabled");
+    transerMoneyPage.cancelTransfer();
 });
