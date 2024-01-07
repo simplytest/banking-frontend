@@ -56,10 +56,20 @@ jobs:
             docker pull ghcr.io/simplytest/banking-frontend:latest
             docker run -d -p 4200:80 --rm --name=Banking-Frontend-Demo ghcr.io/simplytest/banking-frontend:latest
 
-      - name: ⌛ Wait for Frontend
-        uses: iFaxity/wait-on-action@v1.1.0
+      - name: 🍃 Install Node
+        uses: actions/setup-node@v3
         with:
-          resource: http://app.testorbit.de:4200
+          node-version: 16
+
+      - name: 🍃 Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+
+      - name: 🏗️ Install Dependencies
+        run: |
+          pnpm install
 
       - name: 🧪 Smoke Tests
         run: |
