@@ -56,15 +56,24 @@ jobs:
             docker pull ghcr.io/simplytest/banking-frontend:latest
             docker run -d -p 4200:80 --rm --name=Banking-Frontend-Demo ghcr.io/simplytest/banking-frontend:latest
 
-      - name: 🧨 Detect Breaking Changes
-        id: changes
-        uses: simbo/changes-between-tags-action@v1
+      - name: ⌛ Wait for Frontend
+        uses: iFaxity/wait-on-action@v1.1.0
         with:
-          tag-pattern: "^[a-zA-Z()]+!:"
+          resource: ${{ secrets.HOST }}:${{ secrets.PORT }}
 
-      - name: 🧯 Forward Breaking Changes
-        if: contains(steps.changes.outputs.changes, '!')
-        uses: benc-uk/workflow-dispatch@v1
-        with:
-          workflow: cd.yml
-          repo: simplytest/banking-backend
+      - name: 🧪 Smoke Tests
+        run: |
+          pnpm run test:smoketests
+
+      # - name: 🧨 Detect Breaking Changes
+      #   id: changes
+      #   uses: simbo/changes-between-tags-action@v1
+      #   with:
+      #     tag-pattern: "^[a-zA-Z()]+!:"
+
+      # - name: 🧯 Forward Breaking Changes
+      #   if: contains(steps.changes.outputs.changes, '!')
+      #   uses: benc-uk/workflow-dispatch@v1
+      #   with:
+      #     workflow: cd.yml
+      #     repo: simplytest/banking-backend
