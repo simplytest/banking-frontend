@@ -75,6 +75,13 @@ jobs:
         run: |
           pnpm run test:smoketests
 
+      - name: 🔍 Check for duplicate reports
+        id: skip_check
+        uses: fkirc/skip-duplicate-actions@v5
+        with:
+          skip_after_successful_duplicate: true
+          concurrent_skipping: "same_content_newer"
+          
       - name: 📋 Smoke Test Report
         uses: phoenix-actions/test-reporting@v8
         if: steps.skip_check.outputs.should_skip != 'true' && (success() || failure())
