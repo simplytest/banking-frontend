@@ -2,10 +2,7 @@ class BasePO
 {
     navigate(path)
     {
-        cy.fixture("config.json").then((data) =>
-        {
-            cy.visit(data.baseUrl + path);
-        });
+        cy.visit(path);
     }
 }
 export default BasePO;
