@@ -21,6 +21,7 @@ export class DashboardComponent implements OnInit
 
     ngOnInit()
     {
+        Cookies.remove("session");
     }
 
     async onSubmit(value: any)
@@ -29,12 +30,6 @@ export class DashboardComponent implements OnInit
 
         this.service.login(contractID, password).subscribe(token =>
         {
-            if (token.error)
-            {
-                alert(JSON.stringify(token.error));
-                return;
-            }
-
             Cookies.set("session", token.result);
             this.router.navigate(["/mainPage"]);
         },

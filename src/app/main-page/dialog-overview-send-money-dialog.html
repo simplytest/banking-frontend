@@ -1,18 +1,18 @@
-<h1 data-testid="title" mat-dialog-title data-testid="title">Geld überweisen</h1>
+<h1 data-testid="title" mat-dialog-title data-testid="title" i18n="@@send-money">Geld überweisen</h1>
 
 <div mat-dialog-content>
   <mat-form-field floatLabel="always" subscriptSizing="dynamic">
-    <mat-label>Geldbetrag</mat-label>
+    <mat-label i18n="@@money-amount">Geldbetrag</mat-label>
     <input data-testid="send_amount" type="number" matInput [(ngModel)]="sendData.amount" placeholder="0">
-    <span matTextPrefix>$&nbsp;</span>
+    <span matTextPrefix>€&nbsp;</span>
   </mat-form-field>
   <mat-form-field subscriptSizing="dynamic">
-    <mat-label>Ziel IBAN</mat-label>
+    <mat-label i18n="@@target-iban">Ziel IBAN</mat-label>
     <input data-testid="send_iban" matInput [(ngModel)]="sendData.target.iban" placeholder="0">
   </mat-form-field>
 </div>
 
 <div mat-dialog-actions align="end">
-  <button data-testid="cancel_button" mat-button (click)="onNoClick()">Abbrechen</button>
-  <button data-testid="send_money_button" mat-button (click)="sendMoney()" cdkFocusInitial>Geld überweisen</button>
+  <button data-testid="cancel_button" mat-button (click)="onNoClick()" i18n="@@cancel">Abbrechen</button>
+  <button data-testid="send_money_button" mat-button (click)="sendMoney()" cdkFocusInitial i18n="@@send">Senden</button>
 </div>

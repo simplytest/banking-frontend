@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "build": "ng build --configuration=production",
+    "build": "ng build --localize --configuration=production",
     "cypress:open": "cypress open",
     "test:smoketests": "cypress run --env tags=\"@Smoketest\" --config baseUrl=http://app.testorbit.de:4200/ --reporter junit --reporter-options \"mochaFile=results/smoketests-[suiteName].xml\"",
     "test:e2e": "cypress run --env tags=\"not @Smoketest\" --reporter junit --reporter-options \"mochaFile=results/e2e-[suiteName].xml\"",
@@ -42,6 +42,7 @@
     "font-awesome": "^4.7.0",
     "js-cookie": "^3.0.5",
     "rxjs": "~6.5.5",
+    "select": "link:@angular/material/select",
     "tslib": "^2.6.2",
     "zone.js": "~0.13.3"
   },

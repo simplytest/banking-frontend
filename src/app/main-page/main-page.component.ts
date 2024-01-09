@@ -29,6 +29,12 @@ export class MainPageComponent implements OnInit
     ngOnInit(): void
     {
         this.token = Cookies.get("session");
+
+        if (!this.token)
+        {
+            this.router.navigate(["/"]);
+        }
+
         this.getContracts();
     }
 

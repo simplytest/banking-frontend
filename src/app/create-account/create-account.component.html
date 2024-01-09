@@ -4,27 +4,32 @@
   </div>
 
   <div class="container">
-    <h3>Konto Typ Auswahl:</h3>
+    <h3 i18n="@@accont-type">Wählen sie den Konto Typ</h3>
     <div id="outer" class="container-2">
-      <button test-dataid="giro_account_button" type="button" (click)="setAccountGiro()" class="btn btn-primary">
+      <button test-dataid="giro_account_button" type="button" (click)="setAccountGiro()" class="btn btn-primary"
+        i18n="@@account-giro">
         Giro-Konto
       </button>
 
-      <button test-dataid="fixed_rate_button" type="button" (click)="setAccountFixedRate()" class="btn btn-primary">
+      <button test-dataid="fixed_rate_button" type="button" (click)="setAccountFixedRate()" class="btn btn-primary"
+        i18n="@@account-fixed">
         Festgeld-Konto
       </button>
 
-      <button test-dataid="onCall_button" type="button" (click)="setAccountOnCall()" class="btn btn-primary">
+      <button test-dataid="onCall_button" type="button" (click)="setAccountOnCall()" class="btn btn-primary"
+        i18n="@@account-call">
         Tagesgeld-Konto
       </button>
 
-      <button test-dataid="realEstate_button" type="button" (click)="openDialogCreateRealEstateAccount()" class="btn btn-primary">
+      <button test-dataid="realEstate_button" type="button" (click)="openDialogCreateRealEstateAccount()"
+        class="btn btn-primary" i18n="@@account-real-estate">
         Immobilien-Finanzierungskonto
       </button>
     </div>
     <br />
     <div>
-      <button test-dataid="return_button" (click)="goToMainPage()" class="btn btn-primary" style="width:250px">
+      <button test-dataid="return_button" (click)="goToMainPage()" class="btn btn-primary" style="width:250px"
+        i18n="@@back">
         Zurück
       </button>
     </div>
@@ -34,6 +39,7 @@
     <label style="flex: 1">
       © Smart Money GmbH 2023
     </label>
+    <lang-switch />
     <div>
       <img src="assets/SimplyTest.png" alt="" style="flex: 1" height="50px" />
     </div>
