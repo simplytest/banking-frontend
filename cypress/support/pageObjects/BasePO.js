@@ -16,6 +16,7 @@ class BasePO
         {
             cy.get("[data-testid='" + identifier + "']").type(part);
         }
+        cy.get("[data-testid='" + identifier + "']").should("have.value", value);
     }
 }
 export default BasePO;
