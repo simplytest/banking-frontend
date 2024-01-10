@@ -70,7 +70,7 @@ Then("Ich sehe die Erfolgsmeldung {string}", (message) =>
 });
 
 Then("Ich sehe die Fehlermeldung {string}", (errorMessage) =>
-{
+{   
     transerMoneyPage.elements.transferErrorLabel().should("have.text", errorMessage);
     transerMoneyPage.elements.transferErrorLabel().should("have.css", "color").and("eq", "rgb(244, 67, 54)");
     transerMoneyPage.elements.transferButton().should("be.disabled");
