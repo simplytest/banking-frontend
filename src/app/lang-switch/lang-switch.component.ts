@@ -1,9 +1,12 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import Cookies from "js-cookie";
-import { ContractServerService } from "../_services/contract-server.service";
-import { CustomerData, CustomerType } from "../types/data/customerData";
 import { MatSelectChange } from "@angular/material/select";
+import { ActivatedRoute, Router } from "@angular/router";
+
+/**
+ * TODO: This is horrendous.
+ * From what I can tell Angular does not provide a sane built in way to switch the language (either that or its documentation is just really bad).
+ * If there's a better way to do this please let me know! 
+ */
 
 interface Language
 {
@@ -24,10 +27,6 @@ export class LangSwitchComponent implements OnInit
 
     public current: Language = this.languages[0];
 
-    constructor(private router: Router, private route: ActivatedRoute)
-    {
-    }
-
     ngOnInit(): void
     {
         const url = document.URL;
@@ -42,8 +41,6 @@ export class LangSwitchComponent implements OnInit
             this.current = language;
             break;
         }
-
-        console.debug("Language deduced as", this.current);
     }
 
     onChange(event: MatSelectChange): void
