@@ -19,7 +19,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "localize": true,
             "outputPath": "dist/BankingSoftwareFrontEnd",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -45,6 +44,7 @@
           },
           "configurations": {
             "production": {
+              "localize": true,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -70,9 +70,28 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "development": {
+              "localize": false,
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            },
+            "en": {
+              "localize": [
+                "en"
+              ]
+            },
+            "de": {
+              "localize": [
+                "de"
+              ]
             }
           },
-          "defaultConfiguration": ""
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -82,8 +101,18 @@
           "configurations": {
             "production": {
               "browserTarget": "BankingSoftwareFrontEnd:build:production"
+            },
+            "development": {
+              "browserTarget": "BankingSoftwareFrontEnd:build:development"
+            },
+            "de": {
+              "browserTarget": "BankingSoftwareFrontEnd:build:development,de"
+            },
+            "en": {
+              "browserTarget": "BankingSoftwareFrontEnd:build:development,en"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
