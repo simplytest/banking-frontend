@@ -51,13 +51,13 @@ describe("Unittest: MainPagekomponente ohne Dialoge, mit Testdaten", () =>
 
         cy.get("[data-testid='kundendaten_button']").should("have.text", " Kundendaten ändern ");
         cy.get("[data-testid='kuendigen_button']").should("have.text", " Vertrag kündigen ");
-        cy.get("[data-testid='dashboard_button']").should("have.text", " Zum Dashboard ");
+        cy.get("[data-testid='dashboard_button']").should("have.text", " Abmelden ");
 
         cy.get("[data-testid='erstellen_button']").should("have.text", " Konto erstellen ");
 
         /*  Tableheader, wenn Daten vorhanden sind */
 
-        cy.get("[data-testid='customer_Label'").should("have.text", " Hallo giro_Only!  Ihre Kundennummer ist: 00001 ");
+        cy.get("[data-testid='customer_Label'").should("have.text", " Willkommen giro_Only!  Ihre Kundennummer ist: 00001 ");
 
         cy.get("[data-testid='kontoID_table_head']").should("have.text", " Konto ID ");
         cy.get("[data-testid='kontoTyp_table_head']").should("have.text", " Konto Typ ");

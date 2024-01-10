@@ -28,7 +28,7 @@ describe("MainPagekomponente Komponententest (Unittest)", () =>
 
         cy.get("[data-testid='kundendaten_button']").should("have.text", " Kundendaten ändern ");
         cy.get("[data-testid='kuendigen_button']").should("have.text", " Vertrag kündigen ");
-        cy.get("[data-testid='dashboard_button']").should("have.text", " Zum Dashboard ");
+        cy.get("[data-testid='dashboard_button']").should("have.text", " Abmelden ");
 
         cy.get("[data-testid='erstellen_button']").should("have.text", " Konto erstellen ");
 
