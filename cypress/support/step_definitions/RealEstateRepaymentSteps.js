@@ -71,7 +71,7 @@ Then("Ich sehe die Erfolgsmeldung {string}", (message) =>
 
 Then("Ich sehe die Fehlermeldung {string}", (errorMessage) =>
 {
-    cy.wait("[data-testid='error_label']");
+    cy.get("[data-testid='error_label']", { timeout: 10000 }).should('be.visible');
     transerMoneyPage.elements.transferErrorLabel().should("have.text", errorMessage);
     transerMoneyPage.elements.transferErrorLabel().should("have.css", "color").and("eq", "rgb(244, 67, 54)");
     transerMoneyPage.elements.transferButton().should("be.disabled");
