@@ -63,6 +63,12 @@ jobs:
         run: |
           pnpm run test:e2e
 
+      - name: 📋 Upload Screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: cypress/screenshots/
+
       - name: 🔍 Check for duplicate reports
         id: skip_check
         uses: fkirc/skip-duplicate-actions@v5
