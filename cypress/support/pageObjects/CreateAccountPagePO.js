@@ -39,6 +39,8 @@ class CreateAccountPagePO extends BasePO
         {
             cy.get("[data-testid='credit_value_input']").type(part);
         }
+        cy.wait(2000);
+        cy.get("[data-testid='credit_value_input']").should("have.value", kreditBeitrag);
     }
     typeTilgungRate(tilgungRate)
     {
