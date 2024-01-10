@@ -4,30 +4,33 @@ import { addCucumberPreprocessorPlugin } from "@badeball/cypress-cucumber-prepro
 import { createEsbuildPlugin } from "@badeball/cypress-cucumber-preprocessor/esbuild";
 
 export default defineConfig({
-  e2e: {
-    specPattern: "**/*.feature",
-    async setupNodeEvents(
-      on: Cypress.PluginEvents,
-      config: Cypress.PluginConfigOptions
-    ): Promise<Cypress.PluginConfigOptions> {
-      await addCucumberPreprocessorPlugin(on, config);
 
-      on(
-        "file:preprocessor",
-        createBundler({
-          plugins: [createEsbuildPlugin(config)],
-        })
-      );
+    e2e: {
+        specPattern: "**/*.feature",
+        async setupNodeEvents(
+            on: Cypress.PluginEvents,
+            config: Cypress.PluginConfigOptions
+        ): Promise<Cypress.PluginConfigOptions>
+        {
+            await addCucumberPreprocessorPlugin(on, config);
 
-      return config;
+            on(
+                "file:preprocessor",
+                createBundler({
+                    plugins: [createEsbuildPlugin(config)],
+                })
+            );
+
+            return config;
+        },
+        screenshotOnRunFailure: true,
     },
-  },
 
-  component: {
-    devServer: {
-      framework: "angular",
-      bundler: "webpack",
+    component: {
+        devServer: {
+            framework: "angular",
+            bundler: "webpack",
+        },
+        specPattern: "**/*.cy.ts",
     },
-    specPattern: "**/*.cy.ts",
-  },
 });
