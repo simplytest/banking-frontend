@@ -9,9 +9,9 @@ Feature: Smoketests Prod
     Then I should be presented with a greeting text <greeting>
 
     Examples: 
-      | contractID | password | greeting      |
-      |      00002 |      123 | Hallo John!   |
-      |      00003 |      123 | Hallo Amanda! |
+      | contractID | password | greeting           |
+      |      00002 |      123 | Willkommen John!   |
+      |      00003 |      123 | Willkommen Amanda! |
 
   Scenario: User with giro is created and recieve money from outside
     Given User is created with giro

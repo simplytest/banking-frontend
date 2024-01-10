@@ -113,7 +113,7 @@ Then("I should be presented with an alert box containing \"Geld übertragen\" te
 
 Then("I should be presented with an alert box containing \"Geld übertragen!\" text", () =>
 {
-    cy.get("[data-testid='title'").contains("Geld übertragen!");
+    cy.get("[data-testid='title'").contains("Geld übertragen");
 });
 
 Then("my account balance is updated with the amount {string}", (betrag) =>
@@ -143,7 +143,7 @@ Then("I should be presented with an alert box containing \"Geld überweisen\" te
 
 Then("I should be presented with an alert box containing \"Geld empfangen!\" text", () =>
 {
-    cy.get("[data-testid='title']").contains("Geld empfangen!");
+    cy.get("[data-testid='title']").contains("Geld empfangen");
 });
 
 Then("I should be presented with an alert box containing \"Geld überweisen\"", () =>
@@ -153,12 +153,12 @@ Then("I should be presented with an alert box containing \"Geld überweisen\"", 
 
 Then("I should be presented with an alert box containing \"Geld gesendet!\" text", () =>
 {
-    cy.get("[data-testid='title']").contains("Geld gesendet!");
+    cy.get("[data-testid='title']").contains("Geld gesendet");
 });
 
 Then("I should be presented with an alert box containing \"Geld erhalten!\" text", () =>
 {
-    cy.get("[data-testid='title']").contains("Geld Erhalten!");
+    cy.get("[data-testid='title']").contains("Geld erhalten");
 });
 
 

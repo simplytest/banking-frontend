@@ -39,5 +39,5 @@ Feature: Money Transfer
     Then my account balance at the end has an amount of '<Endbetrag>'
 
     Examples: 
-      | firstName | lastName | password | street    | house | zipCode | city   | country     | email       | birthDate  | greeting    | geldbetrag | betrag | IBAN                   | Endbetrag |
-      | John      | Doe      |      123 | Hauptstr. |     1 |   10555 | Berlin | Deutschland | john@doe.de | 2000-09-09 | Hallo John! |       2000 |   1000 | DE02120300000000202051 |         0 |
+      | firstName | lastName | password | street    | house | zipCode | city   | country     | email       | birthDate  | greeting         | geldbetrag | betrag | IBAN                   | Endbetrag |
+      | John      | Doe      |      123 | Hauptstr. |     1 |   10555 | Berlin | Deutschland | john@doe.de | 2000-09-09 | Willkommen John! |       2000 |   1000 | DE02120300000000202051 |         0 |

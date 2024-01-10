@@ -15,7 +15,7 @@ Given("Ich bin auf der Banking App als Nutzer {string} mit Passwort {string} ein
     dashboardPage.typeContractID(user);
     dashboardPage.typePassword(password);
     dashboardPage.clickOnLoginButton();
-    cy.get("[data-testid='customer_Label']").contains("Hallo");
+    cy.get("[data-testid='customer_Label']").contains("Willkommen");
 
     cy.injectAxe();
     cy.checkA11y(null, null, null, true);
