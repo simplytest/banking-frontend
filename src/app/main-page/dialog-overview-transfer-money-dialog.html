@@ -3,9 +3,9 @@
 <div mat-dialog-content>
   <mat-form-field floatLabel="always" subscriptSizing="dynamic">
     <mat-label i18n="@@money-amount">Geldbetrag</mat-label>
-    <input data-testid="amount_input" matInput [(ngModel)]="transferData.amount">
+    <input data-testid="amount_input" matInput [(ngModel)]="transferData.amount" [errorStateMatcher]="matcher">
     <span matTextPrefix>€&nbsp;</span>
-    <mat-error *ngIf="!allowed()">
+    <mat-error data-testid="error_label" *ngIf="allowed() === -1">
       Betrag ist nicht zulässig
     </mat-error>
   </mat-form-field>
@@ -20,5 +20,5 @@
 <div mat-dialog-actions align="end">
   <button mat-button (click)="onNoClick()" data-testid="cancel_button" i18n="@@cancel">Abbrechen</button>
   <button data-testid="transfer_money_button" mat-button (click)="transferMoney()" cdkFocusInitial
-    i18n="@@transfer">Übertragen</button>
+    disabled="{{allowed() !== 0}}" i18n="@@transfer">Übertragen</button>
 </div>

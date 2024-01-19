@@ -45,7 +45,8 @@ export class MainPageComponent implements OnInit
         {
             this.contract = contract;
             this.contract.id = Id.from(this.contract.id);
-        });
+        },
+        () => this.router.navigate(["/"]));
     }
 
     addAccount()
@@ -203,7 +204,7 @@ export class TransferErrorMatcher implements ErrorStateMatcher
 
     isErrorState(): boolean
     {
-        return !this.dialog.allowed();
+        return this.dialog.allowed() === -1;
     }
 }
 
@@ -236,14 +237,22 @@ export class DialogOverviewTransferMoneyDialog
         return account?.[1]?.data;
     }
 
-    allowed()
+    /**
+     * @returns -2 in case the target is invalid, -1 in case the amount is invalid, 0 on success
+     */
+    allowed(): -2 | -1 | 0
     {
         const { target, amount: _amount } = this.transferData;
 
         const Error = DialogOverviewTransferMoneyDialog.Error;
-        const amount = Number.parseInt(_amount as unknown as string);
+        const amount = Number.parseFloat(_amount as unknown as string);
 
-        if (amount < 0)
+        if (!Number.isFinite(amount) || amount <= 0)
+        {
+            return Error.BadAmount;
+        }
+
+        if (amount.toString().split(/[^0-9]/)[1]?.length > 2)
         {
             return Error.BadAmount;
         }
@@ -270,7 +279,7 @@ export class DialogOverviewTransferMoneyDialog
             return Error.BadAmount;
         }
 
-        return true;
+        return Error.Success;
     }
 
     onNoClick()
