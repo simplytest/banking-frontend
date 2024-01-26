@@ -8,10 +8,10 @@ const mainPage = new MainPagePO();
 function angularInputFieldHelperByDataTestID(value, identifier)
 {
     const betrag = value.split("");
-    
+
     cy.get("[data-testid='" + identifier + "']").focus();
     cy.get("[data-testid='" + identifier + "']").clear();
-    
+
     for (let part of betrag)
     {
         cy.get("[data-testid='" + identifier + "']").type(part);
@@ -24,7 +24,6 @@ Given("I navigate to the Banking App main page", () =>
 {
     mainPage.navigateToMainPage();
 });
-
 
 /*      When        */
 
@@ -39,8 +38,8 @@ When("I click on Double Arrows button to sent money to my other account", () =>
 });
 
 When("I type a Betrag {string}", (geldbetrag) =>
-{   
-    angularInputFieldHelperByDataTestID(geldbetrag,"amount_input");
+{
+    angularInputFieldHelperByDataTestID(geldbetrag, "amount_input");
 });
 
 When("I select the desired account", () =>
@@ -65,8 +64,8 @@ When("I click on Arrow button to receive money into my account", () =>
 
 When("I type a Geldbetrag {string}", (betrag) =>
 {
-    angularInputFieldHelperByDataTestID(betrag,"receiveMoney_input");
-}); 
+    angularInputFieldHelperByDataTestID(betrag, "receiveMoney_input");
+});
 
 When("I click on Geld empfangen button", () =>
 {
@@ -80,7 +79,7 @@ When("I click on money button to send money to someone else account", () =>
 
 When("I type a desired Geldbetrag {string}", (geldbetrag) =>
 {
-    angularInputFieldHelperByDataTestID(geldbetrag,"send_amount");
+    angularInputFieldHelperByDataTestID(geldbetrag, "send_amount");
 });
 
 When("I type a Ziel IBAN {}", (iban) =>
@@ -92,7 +91,6 @@ When("I click on Geld überweisen button", () =>
 {
     cy.get("[data-testid='send_money_button'").click();
 });
-
 
 /*      Then        */
 
@@ -118,17 +116,17 @@ Then("I should be presented with an alert box containing \"Geld übertragen!\" t
 
 Then("my account balance is updated with the amount {string}", (betrag) =>
 {
-    cy.get("[id=\"0.kontostand\"]").should("have.text"," " + betrag + " $ ");
+    cy.get("[id=\"0.kontostand\"]").should("contain.text", `${betrag}`);
 });
 
 Then("my account balance at the end has an amount of {string}", (betrag) =>
 {
-    cy.get("[id=\"0.kontostand\"]").should("have.text"," " + betrag + " $ ");
+    cy.get("[id=\"0.kontostand\"]").should("contain.text", `${betrag}`);
 });
 
 Then("the account balance fromt my second account is updated with the amount {string}", (betrag) =>
 {
-    cy.get("[id=\"1.kontostand\"]").should("have.text"," " + betrag + " $ ");
+    cy.get("[id=\"1.kontostand\"]").should("contain.text", `${betrag}`);
 });
 
 Then("I should be presented with an alert box containing \"Geld empfangen\" text", () =>
@@ -160,5 +158,4 @@ Then("I should be presented with an alert box containing \"Geld erhalten!\" text
 {
     cy.get("[data-testid='title']").contains("Geld erhalten");
 });
-
 

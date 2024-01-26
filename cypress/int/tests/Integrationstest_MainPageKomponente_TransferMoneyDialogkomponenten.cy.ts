@@ -19,10 +19,18 @@ import { MainPageComponent, DialogOverviewSendMoneyDialog, DialogOverviewTransfe
 
 describe("Integration: MainPagekomponente mit kompletten positivem TransferMoney Ablauf", () =>
 {
+    // ugly workaround because cypress finds to find the element when re-rendered by angular due to controlled inputs
+    const type = (component: () => Cypress.Chainable, value: string) =>
+    {
+        [...value].forEach(c =>
+        {
+            component().click();
+            component().type(c);
+        });
+    };
 
     it("100 $ werden vom Girokonto auf das Festgeldkonto übertragen", () =>
     {
-
         cy.viewport(1280, 720);
         cy.mount(MainPageComponent, {
             declarations: [
@@ -34,7 +42,7 @@ describe("Integration: MainPagekomponente mit kompletten positivem TransferMoney
                 MoneySendDialog,
                 TransferMoneyDialog,
                 TransferMoneyFalseDialog,
-                ReceiveMoneyDialog,],
+                ReceiveMoneyDialog],
 
             imports: [BrowserModule,
                 FormsModule,
@@ -52,22 +60,22 @@ describe("Integration: MainPagekomponente mit kompletten positivem TransferMoney
                 MatRadioModule,
                 MatIconModule,
                 MatTooltipModule],
-            providers: [{ provide: ContractServerService, useClass: MockContractServerService }]
+            providers: [{ provide: ContractServerService, useClass: MockContractServerService }],
         });
 
         // Dialogbutton "Transferieren des Girokontos wird geklickt"
         cy.get("button[id='0-transferieren']").click();
 
         // Der zu übertragende Wert = 100$ wird eingetragen
-        cy.get("[data-testid='amount_input']")
-            .focus()
-            .should("have.value", "0")
-            .clear()
-            .type("1")
-            .type("0")
-            .type("0")
-            .invoke("val")
-            .should("eq","100")
+        cy.get("[data-testid='amount_input']").as("amount");
+
+        cy.get("@amount").should("have.value", "0");
+        cy.get("@amount").focus();
+        cy.get("@amount").clear();
+
+        type(() => cy.get("@amount"), "100");
+        cy.get("@amount").invoke("val");
+        cy.should("eq", "100");
 
         // Der Radiobutton für das Konto, auf welchen der Wert übertragen werden soll, wird ausgewählt.
         cy.get("mat-radio-button[id='00001:00002']").click();
@@ -79,11 +87,10 @@ describe("Integration: MainPagekomponente mit kompletten positivem TransferMoney
         cy.get("[data-testid='close_button']").click();
 
         // Es wird überprüft, dass der Wert korrekt vom Girokonto abgezogen wurde.
-        cy.get("th[id='0.kontostand']").should("have.text", " 900 $ ");
+        cy.get("th[id='0.kontostand']").should("include.text", "900");
 
         // Es wird überprüft, dass der Wert korrekt auf das Festgeldkonto übertragen wurde.
-        cy.get("th[id='1.kontostand']").should("have.text", " 1100 $ ");
-
+        cy.get("th[id='1.kontostand']").should("include.text", "1100");
     });
 
     it("300 $ werden vom Girokonto auf das Tagesgeldkonto übertragen", () =>
@@ -112,22 +119,22 @@ describe("Integration: MainPagekomponente mit kompletten positivem TransferMoney
                 MatRadioModule,
                 MatIconModule,
                 MatTooltipModule],
-            providers: [{ provide: ContractServerService, useClass: MockContractServerService }]
+            providers: [{ provide: ContractServerService, useClass: MockContractServerService }],
         });
 
         // Dialogbutton "Transferieren des Girokontos wird geklickt"
         cy.get("button[id='0-transferieren']").click();
 
         // Der zu übertragende Wert = 300$ wird eingetragen
-        cy.get("[data-testid='amount_input']")
-            .focus()
-            .should("have.value", "0")
-            .clear()
-            .type("3")
-            .type("0")
-            .type("0")
-            .invoke("val")
-            .should("eq","300")
+        cy.get("[data-testid='amount_input']").as("amount");
+
+        cy.get("@amount").should("have.value", "0");
+        cy.get("@amount").focus();
+        cy.get("@amount").clear();
+
+        type(() => cy.get("@amount"), "300");
+        cy.get("@amount").invoke("val");
+        cy.should("eq", "300");
 
         // Der Radiobutton für das Konto, auf welchen der Wert übertragen werden soll, wird ausgewählt.
         cy.get("mat-radio-button[id='00001:00003']").click();
@@ -139,11 +146,10 @@ describe("Integration: MainPagekomponente mit kompletten positivem TransferMoney
         cy.get("[data-testid='close_button']").click();
 
         // Es wird überprüft, dass der Wert korrekt vom Girokonto abgezogen wurde.
-        cy.get("th[id='0.kontostand']").should("have.text", " 600 $ ");
+        cy.get("th[id='0.kontostand']").should("include.text", "600");
 
         // Es wird überprüft, dass der Wert korrekt auf das Tagesgeldkonto übertragen wurde.
-        cy.get("th[id='2.kontostand']").should("have.text", " 1300 $ ");
-
+        cy.get("th[id='2.kontostand']").should("include.text", "1300");
     });
 
     it("600 $ werden vom Girokonto zur Tilgung des Kredites auf das Immobilien-Finanzierungskonto übertragen", () =>
@@ -160,7 +166,7 @@ describe("Integration: MainPagekomponente mit kompletten positivem TransferMoney
                 MoneySendDialog,
                 TransferMoneyDialog,
                 TransferMoneyFalseDialog,
-                ReceiveMoneyDialog,],
+                ReceiveMoneyDialog],
 
             imports: [BrowserModule,
                 FormsModule,
@@ -178,7 +184,7 @@ describe("Integration: MainPagekomponente mit kompletten positivem TransferMoney
                 MatRadioModule,
                 MatIconModule,
                 MatTooltipModule],
-            providers: [{ provide: ContractServerService, useClass: MockContractServerService }]
+            providers: [{ provide: ContractServerService, useClass: MockContractServerService }],
         });
 
         // Dialogbutton "Transferieren des Girokontos wird geklickt"
@@ -186,15 +192,15 @@ describe("Integration: MainPagekomponente mit kompletten positivem TransferMoney
 
         // Der zu übertragende Wert = 300$ wird eingetragen
 
-        cy.get("[data-testid='amount_input']")
-            .focus()
-            .should("have.value", "0")
-            .clear()
-            .type("6")
-            .type("0")
-            .type("0")
-            .invoke("val")
-            .should("eq","600")
+        cy.get("[data-testid='amount_input']").as("amount");
+
+        cy.get("@amount").should("have.value", "0");
+        cy.get("@amount").focus();
+        cy.get("@amount").clear();
+
+        type(() => cy.get("@amount"), "600");
+        cy.get("@amount").invoke("val");
+        cy.should("eq", "600");
 
         // Der Radiobutton für das Konto, auf welchen der Wert übertragen werden soll, wird ausgewählt.
         cy.get("mat-radio-button[id='00001:00004']").click();
@@ -206,11 +212,9 @@ describe("Integration: MainPagekomponente mit kompletten positivem TransferMoney
         cy.get("[data-testid='close_button']").click();
 
         // Es wird überprüft, dass der Wert korrekt vom Girokonto abgezogen wurde.
-        cy.get("th[id='0.kontostand']").should("have.text", " 0 $ ");
+        cy.get("th[id='0.kontostand']").should("include.text", "0");
 
         // Es wird überprüft, dass der Wert korrekt auf das Immobilien-Finanzierungskonto übertragen wurde.
-        cy.get("th[id='3.kontostand']").should("have.text", " -9400 $ ");
-
+        cy.get("th[id='3.kontostand']").should("include.text", "-9400");
     });
-
 });

@@ -8,7 +8,6 @@ import { ContractServerService } from "src/app/_services/contract-server.service
 
 describe("MainPagekomponente Komponententest (Unittest)", () =>
 {
-
     it("Komponente wird erstellt: ohne Dialoge, ohne Daten", () =>
     {
         cy.viewport(1280, 720);
@@ -21,7 +20,7 @@ describe("MainPagekomponente Komponententest (Unittest)", () =>
                 AppRoutingModule,
                 HttpClientTestingModule,
                 MatDialogModule],
-            providers: [ContractServerService]
+            providers: [ContractServerService],
         });
 
         /*  MainpageKomponentenElemente sind vorhanden */
@@ -69,6 +68,5 @@ describe("MainPagekomponente Komponententest (Unittest)", () =>
         cy.get("button[id='1-transferieren']").should("not.exist");
         cy.get("button[id='1-empfangen']").should("not.exist");
         cy.get("button[id='1-editieren']").should("not.exist");
-
     });
 });

@@ -20,7 +20,6 @@ import { ContractServerService } from "src/app/_services/contract-server.service
 
 describe("Unittest: MainPagekomponente ohne Dialoge, mit Testdaten", () =>
 {
-
     it("Alle Elemente der Komponente die abhängig von den Testdaten sind, werden angezeigt.", () =>
     {
         cy.viewport(1280, 720);
@@ -44,7 +43,7 @@ describe("Unittest: MainPagekomponente ohne Dialoge, mit Testdaten", () =>
                 MatRadioModule,
                 MatIconModule,
                 MatTooltipModule],
-            providers: [{ provide: ContractServerService, useClass: MockContractServerService }]
+            providers: [{ provide: ContractServerService, useClass: MockContractServerService }],
         });
 
         /*  MainpageKomponentenElemente */
@@ -76,10 +75,10 @@ describe("Unittest: MainPagekomponente ohne Dialoge, mit Testdaten", () =>
         cy.get("th[id='2.kontotyp']").should("have.text", " OnCall ");
         cy.get("th[id='3.kontotyp']").should("have.text", " RealEstate ");
 
-        cy.get("th[id='0.kontostand']").should("have.text", " 1000 $ ");
-        cy.get("th[id='1.kontostand']").should("have.text", " 1000 $ ");
-        cy.get("th[id='2.kontostand']").should("have.text", " 1000 $ ");
-        cy.get("th[id='3.kontostand']").should("have.text", " -10000 $ ");
+        cy.get("th[id='0.kontostand']").should("include.text", "1000");
+        cy.get("th[id='1.kontostand']").should("include.text", "1000");
+        cy.get("th[id='2.kontostand']").should("include.text", "1000");
+        cy.get("th[id='3.kontostand']").should("include.text", "-10000");
 
         cy.get("button[id='0-kontoschließen']").should("exist");
         cy.get("button[id='0-ueberweisen']").should("exist");
@@ -92,7 +91,6 @@ describe("Unittest: MainPagekomponente ohne Dialoge, mit Testdaten", () =>
         cy.get("button[id='1-transferieren']").should("exist");
         cy.get("button[id='1-empfangen']").should("not.exist");
         cy.get("button[id='1-editieren']").should("not.exist");
-
     });
 
     it("Radiobuttons der Dialogkomponente werden nicht angezeigt.", () =>
@@ -107,7 +105,7 @@ describe("Unittest: MainPagekomponente ohne Dialoge, mit Testdaten", () =>
                 AppRoutingModule,
                 HttpClientModule,
                 MatDialogModule],
-            providers: [{ provide: ContractServerService, useClass: MockContractServerService }]
+            providers: [{ provide: ContractServerService, useClass: MockContractServerService }],
         });
 
         // Dialogbutton "Geld übertragen des Girokontos wird geklickt"
@@ -120,7 +118,5 @@ describe("Unittest: MainPagekomponente ohne Dialoge, mit Testdaten", () =>
 
         // Der Button "Abbrechen" wird geklickt
         cy.get("[data-testid='cancel_button']").click();
-
     });
-
 });

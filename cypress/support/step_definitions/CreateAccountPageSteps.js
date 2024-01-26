@@ -4,7 +4,6 @@ import CreateAccountPagePO from "../pageObjects/CreateAccountPagePO";
 
 const createAccountPage = new CreateAccountPagePO();
 
-
 /*      When        */
 
 When("I click on Giro-Konto button", () =>
@@ -41,7 +40,6 @@ When("I click on Kredit Anfordern Button", () =>
     createAccountPage.clickKreditAnfordernButton();
 });
 
-
 /*      Then        */
 
 Then("I should be presented an alert box with text Immobilien-Finanzierungskonto Erstellen", () =>
@@ -53,22 +51,27 @@ Then("I should be presented with a created Giro Konto", () =>
 {
     cy.get("[id=\"1.kontotyp\"]").contains("Giro");
 });
-Then("I should be presented with a created Festgeld-Konto called FixedRate", () => {
+Then("I should be presented with a created Festgeld-Konto called FixedRate", () =>
+{
     cy.get("[id=\"2.kontotyp\"]").contains("FixedRate");
 });
-Then("I should be presented with a created Tagesgeld-Konto called OnCall", () => {
+Then("I should be presented with a created Tagesgeld-Konto called OnCall", () =>
+{
     cy.get("[id=\"3.kontotyp\"]").contains("OnCall");
 });
 
-Then("I should be presented with a created  Immobilien-Finanzierungskonto called RealEstate", () => {
+Then("I should be presented with a created  Immobilien-Finanzierungskonto called RealEstate", () =>
+{
     cy.get("[id=\"4.kontotyp\"]").contains("RealEstate");
 });
 
 // Eventuell nicht genutzt
 
-Then("Kontostand amount is {} $", () => {
+Then("Kontostand amount is {} $", (kreditBeitrag) =>
+{
     cy.get("id=\"4.kontostand\"]").contains(kreditBeitrag);
 });
-Then("I click on delete konto button",() => {
+Then("I click on delete konto button", () =>
+{
     cy.get("[id=\"1-kontoschließen\"]").click();
-})
+});

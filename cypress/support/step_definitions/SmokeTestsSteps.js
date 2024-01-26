@@ -1,18 +1,15 @@
 /// <reference types="cypress" />
 
 import { Given, Then, When } from "@badeball/cypress-cucumber-preprocessor";
-import MainPagePO from "../pageObjects/MainPagePO";
-import DashboardPagePO from "../pageObjects/DashboardPagePO";
-import RegisterNewCustomerPagePO from "../pageObjects/RegisterNewCustomerPagePO";
 import CreateAccountPagePO from "../pageObjects/CreateAccountPagePO";
+import DashboardPagePO from "../pageObjects/DashboardPagePO";
+import MainPagePO from "../pageObjects/MainPagePO";
+import RegisterNewCustomerPagePO from "../pageObjects/RegisterNewCustomerPagePO";
 
 const mainPage = new MainPagePO();
 const dashboardPage = new DashboardPagePO();
 const registerNewCustomerPage = new RegisterNewCustomerPagePO();
 const createAccountPage = new CreateAccountPagePO();
-
-let GiroAccountValue;
-let FixedRateAccountValue;
 
 function registerNewCustomer()
 {
@@ -86,16 +83,6 @@ When("User recieve {string} money from outside", (recieveAmount) =>
 
 When("User transfer {string} from giro to fixedRate", (recieveAmount) =>
 {
-    cy.get("[id='0.kontostand']").invoke("text").then((text) =>
-    {
-        GiroAccountValue = parseInt(text.replace(/[^0-9]/g, ""));
-    });
-
-    cy.get("[id='1.kontostand']").invoke("text").then((text) =>
-    {
-        FixedRateAccountValue = parseInt(text.replace(/[^0-9]/g, ""));
-    });
-
     cy.get("[id='0-transferieren']").click();
     angularInputFieldHelperByDataTestID(recieveAmount, "amount_input");
     cy.get("[id$=':00002'").click();

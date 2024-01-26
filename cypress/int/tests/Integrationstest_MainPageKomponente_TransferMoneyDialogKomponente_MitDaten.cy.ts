@@ -43,7 +43,7 @@ describe("Integrationstest: MainPagekomponente mit TransferMoneyDialogKomponente
                 MatRadioModule,
                 MatIconModule,
                 MatTooltipModule],
-            providers: [{ provide: ContractServerService, useClass: MockContractServerService }]
+            providers: [{ provide: ContractServerService, useClass: MockContractServerService }],
         });
 
         // Dialogbutton "Geld übertragen des Girokontos wird geklickt"
@@ -55,7 +55,5 @@ describe("Integrationstest: MainPagekomponente mit TransferMoneyDialogKomponente
         cy.get("mat-radio-button[id='00001:00004']").should("exist");
 
         cy.get("[data-testid='cancel_button']").click();
-
     });
-
 });
