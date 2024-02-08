@@ -8,10 +8,10 @@ import RegisterNewCustomerPagePO from "../pageObjects/RegisterNewCustomerPagePO"
 
 const mainPage = new MainPagePO();
 const dashboardPage = new DashboardPagePO();
-const registerNewCustomerPage = new RegisterNewCustomerPagePO();
 const createAccountPage = new CreateAccountPagePO();
+const registerNewCustomerPage = new RegisterNewCustomerPagePO();
 
-function registerNewCustomer()
+const registerNewCustomer = () =>
 {
     registerNewCustomerPage.typeFirstName("Demo");
     registerNewCustomerPage.typeLastName("User");
@@ -24,20 +24,27 @@ function registerNewCustomer()
     registerNewCustomerPage.typeEmail("test@email.com");
     registerNewCustomerPage.typeBirthDate("1999-12-14");
     registerNewCustomerPage.clickOnRegistrierenButtonAgain();
-}
+};
 
-function angularInputFieldHelperByDataTestID(value, identifier)
+// ugly workaround because cypress finds to find the element when re-rendered by angular due to controlled inputs
+const type = (value, identifier) =>
 {
-    cy.get("[data-testid='" + identifier + "']").focus();
-    cy.get("[data-testid='" + identifier + "']").clear();
-    const betrag = value.split("");
-    for (let part of betrag)
-    {
-        cy.get("[data-testid='" + identifier + "']").type(part);
-    }
-}
+    cy.get(`[data-testid='${identifier}']`).as("component");
 
-/* Given */
+    cy.get("@component").focus();
+    cy.get("@component").clear();
+
+    [...value].forEach(c =>
+    {
+        cy.get("@component").click();
+        cy.get("@component").type(c);
+    });
+};
+
+const testAmount = (component, amount) =>
+{
+    cy.get(component).invoke("text").should("match", new RegExp(`[^0-9]*${amount}[^0-9]*$`, "ig"));
+};
 
 Given("User is created with giro", () =>
 {
@@ -50,9 +57,13 @@ Given("User is created with giro {string} and fixedRate", (giroAccountValue) =>
 {
     dashboardPage.navigateToDashboardPage();
     dashboardPage.clickOnRegistrierenButton();
+
     registerNewCustomer();
+
     cy.get("[id='0-empfangen'").click();
-    angularInputFieldHelperByDataTestID(giroAccountValue, "receiveMoney_input");
+
+    type(giroAccountValue, "receiveMoney_input");
+
     cy.get("[data-testid='send_money_button'").click();
     cy.get("[data-testid='close_button'").click();
 
@@ -64,19 +75,22 @@ Given("User is created with giro {string}", (giroAccountValue) =>
 {
     dashboardPage.navigateToDashboardPage();
     dashboardPage.clickOnRegistrierenButton();
+
     registerNewCustomer();
+
     cy.get("[id='0-empfangen'").click();
-    angularInputFieldHelperByDataTestID(giroAccountValue, "receiveMoney_input");
+
+    type(giroAccountValue, "receiveMoney_input");
+
     cy.get("[data-testid='send_money_button'").click();
     cy.get("[data-testid='close_button'").click();
 });
 
-/*      When        */
-
 When("User recieve {string} money from outside", (recieveAmount) =>
 {
     cy.get("[id='0-empfangen']").click();
-    angularInputFieldHelperByDataTestID(recieveAmount, "receiveMoney_input");
+    type(recieveAmount, "receiveMoney_input");
+
     cy.get("[data-testid='send_money_button'").click();
     cy.get("[data-testid='close_button'").click();
 });
@@ -84,8 +98,11 @@ When("User recieve {string} money from outside", (recieveAmount) =>
 When("User transfer {string} from giro to fixedRate", (recieveAmount) =>
 {
     cy.get("[id='0-transferieren']").click();
-    angularInputFieldHelperByDataTestID(recieveAmount, "amount_input");
+
+    type(recieveAmount, "amount_input");
+
     cy.get("[id$=':00002'").click();
+
     cy.get("[data-testid='transfer_money_button'").click();
     cy.get("[data-testid='close_button'").click();
 });
@@ -93,30 +110,30 @@ When("User transfer {string} from giro to fixedRate", (recieveAmount) =>
 When("User send {string} outside to another account", (recieveAmount) =>
 {
     cy.get("[id=0-ueberweisen]").click();
-    angularInputFieldHelperByDataTestID(recieveAmount, "send_amount");
+
+    type(recieveAmount, "send_amount");
+
     cy.get("[data-testid='send_iban'").type("DE02120300000000202051");
     cy.get("[data-testid='send_money_button'").click();
     cy.get("[data-testid='close_button'").click();
 });
 
-/*      Then        */
-
 Then("GiroAccountValue has the value {string}", (recieveAmount) =>
 {
-    cy.get("[id='0.kontostand']").should("have.text", " " + recieveAmount + " $ ");
+    testAmount("[id='0.kontostand']", recieveAmount);
 });
 
 Then("{string} is lowered by the {string}", (giroAccountValue, transferAmount) =>
 {
-    cy.get("[id='0.kontostand']").should("have.text", " " + (+giroAccountValue - +transferAmount ) + " $ ");
+    testAmount("[id='0.kontostand']", giroAccountValue - transferAmount);
 });
 
 Then("FixedRateAccountValue is raised by the {string}", (transferAmount) =>
 {
-    cy.get("[id='1.kontostand']").should("have.text", " " + (transferAmount ) + " $ ");
+    testAmount("[id='1.kontostand']", transferAmount);
 });
 
 Then("{string} is lowered by {string}", (giroAccountValue, sendAmount) =>
 {
-    cy.get("[id='0.kontostand']").should("have.text", " " + (+giroAccountValue - +sendAmount ) + " $ ");
+    testAmount("[id='0.kontostand']", giroAccountValue - sendAmount);
 });

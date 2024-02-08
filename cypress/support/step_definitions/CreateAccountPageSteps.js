@@ -64,14 +64,3 @@ Then("I should be presented with a created  Immobilien-Finanzierungskonto called
 {
     cy.get("[id=\"4.kontotyp\"]").contains("RealEstate");
 });
-
-// Eventuell nicht genutzt
-
-Then("Kontostand amount is {} $", (kreditBeitrag) =>
-{
-    cy.get("id=\"4.kontostand\"]").contains(kreditBeitrag);
-});
-Then("I click on delete konto button", () =>
-{
-    cy.get("[id=\"1-kontoschließen\"]").click();
-});

@@ -2,7 +2,6 @@ import BasePO from "./BasePO";
 
 class RegisterNewCustomerPagePO extends BasePO
 {
-
     elements = {
         firstNameInput: () => cy.get("[data-testid='firstname_input']"),
         lastNameInput: () => cy.get("[data-testid='lastname_input']"),
@@ -14,16 +13,15 @@ class RegisterNewCustomerPagePO extends BasePO
         countryInput: () => cy.get("[data-testid='land_input']"),
         eMailInput: () => cy.get("[data-testid='e-mail_input']"),
         birthdayInput: () => cy.get("[data-testid='birthday_input']"),
-        registerButton: () => cy.get("[data-testid='register_button']")
+        registerButton: () => cy.get("[data-testid='register_button']"),
     };
-
 
     typeFirstName(firstName)
     {
         this.elements.firstNameInput().type(firstName);
     }
 
-    typeLastName(lastName) 
+    typeLastName(lastName)
     {
         this.elements.lastNameInput().type(lastName);
     }

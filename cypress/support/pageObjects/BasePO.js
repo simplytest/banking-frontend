@@ -5,4 +5,5 @@ class BasePO
         cy.visit(path);
     }
 }
+
 export default BasePO;

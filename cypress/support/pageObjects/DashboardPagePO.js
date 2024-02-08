@@ -12,7 +12,7 @@ class DashboardPagePO extends BasePO
         registrierenButton: () => cy.get("#registerButton"),
         expectedAlertText: () => cy.get("[data-testid='title']"),
         contractIDInput: () => cy.get("[data-testid='contract_input']"),
-        passwordInput: () => cy.get("[data-testid='password_input']")
+        passwordInput: () => cy.get("[data-testid='password_input']"),
     };
 
     clickOnRegistrierenButton()

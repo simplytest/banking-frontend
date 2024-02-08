@@ -9,12 +9,12 @@ class CreateAccountPagePO extends BasePO
         immobilienFinanzierungskontoButton: () => cy.get("[test-dataid='realEstate_button']"),
         kreditBeitragInput: () => cy.get("[data-testid='credit_value']"),
         kreditTilgungsrateInput: () => cy.get("[data-testid='rate_value']"),
-        kreditAnfordernButton: () => cy.get("[data-testid='create_real_estate_button']")
+        kreditAnfordernButton: () => cy.get("[data-testid='create_real_estate_button']"),
     };
 
     navigateToCreateAccountPage ()
     {
-        super.navigate("createAccount/eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzAxODg2OTE3fQ.bgQo-rEmTDO3MeiNac6EwPqrReYLeFX22_S8opo1CId7oZMGiWbe83u3eZ23xoxoiVs9YrXoehaDQrfQEBiDcQ");
+        super.navigate("createAccount");
     }
 
     clickOnGiroKontoButton()
@@ -34,7 +34,7 @@ class CreateAccountPagePO extends BasePO
         this.elements.immobilienFinanzierungskontoButton().click();
     }
     typeKreditBeitrag(kreditBeitrag)
-    { 
+    {
         this.elements.kreditBeitragInput().type(kreditBeitrag);
     }
     typeTilgungRate(tilgungRate)
@@ -42,7 +42,8 @@ class CreateAccountPagePO extends BasePO
         this.elements.kreditTilgungsrateInput().type(tilgungRate);
     }
 
-    clickKreditAnfordernButton(){
+    clickKreditAnfordernButton()
+    {
         this.elements.kreditAnfordernButton().click();
     }
 
