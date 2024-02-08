@@ -1,17 +1,18 @@
-import { defineConfig } from "cypress";
-import createBundler from "@bahmutov/cypress-esbuild-preprocessor";
 import { addCucumberPreprocessorPlugin } from "@badeball/cypress-cucumber-preprocessor";
 import { createEsbuildPlugin } from "@badeball/cypress-cucumber-preprocessor/esbuild";
+import createBundler from "@bahmutov/cypress-esbuild-preprocessor";
+import registerCodeCoverageTasks from "@cypress/code-coverage/task";
+import { defineConfig } from "cypress";
+import coverageWebpack from "./cypress/coverage.webpack";
 
 export default defineConfig({
     e2e: {
         specPattern: "**/*.feature",
         baseUrl: "http://localhost:4200/",
-        async setupNodeEvents(
-            on: Cypress.PluginEvents,
-            config: Cypress.PluginConfigOptions
-        ): Promise<Cypress.PluginConfigOptions>
+
+        async setupNodeEvents(on: Cypress.PluginEvents, config: Cypress.PluginConfigOptions)
         {
+            registerCodeCoverageTasks(on, config);
             await addCucumberPreprocessorPlugin(on, config);
 
             on(
@@ -23,13 +24,27 @@ export default defineConfig({
 
             return config;
         },
+        env: {
+            codeCoverageTasksRegistered: true,
+        },
     },
 
     component: {
         devServer: {
+            webpackConfig: coverageWebpack,
             framework: "angular",
             bundler: "webpack",
         },
         specPattern: "**/*.cy.ts",
+
+        setupNodeEvents(on: Cypress.PluginEvents, config: Cypress.PluginConfigOptions)
+        {
+            registerCodeCoverageTasks(on, config);
+            return config;
+        },
+
+        env: {
+            codeCoverageTasksRegistered: true,
+        },
     },
 });
