@@ -40,21 +40,6 @@ jobs:
         with:
           resource: http://localhost:4200
 
-      - name: 👀 Sonar Scan
-        if: github.ref == 'refs/heads/main'
-        uses: sonarsource/sonarqube-scan-action@v2.0.1
-        env:
-          SONAR_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
-          SONAR_HOST_URL: ${{ vars.SONARQUBE_HOST }}
-
-      - name: 🤖 Sonar Summary
-        if: github.ref == 'refs/heads/main'
-        run: |
-          {
-            echo "### 🤖 Sonar Summary"
-            echo "${{ vars.SONARQUBE_HOST }}"
-          } >> $GITHUB_STEP_SUMMARY
-
       - name: 🧪 Integration Tests
         run: |
           pnpm run test:int
@@ -85,3 +70,18 @@ jobs:
           name: 📋 E2E Test Report
           reporter: java-junit
           path: "results/e2e*.xml"
+
+      - name: 👀 Sonar Scan
+        if: github.ref == 'refs/heads/main'
+        uses: sonarsource/sonarqube-scan-action@v2.0.1
+        env:
+          SONAR_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
+          SONAR_HOST_URL: ${{ vars.SONARQUBE_HOST }}
+
+      - name: 🤖 Sonar Summary
+        if: github.ref == 'refs/heads/main'
+        run: |
+          {
+            echo "### 🤖 Sonar Summary"
+            echo "${{ vars.SONARQUBE_HOST }}"
+          } >> $GITHUB_STEP_SUMMARY
