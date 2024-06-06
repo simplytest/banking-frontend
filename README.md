@@ -17,3 +17,4 @@ To build the docker image, simply build the dockerfile present in the root direc
 $ docker buildx build -t banking-frontend -f docker/Dockerfile .
 $ docker run -p 4200:80 banking-frontend
 ```
+
