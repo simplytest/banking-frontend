@@ -1,20 +1,35 @@
-FROM fedora:38 AS base
+FROM node:20-slim AS build
 
-WORKDIR /usr/local/app
-
-# Build Frontend
-
+WORKDIR /banking-demo
 ADD . / ./
 
-RUN dnf install -y nodejs
-RUN curl -fsSL https://get.pnpm.io/install.sh | sh -
-RUN source /root/.bashrc && pnpm install && pnpm run build
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
 
-# Setup Nginx
+RUN pnpm install && pnpm run build
+RUN mv dist dist-prod
+
+RUN pnpm install && pnpm run build:dev
+RUN mv dist dist-dev
+
+# Setup nginx
 
 FROM nginx:latest
 
-COPY --from=base /usr/local/app/dist/BankingSoftwareFrontEnd /usr/share/nginx/html
-COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
-
 EXPOSE 80
+WORKDIR /nginx
+
+COPY --from=build /banking-demo/dist-prod/BankingSoftwareFrontEnd frontend-prod
+COPY --from=build /banking-demo/dist-dev/BankingSoftwareFrontEnd frontend-dev
+
+COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
+RUN rm -rf /usr/share/nginx/html
+
+ENV VARIANT=PROD
+
+CMD if [ "$VARIANT" = "DEV" ]; \
+    then echo "Running development build" && ln -sf /nginx/frontend-dev /usr/share/nginx/html; \
+    else echo "Running production build" && ln -sf /nginx/frontend-prod /usr/share/nginx/html; \
+    fi; \
+    nginx -g "daemon off;"
