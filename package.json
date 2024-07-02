@@ -3,12 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "build": "ng build --localize --configuration=production",
-    "cypress:open": "cypress open",
     "test:smoketests": "cypress run --env tags=\"@Smoketest\" --config baseUrl=http://app.testorbit.de:4200/ --reporter junit --reporter-options \"mochaFile=results/smoketests-[suiteName].xml\"",
     "test:e2e": "cypress run --env tags=\"not @Smoketest\" --reporter junit --reporter-options \"mochaFile=results/e2e-[suiteName].xml\"",
     "test:int": "cypress run --component --reporter junit --reporter-options \"mochaFile=results/integration-[suiteName].xml\"",
     "start": "ng serve",
-    "clear-cypress-cache": "cypress cache clear"
+    "clear-cypress-cache": "cypress cache clear",
+    "cypress:run": "ng run BankingSoftwareFrontEnd:cypress-run",
+    "cypress:open": "ng run BankingSoftwareFrontEnd:cypress-open"
   },
   "private": true,
   "dependencies": {
