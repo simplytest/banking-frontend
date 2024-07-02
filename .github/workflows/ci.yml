@@ -36,9 +36,12 @@ jobs:
           pnpm run start &
 
       - name: ⌛ Wait for Frontend
-        uses: iFaxity/wait-on-action@v1.1.0
+        uses: iFaxity/wait-on-action@v1.2.1
         with:
           resource: http://localhost:4200
+          delay: 1000
+          httpTimeout: 500
+          timeout: 10000
 
       - name: 👀 Sonar Scan
         if: github.ref == 'refs/heads/main'
