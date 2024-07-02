@@ -83,6 +83,25 @@
           "options": {
             "browserTarget": "BankingSoftwareFrontEnd:build"
           }
+        },
+        "cypress-run": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "BankingSoftwareFrontEnd:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "BankingSoftwareFrontEnd:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "BankingSoftwareFrontEnd:serve:development",
+            "watch": true,
+            "headless": false
+          }
         }
       }
     }

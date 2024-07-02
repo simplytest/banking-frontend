@@ -4,11 +4,12 @@
   "type": "module",
   "scripts": {
     "build": "ng build --configuration=production",
-    "cypress:open": "cypress open",
     "test:e2e": "cypress run --reporter junit --reporter-options \"mochaFile=results/e2e-[suiteName].xml\"",
     "test:int": "cypress run --component --reporter junit --reporter-options \"mochaFile=results/integration-[suiteName].xml\"",
     "start": "ng serve",
-    "clear-cypress-cache": "cypress cache clear"
+    "clear-cypress-cache": "cypress cache clear",
+    "cypress:run": "ng run BankingSoftwareFrontEnd:cypress-run",
+    "cypress:open": "ng run BankingSoftwareFrontEnd:cypress-open"
   },
   "private": true,
   "dependencies": {
