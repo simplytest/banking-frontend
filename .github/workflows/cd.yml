@@ -56,15 +56,49 @@ jobs:
             docker pull ghcr.io/simplytest/banking-frontend:latest
             docker run -d -p 4200:80 --rm --name=Banking-Frontend-Demo ghcr.io/simplytest/banking-frontend:latest
 
-      - name: 🧨 Detect Breaking Changes
-        id: changes
-        uses: simbo/changes-between-tags-action@v1
+      - name: 🍃 Install Node
+        uses: actions/setup-node@v3
         with:
-          tag-pattern: "^[a-zA-Z()]+!:"
+          node-version: 22
 
-      - name: 🧯 Forward Breaking Changes
-        if: contains(steps.changes.outputs.changes, '!')
-        uses: benc-uk/workflow-dispatch@v1
+      - name: 🍃 Install pnpm
+        uses: pnpm/action-setup@v2
         with:
-          workflow: cd.yml
-          repo: simplytest/banking-backend
+          version: 9
+          run_install: false
+
+      - name: 🏗️ Install Dependencies
+        run: |
+          pnpm install
+
+      - name: 🧪 Smoke Tests
+        run: |
+          pnpm run test:smoketests
+
+      - name: 🔍 Check for duplicate reports
+        id: skip_check
+        uses: fkirc/skip-duplicate-actions@v5
+        with:
+          skip_after_successful_duplicate: true
+          concurrent_skipping: "same_content_newer"
+
+      - name: 📋 Smoke Test Report
+        uses: phoenix-actions/test-reporting@v8
+        if: steps.skip_check.outputs.should_skip != 'true' && (success() || failure())
+        with:
+          name: 📋 Smoke Test Report
+          reporter: java-junit
+          path: "results/smoketests*.xml"
+
+      # - name: 🧨 Detect Breaking Changes
+      #   id: changes
+      #   uses: simbo/changes-between-tags-action@v1
+      #   with:
+      #     tag-pattern: "^[a-zA-Z()]+!:"
+
+      # - name: 🧯 Forward Breaking Changes
+      #   if: contains(steps.changes.outputs.changes, '!')
+      #   uses: benc-uk/workflow-dispatch@v1
+      #   with:
+      #     workflow: cd.yml
+      #     repo: simplytest/banking-backend
