@@ -33,7 +33,7 @@ jobs:
           docker pull ghcr.io/simplytest/banking-backend:latest
           docker run -d -p 5005:5005 -e "SIMPLYTEST_DEMO=ON" --rm --name=Banking-Backend-Demo ghcr.io/simplytest/banking-backend:latest
 
-          pnpm run start &
+          pnpm run start > log.txt 2>&1 &
 
       - name: ⌛ Wait for Frontend
         uses: iFaxity/wait-on-action@v1.2.1
@@ -41,7 +41,7 @@ jobs:
           resource: http://localhost:4200
           delay: 1000
           httpTimeout: 500
-          timeout: 10000
+          timeout: 60000
 
       - name: 🧪 Integration Tests
         run: |
@@ -88,3 +88,10 @@ jobs:
             echo "### 🤖 Sonar Summary"
             echo "${{ vars.SONARQUBE_HOST }}"
           } >> $GITHUB_STEP_SUMMARY
+
+      - name: 🔍 Upload PNPM Logs
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: PNPM Log
+          path: log.txt
