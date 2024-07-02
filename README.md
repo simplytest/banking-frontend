@@ -18,3 +18,8 @@ $ docker buildx build -t banking-frontend -f docker/Dockerfile .
 $ docker run -p 4200:80 banking-frontend
 ```
 
+To start frontend from docker contaienr which interacts with localhost backend, use following command:
+
+```bash
+$ docker run -e VARIANT=DEV -p 4200:80 banking-frontend
+```
