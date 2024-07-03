@@ -7,7 +7,7 @@ import coverageWebpack from "./cypress/coverage.webpack";
 
 export default defineConfig({
     e2e: {
-        specPattern: "**/*.feature",
+        specPattern: "**/e2e/*.{spec.ts,feature}",
         baseUrl: "http://localhost:4200/",
 
         async setupNodeEvents(on: Cypress.PluginEvents, config: Cypress.PluginConfigOptions)
