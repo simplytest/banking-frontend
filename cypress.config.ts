@@ -26,6 +26,11 @@ export default defineConfig({
         },
         env: {
             codeCoverageTasksRegistered: true,
+            register_page : "registerNewCustomer",
+            dashboard_page: "dashboard",//Anmeldung
+            main_page: "mainPage",
+            createAcconut_page: "createAccount",
+            kundendatenAendern_page: "registerForm"
         },
     },
 

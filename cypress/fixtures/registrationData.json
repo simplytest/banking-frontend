@@ -1,0 +1,23 @@
+{
+  "firstName": "Max",
+  "lastName": "Muster",
+  "password": "admin",
+  "street": "Hauptstr.",
+  "house": "12",
+  "zipCode": "897897",
+  "city": "Musterstadt",
+  "country": "Deutschland",
+  "email": "max@muster.de",
+  "birthDay": "1990-10-10",
+  "registrationResponse": {
+    "result": {
+      "id": 31,
+      "JWT": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzMSIsImlhdCI6MTcxNDY3OTU5Mn0.U2IChSu9gG321zcVsVnbRVeP-nUfEDHu37816YtQBuX2n57MZbI-XBGFj98xDHJfxneBZNlpEi7lNKSfPFNw5g"
+    }
+  },
+  "underageRegistrationResponse": {
+    "status": 400,
+    "error": "Underage",
+    "message": "Registrierung für Minderjährige nicht erlaubt."
+  }
+}

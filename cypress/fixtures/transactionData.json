@@ -1,0 +1,18 @@
+{
+    "receiveMoney": {
+      "amount": 10000,
+      "result": true
+    },
+    "sendMoney": {
+      "amount": 100,
+      "iban": "DE12500105170648489890",
+      "result": true,
+      "invalidIbanError": {
+        "error": "BadIban"
+      }
+    },
+    "transferMoney": {
+      "amount": 1000,
+      "result": true
+    }
+  }
