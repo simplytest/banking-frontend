@@ -6,7 +6,7 @@ describe("Übung 5.1 - Registrierung über Backend", () => {
         cy.fixture("registrationData").as("registrationData");
     });
 
-    it("Erfolgreiche Registrierung ohne Interception - benötigt Backend", function () {
+    it("5.1.1 Erfolgreiche Registrierung ohne Interception - benötigt Backend", function () {
  
         cy.visit(baseUrl);
 
@@ -41,5 +41,59 @@ describe("Übung 5.1 - Registrierung über Backend", () => {
             .should("contain.text", `Willkommen ${registrationData.firstName}!`);
 
     });
+
+
+    it("5.1.2 Neuen Account via API registrieren  und anmelden", () => {
+		const registerAccountUrl = "http://localhost:5005/api/contracts";
+		const firstName = "Max";
+		const lastName = "Mustermann";
+		const password = "123";
+		const street = "Bahnhofstraße";
+		const house = "10";
+		const zipCode = "90403";
+		const city = "Nürnberg";
+		const country = "Deutschland";
+		const email = "max@mustermann.de";
+		const type = "Private";
+		const birthDay = "1990-01-01";
+		let registeredAccountId;
+
+		// Neues Konto registrieren
+		cy.request({
+			method: "POST",
+			url: registerAccountUrl,
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: {
+				firstName: firstName,
+				lastName: lastName,
+				password: password,
+				address: {
+					street: street,
+					house: house,
+					zipCode: zipCode,
+					city: city,
+					country: country,
+					email: email,
+				},
+				type: type,
+				birthDay: birthDay,
+			},
+		}).then((registerAccountResponse) => {
+			expect(registerAccountResponse.status).to.eq(201);
+			registeredAccountId = registerAccountResponse.body.result.id;
+            
+
+            cy.visit("http://localhost:4200/dashboard");
+            cy.get("#contract_input").type(registeredAccountId);
+            cy.get("#password_input").type(password);
+            cy.get("#login_button").click();
+            cy.url().should("include", "/mainPage");
+            cy.get('label[data-testid="customer_Label"]').should('contain.text', `Willkommen ${firstName}!`);
+        });
+	
+	});
+
 
 });
