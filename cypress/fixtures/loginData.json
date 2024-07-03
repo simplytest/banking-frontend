@@ -1,5 +1,6 @@
 {
-    "username": "max@muster.de",
+   "userid": "00025",
+   "username": "max@muster.de",
     "password": "admin",
     "loginResponse": {
       "JWT": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzMSIsImlhdCI6MTcxNDY3OTU5Mn0.U2IChSu9gG321zcVsVnbRVeP-nUfEDHu37816YtQBuX2n57MZbI-XBGFj98xDHJfxneBZNlpEi7lNKSfPFNw5g"

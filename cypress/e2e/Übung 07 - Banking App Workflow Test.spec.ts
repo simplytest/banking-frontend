@@ -6,14 +6,12 @@ describe("Übung 7 - Banking Workflow", () => {
         // Anmeldung mit Testuser als Preroutine
         cy.fixture("loginData").then((loginData) => {
 
-            cy.fixture("contracts").then( (contracts) => {
-            
             const dashboardUrl = `${Cypress.config("baseUrl")}${Cypress.env("dashboard_page")}`;
             cy.visit(Cypress.config("baseUrl"));
             cy.url().should("eq", dashboardUrl);
 
             // Interception für die erfolgreiche Anmeldung
-            cy.intercept("POST", "http://localhost:5005/api/contracts/login/00025", {
+            cy.intercept("POST", `${Cypress.env("backendUrl")}/api/contracts/login/00025`, {
                 statusCode: 200,
                 body: {
                     result: loginData.loginResponse.JWT
@@ -21,37 +19,33 @@ describe("Übung 7 - Banking Workflow", () => {
             }).as("loginRequest");
 
             
-            cy.intercept("GET", "http://localhost:5005/api/contracts", {
-                statusCode: 200,
-                body: contracts.initial
-            }).as("contractsRequest");
+            cy.fixture("contracts").then( (contracts) => {
+                cy.intercept("GET", `${Cypress.env("backendUrl")}/api/contracts`, {
+                    statusCode: 200,
+                    body: contracts.initial
+                }).as("contractsRequest");
+            });
             
 
             cy.get("#contract_input").type("00025");
             cy.get("#password_input").type(loginData.password);
             cy.get("#login_button").click();
 
-            cy.wait("@loginRequest").then((interception) => {
-                expect(interception.response.statusCode).equals(200);
-            });
+            cy.wait("@loginRequest").its('response.statusCode').should('eq', 200);
 
             cy.wait("@contractsRequest");
+
         });
-    });
     });
 
     it("Unhappy Path: Geld empfangen und überweisen mit ungültiger IBAN", () => {
         cy.fixture("contracts").then((contracts) => {
 
-            cy.get('label[data-testid="customer_Label"]')
-                .invoke("text")
-                .then((text) => {
-                    expect(text).to.include("Willkommen Max!");
-                });
+            cy.get('label[data-testid="customer_Label"]').should('contain.text', "Willkommen Max!");
 
             // Interception für Geld empfangen
             cy.fixture("transactionData").then((transactionData) => {
-                cy.intercept("GET", `http://localhost:5005/api/accounts/1/receive?amount=${transactionData.receiveMoney.amount}`, {
+                cy.intercept("GET", `${Cypress.env("backendUrl")}/api/accounts/1/receive?amount=${transactionData.receiveMoney.amount}`, {
                     statusCode: 200,
                     body: {
                         result: transactionData.receiveMoney.result
@@ -60,21 +54,22 @@ describe("Übung 7 - Banking Workflow", () => {
             });
 
             // Interception für Kontodetails nach Geldempfang
-            cy.intercept("GET", "http://localhost:5005/api/contracts", {
+            cy.intercept("GET", `${Cypress.env("backendUrl")}/api/contracts`, {
                 statusCode: 200,
                 body: contracts.initial
             }).as("accountDetails");
 
             cy.get("button[id='0-empfangen']").click();
             cy.get("h1[data-testid='receiveMoney_title']").should("have.text", "Geld empfangen");
-            cy.get("input[data-testid='receiveMoney_input']").focus().type("10000");
+            cy.get("input[data-testid='receiveMoney_input']").focus().type("10000"); // focus() call important here for proper typing !!!
             cy.get("button[data-testid='send_money_button']").click();
 
             cy.wait("@receiveMoney").then((interception) => {
                 expect(interception.response.statusCode).to.equal(200);
                 expect(interception.response.body.result).to.equal(true);
-                cy.get("h1[data-testid='title']").should("have.text", "Geld erhalten");
             });
+
+            cy.get("h1[data-testid='title']").should("have.text", "Geld erhalten");
 
             cy.wait("@accountDetails").then((interception) => {
                 expect(interception.response.statusCode).to.equal(200);
@@ -85,7 +80,7 @@ describe("Übung 7 - Banking Workflow", () => {
 
             // Interception für gescheiterte Überweisung
             cy.fixture("transactionData").then((transactionData) => {
-                cy.intercept("POST", "http://localhost:5005/api/accounts/1/send", {
+                cy.intercept("POST", `${Cypress.env("backendUrl")}/api/accounts/1/send`, {
                     statusCode: 400,
                     body: {
                         error: transactionData.sendMoney.invalidIbanError
@@ -99,9 +94,7 @@ describe("Übung 7 - Banking Workflow", () => {
             cy.get("input[data-testid='send_iban']").click().type("invalid");
             cy.get("button[data-testid='send_money_button']").click();
 
-            cy.wait("@failedTransaction").then((interception) => {
-                expect(interception.response.statusCode).to.equal(400);
-            });
+            cy.wait("@failedTransaction").its('response.statusCode').should('eq', 400);
 
             cy.on("window:alert", (text) => {
                 expect(text).to.equal('{"error":{"error":"BadIban"}}');
@@ -113,15 +106,11 @@ describe("Übung 7 - Banking Workflow", () => {
     it("Happy Path: Geld empfangen und überweisen mit gültiger IBAN", () => {
         cy.fixture("contracts").then((contracts) => {
 
-            cy.get('label[data-testid="customer_Label"]')
-                .invoke("text")
-                .then((text) => {
-                    expect(text).to.include("Willkommen Max!");
-                });
+            cy.get('label[data-testid="customer_Label"]').should('contain.text', "Willkommen Max!");
 
             // Interception für Geld empfangen
             cy.fixture("transactionData").then((transactionData) => {
-                cy.intercept("GET", `http://localhost:5005/api/accounts/1/receive?amount=${transactionData.receiveMoney.amount}`, {
+                cy.intercept("GET", `${Cypress.env("backendUrl")}/api/accounts/1/receive?amount=${transactionData.receiveMoney.amount}`, {
                     statusCode: 200,
                     body: {
                         result: transactionData.receiveMoney.result
@@ -130,7 +119,7 @@ describe("Übung 7 - Banking Workflow", () => {
             });
 
             // Interception für Kontodetails nach Geldempfang
-            cy.intercept("GET", "http://localhost:5005/api/contracts", {
+            cy.intercept("GET", `${Cypress.env("backendUrl")}/api/contracts`, {
                 statusCode: 200,
                 body: contracts.initial
             }).as("accountDetails");
@@ -143,8 +132,10 @@ describe("Übung 7 - Banking Workflow", () => {
             cy.wait("@receiveMoney").then((interception) => {
                 expect(interception.response.statusCode).to.equal(200);
                 expect(interception.response.body.result).to.equal(true);
-                cy.get("h1[data-testid='title']").should("have.text", "Geld erhalten");
             });
+
+            cy.get("h1[data-testid='title']").should("have.text", "Geld erhalten");
+
 
             cy.wait("@accountDetails").then((interception) => {
                 expect(interception.response.statusCode).to.equal(200);
@@ -155,7 +146,7 @@ describe("Übung 7 - Banking Workflow", () => {
 
             // Interception für erfolgreiche Überweisung
             cy.fixture("transactionData").then((transactionData) => {
-                cy.intercept("POST", "http://localhost:5005/api/accounts/1/send", {
+                cy.intercept("POST", `${Cypress.env("backendUrl")}/api/accounts/1/send`, {
                     statusCode: 200,
                     body: {
                         result: transactionData.sendMoney.result
@@ -169,10 +160,9 @@ describe("Übung 7 - Banking Workflow", () => {
             cy.get("input[data-testid='send_iban']").click().type("DE12500105170648489890");
             cy.get("button[data-testid='send_money_button']").click();
 
-            cy.wait("@sendMoney").then((interception) => {
-                expect(interception.response.statusCode).to.equal(200);
-                cy.get("h1[data-testid='title']").should("have.text", "Geld gesendet");
-            });
+            cy.wait("@sendMoney").its('response.statusCode').should('eq', 200);
+
+            cy.get("h1[data-testid='title']").should("contain.text", "Geld gesendet");
         });
     });
 

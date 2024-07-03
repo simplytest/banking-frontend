@@ -1,29 +1,17 @@
+describe("Übung 5.1 - Registrierung über Backend", () => {
+    const baseUrl = "http://localhost:4200/dashboard";
 
-describe("Übung 6 - Registrierung und Konfiguration von Cypress", () => {
     beforeEach(() => {
-        cy.visit(`${Cypress.config("baseUrl")}${Cypress.env("dashboard_page")}`);
-    });
-
-    before(() => {
-        // Laden der Fixture-Daten für die Registrierung
+        // Laden der Fixture-Daten für die Registrierung vor jedem Testfall
         cy.fixture("registrationData").as("registrationData");
-        cy.fixture("contracts").as("contractsData");
     });
 
-    it("Erfolgreiche Registrierung", function () {
+    it("Erfolgreiche Registrierung ohne Interception - benötigt Backend", function () {
+ 
+        cy.visit(baseUrl);
+
         // Zugriff auf die Fixture-Daten im Testfall
         const registrationData = this.registrationData;
-
-        // Erfassen Sie den Netzwerkverkehr für die Registrierung
-        cy.intercept("POST", `${Cypress.env("backendUrl")}/api/contracts`, {
-            statusCode: 201,
-            body: registrationData.registrationResponse
-        }).as("registerRequest");
-
-        cy.intercept("GET", `${Cypress.env("backendUrl")}/api/contracts`, {
-            statusCode: 200,
-            body: this.contractsData.initial
-        }).as("contractsRequest");
 
         // Klicken Sie auf den Registrierungsbutton
         cy.get("#registerButton").click();
@@ -46,14 +34,12 @@ describe("Übung 6 - Registrierung und Konfiguration von Cypress", () => {
         // Klicken Sie auf den Submit-Button
         cy.get("button[data-testid='register_button']").click();
 
-        // Warten Sie auf die Antwort des Servers und überprüfen Sie die erfolgreiche Registrierung
-        cy.wait("@registerRequest").its('response.statusCode').should('eq', 201);
 
-        cy.wait("@contractsRequest").its('response.statusCode').should('eq', 200);
-        
         // Überprüfen Sie die angezeigte Willkommensnachricht
         cy.get('label[data-testid="customer_Label"]')
             .should("be.visible")
             .should("contain.text", `Willkommen ${registrationData.firstName}!`);
+
     });
+
 });

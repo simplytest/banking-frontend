@@ -25,6 +25,7 @@ export default defineConfig({
             return config;
         },
         env: {
+            backendUrl: "http://localhost:5005",
             codeCoverageTasksRegistered: true,
             register_page : "registerNewCustomer",
             dashboard_page: "dashboard",//Anmeldung
