@@ -25,6 +25,7 @@ describe("Übung 6 - Registrierung und Konfiguration von Cypress", () => {
             body: this.contractsData.initial
         }).as("contractsRequest");
 
+        
         // Klicken Sie auf den Registrierungsbutton
         cy.get("#registerButton").click();
 
@@ -40,11 +41,9 @@ describe("Übung 6 - Registrierung und Konfiguration von Cypress", () => {
         cy.get("#email").type(registrationData.email);
         cy.get("#birthDay").type(registrationData.birthDay);
 
-        // Überprüfen Sie, ob das Submit-Button aktiviert ist
-        cy.get("button[data-testid='register_button']").should("be.enabled");
+         // Überprüfen Sie, ob das Submit-Button aktiviert ist und klicken Sie sie an
+         cy.get("button[data-testid='register_button']").should("be.enabled").click();
 
-        // Klicken Sie auf den Submit-Button
-        cy.get("button[data-testid='register_button']").click();
 
         // Warten Sie auf die Antwort des Servers und überprüfen Sie die erfolgreiche Registrierung
         cy.wait("@registerRequest").its('response.statusCode').should('eq', 201);

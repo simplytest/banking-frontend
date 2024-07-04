@@ -1,15 +1,14 @@
 describe("Übung 4.2 - Anmeldung", () => {
-    const apiBaseUrl = `${Cypress.env("backendUrl")}/api/contracts`;
-    const dashboardUrl = `${Cypress.config("baseUrl")}${Cypress.env("dashboard_page")}`;
-
+    
     beforeEach(() => {
         // Visit the dashboard URL before each test
+        const dashboardUrl = "http://localhost:4200/dashboard";
         cy.visit(dashboardUrl);
         cy.url().should("eq", dashboardUrl);
 
 
         // Intercept for account details after successful login
-        cy.intercept("GET", apiBaseUrl, {
+        cy.intercept("GET", "**/api/contracts", {
             statusCode: 200,
             body: {
                 id: {
@@ -59,14 +58,14 @@ describe("Übung 4.2 - Anmeldung", () => {
                     }
                 }
             }
-        }).as("accountDetails");
+        }).as("contractsRequest");
     });
     
 
     it("Erfolgreiche Anmeldung", () => {
 
         // Set up the necessary intercepts for all tests
-        cy.intercept("POST", `${apiBaseUrl}/login/00025`, {
+        cy.intercept("POST", `**/login/00025`, {
             statusCode: 200,
             body: {
                 result: "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyNSIsImlhdCI6MTcxNDY1NDI5Nn0.7RvioDzaHM9nEMP3imlBghveUetX3dRiLYUXZW-9Pd71y7pmA2Bh2uBPXAwZ96GEztgDJ-jAdu9O3Af9aAyJGg"
@@ -84,7 +83,7 @@ describe("Übung 4.2 - Anmeldung", () => {
         // Check for redirection and account details loading
         cy.url().should("include", "/mainPage");
 
-        cy.wait("@accountDetails").then((interception) => {
+        cy.wait("@contractsRequest").then((interception) => {
             expect(interception.response.statusCode).to.equal(200);
         });
 
@@ -95,7 +94,7 @@ describe("Übung 4.2 - Anmeldung", () => {
     it("Erfolgreiche Anmeldung mit anderen Nutzerdaten", () => {
 
         // Set up the necessary intercepts for all tests
-        cy.intercept("POST", `${apiBaseUrl}/login/00026`, {
+        cy.intercept("POST", `**/login/00026`, {
             statusCode: 200,
             body: {
                 result: "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyNiIsImlhdCI6MTcxNDY1NDI5Nn0.8UvioDzaHM9nEMP3imlBghveUetX3dRiLYUXZW-9Pd71y7pmA2Bh2uBPXAwZ96GEztgDJ-jAdu9O3Af9aAyJGg"
@@ -113,7 +112,7 @@ describe("Übung 4.2 - Anmeldung", () => {
         // Check for redirection and account details loading
         cy.url().should("include", "/mainPage");
 
-        cy.wait("@accountDetails").then((interception) => {
+        cy.wait("@contractsRequest").then((interception) => {
             expect(interception.response.statusCode).to.equal(200);
         });
 
@@ -125,7 +124,7 @@ describe("Übung 4.2 - Anmeldung", () => {
     it("Gescheiterte Anmeldung mit korrektem Vertragscode und falschem Passwort", () => {
 
         // Set up the necessary intercepts for all tests
-        cy.intercept("POST", `${apiBaseUrl}/login/00033`, {
+        cy.intercept("POST", `**/login/00033`, {
             statusCode: 400,
             body: {
                 error: {
@@ -140,7 +139,7 @@ describe("Übung 4.2 - Anmeldung", () => {
 
         cy.wait("@failedLoginRequest").then((interception) => {
             expect(interception.response.statusCode).to.equal(400);
-            expect(interception.request.url).to.equal(`${apiBaseUrl}/login/00033`);
+            expect(interception.request.url).to.contain("/login/00033");
             expect(interception.request.method).to.equal("POST");
         });
 
@@ -152,7 +151,7 @@ describe("Übung 4.2 - Anmeldung", () => {
     it("Gescheiterte Anmeldung mit ungültigem Vertragscode", () => {
 
         // Set up the necessary intercepts for all tests
-        cy.intercept("POST", `${apiBaseUrl}/login/111111`, {
+        cy.intercept("POST", `**/login/111111`, {
             statusCode: 404,
             body: {
                 timestamp: "May 20, 2024, 6:43:31 PM",
@@ -169,7 +168,7 @@ describe("Übung 4.2 - Anmeldung", () => {
 
         cy.wait("@invalidAccountRequest").then((interception) => {
             expect(interception.response.statusCode).to.equal(404);
-            expect(interception.request.url).to.equal(`${apiBaseUrl}/login/111111`);
+            expect(interception.request.url).to.contain("/login/111111");
             expect(interception.request.method).to.equal("POST");
         });
 

@@ -25,7 +25,7 @@ describe("Übung 4.1 - Anmeldung über Backend", () => {
 
     it("4.1.2 Erfolgreiche Anmeldung ohne Interception - benötigt Backend", () => {
         
-        cy.intercept("POST", `http://localhost:5005/api/contracts/login/00001`).as("loginRequest");
+        cy.intercept("POST", `**/login/00001`).as("loginRequest");
 
         cy.get("#contract_input").type("00001");
         cy.get("#password_input").type("demo");
