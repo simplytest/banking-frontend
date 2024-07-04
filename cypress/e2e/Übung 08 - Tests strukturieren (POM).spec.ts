@@ -3,8 +3,8 @@ import LoginPage from "./PageObjects/LoginPage";
 
 
 describe("Übung 8 - Banking Workflow", () => {
+    
     beforeEach(() => {
-
 
          // Interception für Geld empfangen
          cy.fixture("transactionData").then((transactionData) => {
@@ -17,6 +17,17 @@ describe("Übung 8 - Banking Workflow", () => {
         });
 
 
+        // Interception für Kontendaten
+        cy.fixture("contracts").then( (contracts) => {
+           
+            cy.intercept("GET", `${Cypress.env("backendUrl")}/api/contracts`, {
+                statusCode: 200,
+                body: contracts.initial
+            }).as("contractsRequest");
+            
+        });
+
+
         // Interception für Anmeldung
         cy.fixture("loginData").then((loginData) => {
             cy.intercept("POST", `${Cypress.env("backendUrl")}/api/contracts/login/${loginData.userid}`, {
@@ -26,18 +37,10 @@ describe("Übung 8 - Banking Workflow", () => {
                 }
             }).as("loginRequest");
 
-            cy.fixture("contracts").then( (contracts) => {
-           
-                cy.intercept("GET", `${Cypress.env("backendUrl")}/api/contracts`, {
-                    statusCode: 200,
-                    body: contracts.initial
-                }).as("contractsRequest");
-                
-            });
-
 
             LoginPage.visit();
             LoginPage.login(loginData.userid, loginData.password);
+
 
             cy.wait("@loginRequest").then((interception) => {
                 expect(interception.response.statusCode).equals(200);
