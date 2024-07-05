@@ -1,4 +1,17 @@
 class DashboardPage {
+
+    checkNoContractMessage() {
+        cy.get("dialog-contract-not-found").should("be.visible")
+              .and("contain.text", "Vertrag nicht gefunden!");
+    }
+    checkWelcomeMessage() {
+        cy.get('label[data-testid="customer_Label"]', { timeout: 10000 })
+            .should("contain.text", "Willkommen Max!");
+    }
+    checkForRedirectionAndAccountDetails() {
+        cy.url().should("include", "/mainPage");
+    }
+
     locators = {
         customerLabel: 'label[data-testid="customer_Label"]',
         receiveMoneyButton: "button[id='0-empfangen']",
