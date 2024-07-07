@@ -1,9 +1,9 @@
 import LoginPage from "./PageObjects/LoginPage";
 import DashboardPage from "./PageObjects/DashboardPage";
-import LoginIntercepts from "./FunctionLibraries/LoginIntercepts";
+import CustomIntercepts from "./FunctionLibraries/CustomIntercepts";
 import ResponseUtility from "./FunctionLibraries/ResponseUtility";
 
-describe("Übung 4.2 - Anmeldung", () => {
+describe("Übung 4.2 - Anmeldung (POM)", () => {
     
     beforeEach(() => {
         // Visit the dashboard URL before each test
@@ -11,47 +11,47 @@ describe("Übung 4.2 - Anmeldung", () => {
         cy.visit(dashboardUrl);
         cy.url().should("eq", dashboardUrl);
 
-        LoginIntercepts.interceptAccountDetailsAfterSuccessfulLoginAs("contractsRequest");
+        CustomIntercepts.interceptAccountDetailsAfterSuccessfulLoginAs("contractsRequest");
     });
     
     it("Erfolgreiche Anmeldung", () => {
 
-        LoginIntercepts.registerExemplaryLoginAs("loginRequest", "00025");
+        CustomIntercepts.registerSuccessfulLoginRequestAs("loginRequest", "00025");
 
         LoginPage.login("00025", "admin");
-        ResponseUtility.waitForStatus200On("loginRequest00025");
+        ResponseUtility.waitForSuccessfulResponseOf("loginRequest00025");
 
         DashboardPage.checkForRedirectionAndAccountDetails();
-        ResponseUtility.waitForStatus200On("contractsRequest");
+        ResponseUtility.waitForSuccessfulResponseOf("contractsRequest");
         DashboardPage.checkWelcomeMessage();
     });
 
     it("Erfolgreiche Anmeldung mit anderen Nutzerdaten", () => {
 
-        LoginIntercepts.registerExemplaryLoginAs("loginRequest", "00026");
+        CustomIntercepts.registerSuccessfulLoginRequestAs("loginRequest", "00026");
 
         LoginPage.login("00026", "password");
-        ResponseUtility.waitForStatus200On("loginRequest00026");
+        ResponseUtility.waitForSuccessfulResponseOf("loginRequest00026");
         DashboardPage.checkForRedirectionAndAccountDetails();
 
-        ResponseUtility.waitForStatus200On("contractsRequest");
+        ResponseUtility.waitForSuccessfulResponseOf("contractsRequest");
         DashboardPage.checkWelcomeMessage();
     });
 
     it("Gescheiterte Anmeldung mit korrektem Vertragscode und falschem Passwort", () => {
 
-        LoginIntercepts.registerFaultyLoginOn("00033");
+        CustomIntercepts.registerFaultyLoginRequestAs("failedLoginRequest", "00033");
 
         LoginPage.login("00033", "123456");
-        ResponseUtility.waitForFailureOn("failedLoginRequest");
+        ResponseUtility.waitForFailureResponseOf("failedLoginRequest00033", 400);
         DashboardPage.checkNoContractMessage();
     });
 
     it("Gescheiterte Anmeldung mit ungültigem Vertragscode", () => {
 
-        LoginIntercepts.registerInvalidAccountRequestAs("invalidAccountRequest");
+        CustomIntercepts.registerInvalidLoginAccountRequestAs("invalidAccountRequest");
         LoginPage.login("111111", "1212");
-        ResponseUtility.waitForInvalidAccountOn("invalidAccountRequest");
+        ResponseUtility.waitForFailureResponseOf("invalidAccountRequest", 404);
         DashboardPage.checkNoContractMessage();
     });
 });

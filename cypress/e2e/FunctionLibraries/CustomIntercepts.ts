@@ -1,6 +1,6 @@
-﻿class LoginIntercepts {
+﻿class CustomIntercepts {
 
-    registerInvalidAccountRequestAs(responseName: string) {
+    registerInvalidLoginAccountRequestAs(responseName: string) {
         cy.intercept("POST", `**/login/111111`, {
             statusCode: 404,
             body: {
@@ -13,7 +13,7 @@
         }).as(responseName);
     }
 
-    registerFaultyLoginOn(userId: string) {
+    registerFaultyLoginRequestAs(asPrefix: string, userId: string) {
         cy.intercept("POST", `**/login/${userId}`, {
             statusCode: 400,
             body: {
@@ -21,16 +21,16 @@
                     error: "BadCredentials"
                 }
             }
-        }).as("failedLoginRequest");
+        }).as(asPrefix + userId);
     }
 
-    registerExemplaryLoginAs(asPrefix: string, responseName: string) {
-        cy.intercept("POST", `**/login/${responseName}`, {
+    registerSuccessfulLoginRequestAs(asPrefix: string, userId: string) {
+        cy.intercept("POST", `**/login/${userId}`, {
             statusCode: 200,
             body: {
                 result: "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyNSIsImlhdCI6MTcxNDY1NDI5Nn0.7RvioDzaHM9nEMP3imlBghveUetX3dRiLYUXZW-9Pd71y7pmA2Bh2uBPXAwZ96GEztgDJ-jAdu9O3Af9aAyJGg"
             }
-        }).as(asPrefix + responseName);
+        }).as(asPrefix + userId);
     }
 
     interceptAccountDetailsAfterSuccessfulLoginAs(responseName: string) {
@@ -86,6 +86,54 @@
             }
         }).as(responseName);
     }
+
+    registerSuccessfulSendMoneyRequestAs(responseName: string)
+    {
+        cy.fixture("transactionData").then((transactionData) => {
+            cy.intercept("POST", `${Cypress.env("backendUrl")}/api/accounts/1/send`, {
+                statusCode: 200,
+                body: {
+                    result: transactionData.sendMoney.result
+                }
+            }).as(responseName);
+        });
+    }
+
+    registerFaultySendMoneyRequestAs(responseName: string)
+    {
+        cy.fixture("transactionData").then((transactionData) => {
+            cy.intercept("POST", `${Cypress.env("backendUrl")}/api/accounts/1/send`, {
+                statusCode: 400,
+                body: {
+                    error: transactionData.sendMoney.invalidIbanError
+                }
+            }).as(responseName);
+        });
+    }
+
+    registerSuccessfulReceiveMoneyRequestAs(responseName: string)
+    {
+        cy.fixture("transactionData").then((transactionData) => {
+            cy.intercept("GET", `${Cypress.env("backendUrl")}/api/accounts/1/receive?amount=${transactionData.receiveMoney.amount}`, {
+                statusCode: 200,
+                body: {
+                    result: transactionData.receiveMoney.result
+                }
+            }).as(responseName);
+        });
+    }
+
+    registerSuccessfulAccountDataRequestAs(responseName: string)
+    {
+        cy.fixture("contracts").then( (contracts) => {
+           
+            cy.intercept("GET", `${Cypress.env("backendUrl")}/api/contracts`, {
+                statusCode: 200,
+                body: contracts.initial
+            }).as(responseName);
+            
+        });
+    }
 }
 
-export default new LoginIntercepts();
+export default new CustomIntercepts();
