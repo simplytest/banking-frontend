@@ -9,6 +9,7 @@ export default defineConfig({
     e2e: {
         specPattern: "**/e2e/*.{spec.ts,feature}",
         baseUrl: "http://localhost:4200/",
+        blockHosts: "fonts.googleapis.com",
 
         async setupNodeEvents(on: Cypress.PluginEvents, config: Cypress.PluginConfigOptions)
         {
