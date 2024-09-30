@@ -30,6 +30,12 @@ export class MainPageComponent implements OnInit
     ngOnInit(): void
     {
         this.token = Cookies.get("session");
+
+        if (!this.token)
+        {
+            this.router.navigate(["/"]);
+        }
+
         this.getContracts();
     }
 
@@ -39,7 +45,8 @@ export class MainPageComponent implements OnInit
         {
             this.contract = contract;
             this.contract.id = Id.from(this.contract.id);
-        });
+        },
+        () => this.router.navigate(["/"]));
     }
 
     addAccount()
@@ -238,9 +245,14 @@ export class DialogOverviewTransferMoneyDialog
         const { target, amount: _amount } = this.transferData;
 
         const Error = DialogOverviewTransferMoneyDialog.Error;
-        const amount = Number.parseInt(_amount as unknown as string);
+        const amount = Number.parseFloat(_amount as unknown as string);
 
         if (!Number.isFinite(amount) || amount <= 0)
+        {
+            return Error.BadAmount;
+        }
+
+        if (amount.toString().split(/[^0-9]/)[1]?.length > 2)
         {
             return Error.BadAmount;
         }
@@ -267,7 +279,7 @@ export class DialogOverviewTransferMoneyDialog
             return Error.BadAmount;
         }
 
-        return 0;
+        return Error.Success;
     }
 
     onNoClick()

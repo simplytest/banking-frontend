@@ -4,8 +4,10 @@ dist
 cypress/screenshots
 cypress/downloads
 
+coverage
 results
 
+.nyc_output
 .angular
 .vscode
 .idea

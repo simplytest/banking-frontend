@@ -2,10 +2,7 @@ class BasePO
 {
     navigate(path)
     {
-        cy.fixture("config.json").then((data) =>
-        {
-            cy.visit(data.baseUrl + path);
-        });
+        cy.visit(path);
     }
 
     angularInputFieldHelperByDataTestID(value, identifier)
@@ -19,4 +16,5 @@ class BasePO
         cy.get("[data-testid='" + identifier + "']").should("have.value", value);
     }
 }
+
 export default BasePO;

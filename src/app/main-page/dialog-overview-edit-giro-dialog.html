@@ -1,20 +1,20 @@
-<h1 mat-dialog-title>Girokonto ändern</h1>
+<h1 mat-dialog-title i18n="@@change-giro">Girokonto ändern</h1>
 
 <div mat-dialog-content>
   <mat-form-field subscriptSizing="dynamic" floatLabel="always">
-    <mat-label>Dispokreditlimit</mat-label>
+    <mat-label i18n="@@dispo-limit">Dispokreditlimit</mat-label>
     <input type="number" matInput [(ngModel)]="dispoLimit" placeholder="0">
-    <span matTextPrefix>$&nbsp;</span>
+    <span matTextPrefix>€&nbsp;</span>
   </mat-form-field>
-  <button mat-raised-button (click)="editDispoLimit()">Dispokreditlimit ändern</button>
+  <button mat-raised-button (click)="editDispoLimit()" i18n="@@edit-dispo-limit">Dispokreditlimit ändern</button>
   <mat-form-field subscriptSizing="dynamic" floatLabel="always">
-    <mat-label>Überweisungslimit</mat-label>
+    <mat-label i18n="@@transfer-limit">Überweisungslimit</mat-label>
     <input type="number" matInput [(ngModel)]="sendLimit" placeholder="0">
-    <span matTextPrefix>$&nbsp;</span>
+    <span matTextPrefix>€&nbsp;</span>
   </mat-form-field>
-  <button mat-raised-button (click)="editSendLimit()">Überweisungslimit ändern</button>
+  <button mat-raised-button (click)="editSendLimit()" i18n="@@change-transfer-limit">Überweisungslimit ändern</button>
 </div>
 
 <div mat-dialog-actions align="end">
-  <button mat-button (click)="onNoClick()" cdkFocusInitial>Fertig</button>
+  <button mat-button (click)="onNoClick()" cdkFocusInitial i18n="@@done">Fertig</button>
 </div>

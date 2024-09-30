@@ -5,11 +5,11 @@
 
   <div class="container">
     <div class="container-2">
-      <button data-testid="to_mainpage_button" (click)="goToMainPage()" class="btn btn-primary">
+      <button data-testid="to_mainpage_button" (click)="goToMainPage()" class="btn btn-primary" i18n="@@to-start">
         Zur Hauptseite
       </button>
-      <button data-testid="to_dashboard_button" [routerLink]="'/'" class="btn btn-primary">
-        Zum Dashboard
+      <button data-testid="to_dashboard_button" [routerLink]="'/'" class="btn btn-primary" i18n="@@logout">
+        Abmelden
       </button>
     </div>
 
@@ -17,37 +17,43 @@
       <form #form="ngForm" (ngSubmit)="onSubmit(form.value)">
         <div ngModelGroup="currentAddress" style="display: flex; flex-direction: column; gap: 10px">
           <div class="form-group">
-            <label data-testid="street_label">Straße:</label>
-            <input data-testid="street_input" type="text" class="form-control" name="street" [(ngModel)]="address.street" />
+            <label data-testid="street_label" i18n="@@street">Straße</label>
+            <input data-testid="street_input" type="text" class="form-control" name="street"
+              [(ngModel)]="address.street" />
           </div>
 
           <div class="form-group">
-            <label data-testid="housenumber_label">Haus:</label>
-            <input data-testid="housenumber_input" type="text" class="form-control" name="house" [(ngModel)]="address.house" />
+            <label data-testid="housenumber_label" i18n="@@house">Haus</label>
+            <input data-testid="housenumber_input" type="text" class="form-control" name="house"
+              [(ngModel)]="address.house" />
           </div>
 
           <div class="form-group">
-            <label data-testid="zip_label">Plz:</label>
-            <input data-testid="zip_input" type="text" class="form-control" name="zipCode" [(ngModel)]="address.zipCode" />
+            <label data-testid="zip_label" i18n="@@zip-code">Postleit-Zahl</label>
+            <input data-testid="zip_input" type="text" class="form-control" name="zipCode"
+              [(ngModel)]="address.zipCode" />
           </div>
 
           <div class="form-group">
-            <label data-testid="city_label">Stadt:</label>
+            <label data-testid="city_label" i18n="@@city">Stadt</label>
             <input data-testid="city_input" type="text" class="form-control" name="city" [(ngModel)]="address.city" />
           </div>
 
           <div class="form-group">
-            <label data-testid="land_label">Land:</label>
-            <input data-testid="land_input" type="text" class="form-control" name="country" [(ngModel)]="address.country" />
+            <label data-testid="land_label" i18n="@@country">Land</label>
+            <input data-testid="land_input" type="text" class="form-control" name="country"
+              [(ngModel)]="address.country" />
           </div>
 
           <div class="form-group">
-            <label data-testid="email_label">E-Mail:</label>
-            <input data-testid="email_input" type="text" class="form-control" name="email" [(ngModel)]="address.email" />
+            <label data-testid="email_label" i18n="@@mail">Mail-Addresse</label>
+            <input data-testid="email_input" type="text" class="form-control" name="email"
+              [(ngModel)]="address.email" />
           </div>
         </div>
 
-        <button data-testid="change_data_button" type="submit" class="btn btn-primary" style="margin-top: 25px; width: 250px">
+        <button data-testid="change_data_button" type="submit" class="btn btn-primary"
+          style="margin-top: 25px; width: 250px" i18n="@@change-data">
           Kundendaten ändern
         </button>
       </form>

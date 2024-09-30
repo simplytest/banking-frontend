@@ -19,10 +19,8 @@ import { MainPageComponent, DialogOverviewSendMoneyDialog, DialogOverviewTransfe
 
 describe("Integration: MainPagekomponente mit allen Dialogkomponenten und Testdaten", () =>
 {
-
     it("Dialogkomponente: 'Geld überweisen' ist integriert ", () =>
     {
-
         cy.viewport(1280, 720);
         cy.mount(MainPageComponent, {
             declarations: [
@@ -62,11 +60,10 @@ describe("Integration: MainPagekomponente mit allen Dialogkomponenten und Testda
         cy.get("[data-testid='title']").should("have.text", "Geld überweisen");
 
         // Defaultwert ist = 0
-        cy.get("[data-testid='send_amount']")
-            .focus();
-        cy.get("[data-testid='send_amount']")
-            .should("have.value", "0");
+        cy.get("[data-testid='send_amount']").as("send_amount");
 
+        cy.get("@send_amount").focus();
+        cy.get("@send_amount").should("have.value", "0");
     });
 
     it("Dialogkomponente: 'Geld übertragen' ist integriert", () =>
@@ -108,16 +105,14 @@ describe("Integration: MainPagekomponente mit allen Dialogkomponenten und Testda
         cy.get("[data-testid='title']").should("have.text", "Geld übertragen");
 
         // Defaultwert ist = 0
-        cy.get("[data-testid='amount_input']")
-            .focus();
-        cy.get("[data-testid='amount_input']")
-            .should("have.value", "0");
+        cy.get("[data-testid='amount_input']").as("amount_input");
+
+        cy.get("@amount_input").focus();
+        cy.get("@amount_input").should("have.value", "0");
 
         // Es wird überprüft, dass die Radiobuttons der "TransferDialogkomponente" vorhanden sind
         cy.get("mat-radio-button[id='00001:00002']").should("exist");
         cy.get("mat-radio-button[id='00001:00003']").should("exist");
         cy.get("mat-radio-button[id='00001:00004']").should("exist");
-
     });
-
 });

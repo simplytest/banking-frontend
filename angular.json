@@ -9,9 +9,15 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+      "i18n": {
+        "sourceLocale": "de",
+        "locales": {
+          "en": "src/locale/en-US.json"
+        }
+      },
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
             "outputPath": "dist/BankingSoftwareFrontEnd",
             "index": "src/index.html",
@@ -34,10 +40,14 @@
             "buildOptimizer": false,
             "sourceMap": true,
             "optimization": false,
-            "namedChunks": true
+            "namedChunks": true,
+            "customWebpackConfig": {
+              "path": "./cypress/coverage.webpack.ts"
+            }
           },
           "configurations": {
             "production": {
+              "localize": true,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -63,20 +73,49 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "development": {
+              "localize": false,
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            },
+            "en": {
+              "localize": [
+                "en"
+              ]
+            },
+            "de": {
+              "localize": [
+                "de"
+              ]
             }
           },
-          "defaultConfiguration": ""
+          "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
             "browserTarget": "BankingSoftwareFrontEnd:build"
           },
           "configurations": {
             "production": {
               "browserTarget": "BankingSoftwareFrontEnd:build:production"
+            },
+            "development": {
+              "browserTarget": "BankingSoftwareFrontEnd:build:development"
+            },
+            "de": {
+              "browserTarget": "BankingSoftwareFrontEnd:build:development,de"
+            },
+            "en": {
+              "browserTarget": "BankingSoftwareFrontEnd:build:development,en"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",

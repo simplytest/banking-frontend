@@ -8,7 +8,6 @@ import { ContractServerService } from "src/app/_services/contract-server.service
 
 describe("MainPagekomponente Komponententest (Unittest)", () =>
 {
-
     it("Komponente wird erstellt: ohne Dialoge, ohne Daten", () =>
     {
         cy.viewport(1280, 720);
@@ -28,7 +27,7 @@ describe("MainPagekomponente Komponententest (Unittest)", () =>
 
         cy.get("[data-testid='kundendaten_button']").should("have.text", " Kundendaten ändern ");
         cy.get("[data-testid='kuendigen_button']").should("have.text", " Vertrag kündigen ");
-        cy.get("[data-testid='dashboard_button']").should("have.text", " Zum Dashboard ");
+        cy.get("[data-testid='dashboard_button']").should("have.text", " Abmelden ");
 
         cy.get("[data-testid='erstellen_button']").should("have.text", " Konto erstellen ");
 
@@ -69,6 +68,5 @@ describe("MainPagekomponente Komponententest (Unittest)", () =>
         cy.get("button[id='1-transferieren']").should("not.exist");
         cy.get("button[id='1-empfangen']").should("not.exist");
         cy.get("button[id='1-editieren']").should("not.exist");
-
     });
 });

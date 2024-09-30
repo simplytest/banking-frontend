@@ -3,15 +3,18 @@ import BasePO from "./BasePO";
 class CreateAccountPagePO extends BasePO
 {
     elements = {
-        giroKontoButton: () => cy.get("[test-dataid=\"giro_account_button\"]"),
-        festgeldKontoButton: () => cy.get("[test-dataid=\"fixed_rate_button\"]"),
-        tagesgeldKontoButton: () => cy.get("[test-dataid=\"onCall_button\"]"),
-        immobilienFinanzierungskontoButton: () => cy.get("[test-dataid=\"realEstate_button\"]"),
+        giroKontoButton: () => cy.get("[test-dataid='giro_account_button']"),
+        festgeldKontoButton: () => cy.get("[test-dataid='fixed_rate_button']"),
+        tagesgeldKontoButton: () => cy.get("[test-dataid='onCall_button']"),
+        immobilienFinanzierungskontoButton: () => cy.get("[test-dataid='realEstate_button']"),
+        kreditBeitragInput: () => cy.get("[data-testid='credit_value']"),
+        kreditTilgungsrateInput: () => cy.get("[data-testid='rate_value']"),
+        kreditAnfordernButton: () => cy.get("[data-testid='create_real_estate_button']"),
     };
 
     navigateToCreateAccountPage ()
     {
-        super.navigate("createAccount/eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzAxODg2OTE3fQ.bgQo-rEmTDO3MeiNac6EwPqrReYLeFX22_S8opo1CId7oZMGiWbe83u3eZ23xoxoiVs9YrXoehaDQrfQEBiDcQ");
+        super.navigate("createAccount");
     }
 
     clickOnGiroKontoButton()
@@ -28,35 +31,20 @@ class CreateAccountPagePO extends BasePO
     }
     clickOnImmobilienFinanzierungskontoButton()
     {
-        cy.get("[test-dataid=\"realEstate_button\"]").click();
+        this.elements.immobilienFinanzierungskontoButton().click();
     }
     typeKreditBeitrag(kreditBeitrag)
     {
-        cy.get("[data-testid='credit_value_input']").focus();
-        cy.get("[data-testid='credit_value_input']").clear();
-        const betrag = kreditBeitrag.split("");
-        for (let part of betrag)
-        {
-            cy.get("[data-testid='credit_value_input']").type(part);
-        }
+        this.elements.kreditBeitragInput().type(kreditBeitrag);
     }
     typeTilgungRate(tilgungRate)
     {
-        cy.get("[data-testid='rate_input']").focus();
-        cy.get("[data-testid='rate_input']").clear();
-        const betrag = tilgungRate.split("");
-        for (let part of betrag)
-        {
-            cy.get("[data-testid='rate_input']").type(part);
-        }
+        this.elements.kreditTilgungsrateInput().type(tilgungRate);
     }
 
-    addRealEstateAccount(creditValue, repaymentRate)
+    clickKreditAnfordernButton()
     {
-        this.clickOnImmobilienFinanzierungskontoButton();
-        this.typeKreditBeitrag(creditValue);
-        this.typeTilgungRate(repaymentRate);
-        cy.get("[data-testid='create_real_estate_button']").click();
+        this.elements.kreditAnfordernButton().click();
     }
 
 }
