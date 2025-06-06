@@ -1,6 +1,6 @@
 describe("Übung 5-2, Registeriung ohne Backend", () =>
 {
-    const dashboardUrl = "/dashboard";
+    const dashboardUrl = "http://localhost:4200/dashboard";
 
     beforeEach(() =>
     {
@@ -43,7 +43,10 @@ describe("Übung 5-2, Registeriung ohne Backend", () =>
 
         // Überprüfen Sie, ob das Submit-Button aktiviert ist und klicken Sie sie an
         cy.get("button[data-testid='register_button']").should("be.enabled").click();
-        //cy.wait(@registerRequest);
+        cy.wait("@registerRequest").should((xhr) =>
+        {
+            expect(xhr.response.statusCode).to.equal(201);
+        });
         cy.get("label[data-testid=\"customer_Label\"]").should("contain", "Max");
         cy.url().should("contain", "mainPage");
     });
