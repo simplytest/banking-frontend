@@ -31,7 +31,8 @@ describe("Übung 4-2, Anmelden ohne Backend", () =>
         {
             expect(interception.response.statusCode).to.eq(200);
         });
-        cy.wait("@contractsRequest").then((interception) => {
+        cy.wait("@contractsRequest").then((interception) =>
+        {
             expect(interception.response.statusCode).to.eq(200);
         });
         cy.url().should("include", "/mainPage");

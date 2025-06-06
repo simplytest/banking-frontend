@@ -80,12 +80,9 @@ describe("Übung 5-2, Registeriung ohne Backend", () =>
         const alertStub = cy.stub();
         cy.on("window:alert", alertStub);
         cy.get("button[data-testid='register_button']").should("be.enabled").click();
-        cy.then(() =>
-        {
-            expect(alertStub).to.be.calledWithMatch("Underage");
-        });
         cy.wait("@underageRegisterRequest").should((xhr) =>
         {
+            expect(alertStub).to.be.calledWithMatch("Underage");
             expect(xhr.response.statusCode).to.equal(400);
             expect(xhr.response.body.error).to.equal("Underage");
         });
