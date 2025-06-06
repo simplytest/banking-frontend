@@ -76,14 +76,14 @@ describe("Übung 5-2, Registeriung ohne Backend", () =>
         cy.get("#email").type(registrationData.email);
         cy.get("#birthDay").type(registrationData.birthDay);
         // Fügen Sie einen Listener für das `window:alert`-Ereignis hinzu
+
         const alertStub = cy.stub();
         cy.on("window:alert", alertStub);
-
-        cy.get("button[data-testid='register_button']").should("be.enabled").click().then(() =>
-        {
-            expect(alertStub).to.have.been.calledWith("Underage");
-        });
         cy.get("button[data-testid='register_button']").should("be.enabled").click();
+        cy.then(() =>
+        {
+            expect(alertStub).to.be.calledWithMatch("Underage");
+        });
         cy.wait("@underageRegisterRequest").should((xhr) =>
         {
             expect(xhr.response.statusCode).to.equal(400);
