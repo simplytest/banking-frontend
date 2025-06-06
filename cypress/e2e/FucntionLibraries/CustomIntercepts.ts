@@ -20,5 +20,29 @@ class CustomIntercepts
 
         });
     }
+    registerSuccessfulReceiveMoneyRequestAs(responseName: string)
+    {
+        cy.fixture("transactionData").then((transactionData) =>
+        {
+            cy.intercept("GET", `${Cypress.env("backendUrl")}/api/accounts/1/receive?amount=${transactionData.receiveMoney.amount}`, {
+                statusCode: 200,
+                body: {
+                    result: transactionData.receiveMoney.result,
+                },
+            }).as(responseName);
+        });
+    }
+    registerSuccessfulSendMoneyRequestAs(alias: string)
+    {
+        cy.fixture("transactionData").then((transactionData) =>
+        {
+            cy.intercept("POST", `${Cypress.env("backendUrl")}/api/accounts/1/send`, {
+                statusCode: 200,
+                body: {
+                    result: transactionData.sendMoney.result,
+                },
+            }).as(alias);
+        });
+    }
 }
 export default new CustomIntercepts();

@@ -27,6 +27,7 @@ export default defineConfig({
         },
         env: {
             codeCoverageTasksRegistered: true,
+            backendUrl: "http://localhost:5005",
         },
     },
 
