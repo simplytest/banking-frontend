@@ -11,15 +11,15 @@ jobs:
 
     steps:
       - name: 📥 Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
 
       - name: 🍃 Install Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v6
         with:
           node-version: 22
 
       - name: 🍃 Install pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@08c4be7e2e672a47d11bd04269e27e5f3e8529cb
         with:
           version: 9
           run_install: false
@@ -36,7 +36,7 @@ jobs:
           pnpm run start > log.txt 2>&1 &
 
       - name: ⌛ Wait for Frontend
-        uses: iFaxity/wait-on-action@v1.2.1
+        uses: iFaxity/wait-on-action@a7d13170ec542bdca4ef8ac4b15e9c6aa00a6866
         with:
           resource: http://localhost:4200
           delay: 1000
@@ -53,13 +53,13 @@ jobs:
 
       - name: 🔍 Check for duplicate reports
         id: skip_check
-        uses: fkirc/skip-duplicate-actions@v5
+        uses: fkirc/skip-duplicate-actions@f75f66ce1886f00957d99748a42c724f4330bdcf
         with:
           skip_after_successful_duplicate: true
           concurrent_skipping: "same_content_newer"
 
       - name: 📋 Integration Test Report
-        uses: phoenix-actions/test-reporting@v8
+        uses: phoenix-actions/test-reporting@f957cd93fc2d848d556fa0d03c57bc79127b6b5e
         if: steps.skip_check.outputs.should_skip != 'true' && (success() || failure())
         with:
           name: 📋 Integration Test Report
@@ -67,7 +67,7 @@ jobs:
           path: "results/integration*.xml"
 
       - name: 📋 E2E Test Report
-        uses: phoenix-actions/test-reporting@v8
+        uses: phoenix-actions/test-reporting@f957cd93fc2d848d556fa0d03c57bc79127b6b5e
         if: steps.skip_check.outputs.should_skip != 'true' && (success() || failure())
         with:
           name: 📋 E2E Test Report
@@ -76,7 +76,7 @@ jobs:
 
       - name: 👀 Sonar Scan
         if: github.ref == 'refs/heads/main'
-        uses: sonarsource/sonarqube-scan-action@v2.0.1
+        uses: sonarsource/sonarqube-scan-action@299e4b793aaa83bf2aba7c9c14bedbb485688ec4
         env:
           SONAR_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
           SONAR_HOST_URL: ${{ vars.SONARQUBE_HOST }}
@@ -91,7 +91,7 @@ jobs:
 
       - name: 🔍 Upload PNPM Logs
         if: ${{ always() }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: PNPM Log
           path: log.txt
