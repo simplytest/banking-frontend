@@ -1,0 +1,11 @@
+Für Hilfetext: npx cypress help
+Für detailliert Hilfe: npx cypress run --help
+Nur Tests aus bestimmten spec Dateien starten: npx cypress run --headless --spec "**/Übung*.spec.ts"
+
+Tests in sichtbarem/unsichtbarem Browser starten: 
+* npx cypress run --headed
+* npx cypress run --headless
+
+Tests mit Chrome/Firefox starten:
+* npx cypress run --headed --browser firefox
+* npx cypress run --headed --browser chrome

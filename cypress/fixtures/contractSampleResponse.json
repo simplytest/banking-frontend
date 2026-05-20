@@ -1,0 +1,39 @@
+{
+    "id": {
+        "counter": 26,
+        "parent": 26,
+        "child": 0
+    },
+    "customer": {
+        "type": "com.simplytest.core.customers.CustomerPrivate",
+        "data": {
+            "birthDay": "Feb 1, 2000, 5:05:47 AM",
+            "schufaScore": 0.0,
+            "transactionFee": 0.0,
+            "monthlyFee": 2.99,
+            "firstName": "demo",
+            "lastName": "demo",
+            "address": {
+                "country": "Country",
+                "zipCode": "12345",
+                "street": "Street",
+                "house": "House",
+                "city": "City",
+                "email": "email@demo.com"
+            }
+        }
+    },
+    "accounts": {
+        "00025:00001": {
+            "type": "com.simplytest.core.accounts.AccountGiro",
+            "data": {
+                "sendLimit": 3000.0,
+                "dispoLimit": 0.0,
+                "dispoRate": 0.0,
+                "balance": 1000.0,
+                "boundPeriod": 0.0,
+                "interestRate": 0.0
+            }
+        }
+    }
+}

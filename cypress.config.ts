@@ -7,6 +7,7 @@ import coverageWebpack from "./cypress/coverage.webpack";
 
 export default defineConfig({
     e2e: {
+        defaultCommandTimeout: 10000,
         specPattern: "**/e2e/*.{spec.ts,feature}",
         baseUrl: "http://localhost:4200/",
         blockHosts: "fonts.googleapis.com",
@@ -27,6 +28,13 @@ export default defineConfig({
         },
         env: {
             codeCoverageTasksRegistered: true,
+            baseUrl: "http://localhost:4200",
+            backendUrl: "http://localhost:5005",
+            register_page : "registerNewCustomer",
+            dashboard_page: "dashboard",// Anmeldung
+            main_page: "mainPage",
+            createAcconut_page: "createAccount",
+            kundendatenAendern_page: "registerForm"
         },
     },
 
