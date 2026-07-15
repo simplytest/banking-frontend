@@ -13,6 +13,7 @@
     "cypress:open": "ng run BankingSoftwareFrontEnd:cypress-open"
   },
   "private": true,
+  "packageManager": "pnpm@10.15.0",
   "dependencies": {
     "@angular/animations": "^16.2.12",
     "@angular/cdk": "^16.2.14",
