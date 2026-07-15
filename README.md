@@ -9,6 +9,20 @@ $ pnpm install
 $ pnpm run build && pnpm run start
 ```
 
+or
+
+``` bash 
+$ npm install
+$ ng serve
+```
+
+The `ng serve` needs the angular CLI installed
+
+``` bash
+$ npm install -g @angular/cli
+```
+
+
 ## 🐋 Docker Setup
 
 To build the docker image, simply build the dockerfile present in the root directory.

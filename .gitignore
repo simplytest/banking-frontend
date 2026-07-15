@@ -11,3 +11,7 @@ results
 .angular
 .vscode
 .idea
+
+.DS_Store
+
+allure-results
